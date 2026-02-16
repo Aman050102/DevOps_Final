@@ -3,61 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevOps Final Mastery 2026 - Ultimate Encyclopedia</title>
+    <title>DevOps Final Mastery 2026 - The Final Shield Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Kanit', sans-serif; background-color: #f1f5f9; color: #1e293b; }
+        body { font-family: 'Kanit', sans-serif; background-color: #f8fafc; color: #1e293b; }
         .mono { font-family: 'Fira Code', monospace; }
         .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(226, 232, 240, 0.8); }
         .nav-active { background-color: #eff6ff; color: #2563eb; border-right: 4px solid #2563eb; font-weight: 600; }
-        .terminal { background: #0f172a; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .terminal { background: #0f172a; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2); }
         .content-section { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .quiz-option { transition: all 0.2s; border: 2px solid transparent; }
-        .quiz-option:hover { transform: scale(1.01); background-color: #f8fafc; border-color: #e2e8f0; }
+        .quiz-option:hover { transform: scale(1.01); background-color: #f8fafc; border-color: #cbd5e1; }
         .correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #166534; }
         .wrong { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b; }
         .cmd-input { background: transparent; border: none; outline: none; color: #10b981; width: 100%; }
+        .flashcard { perspective: 1000px; height: 300px; cursor: pointer; }
+        .flashcard-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flashcard.flipped .flashcard-inner { transform: rotateY(180px); }
+        .flashcard-front, .flashcard-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 24px; padding: 2rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .flashcard-front { background: white; border: 2px solid #e2e8f0; color: #334155; }
+        .flashcard-back { background: #2563eb; color: white; transform: rotateY(180px); }
         .flow-line { height: 2px; background: #cbd5e1; flex-grow: 1; position: relative; }
         .flow-line::after { content: '▶'; position: absolute; right: -5px; top: -7px; color: #cbd5e1; font-size: 10px; }
-        .badge { font-size: 10px; padding: 2px 8px; border-radius: 99px; font-weight: bold; }
+        .keyword-pill { background: #f1f5f9; color: #475569; padding: 2px 10px; border-radius: 8px; font-size: 11px; font-weight: bold; border: 1px solid #e2e8f0; }
     </style>
-    <!-- Chosen Palette: Krungsri Blue & Tech Silver - เน้นความน่าเชื่อถือแบบธนาคาร ผสมกับความทันสมัยของเทคโนโลยีคลาวด์ -->
-    <!-- Application Structure Plan: 
-         1. Dashboard: สรุปภาพรวมและสถิติ 
-         2. Encyclopedia: คลังเนื้อหาแบ่งตามบทเรียน (SDLC, Infra, Containers, Banking) 
-         3. Linux Lab: พื้นที่ฝึกพิมพ์คำสั่งจริง 
-         4. Mega Quiz: ระบบทดสอบความรู้ 50 ข้อ 
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
 <body class="flex flex-col md:flex-row min-h-screen">
 
     <!-- Sidebar -->
     <aside id="sidebar" class="hidden md:flex flex-col w-80 bg-white border-r border-slate-200 fixed h-full z-40 transition-transform duration-300 transform -translate-x-full md:translate-x-0">
         <div class="p-8 border-b">
-            <h1 class="text-2xl font-bold text-blue-600">DevOps Final</h1>
-            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Ultimate Encyclopedia</p>
+            <h1 class="text-2xl font-bold text-blue-600">DevOps Mastery</h1>
+            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1 italic underline decoration-blue-500">The Final Shield v4.1</p>
         </div>
         <nav class="flex-1 overflow-y-auto py-6">
             <ul class="space-y-1">
-                <li><button onclick="showSection('dashboard')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all nav-active" id="btn-dashboard">📊 Dashboard</button></li>
-                <li><button onclick="showSection('encyclopedia')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all" id="btn-encyclopedia">📖 คลังความรู้ฉบับเต็ม</button></li>
-                <li><button onclick="showSection('linux')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all" id="btn-linux">💻 Linux Terminal Lab</button></li>
-                <li><button onclick="showSection('simulator')" class="nav-btn w-full text-left px-6 py-3 text-blue-600 bg-blue-50 font-bold hover:bg-blue-100 transition-all mt-4 mx-4 rounded-lg" id="btn-simulator">🎮 Mega Quiz Challenge</button></li>
+                <li><button onclick="showSection('dashboard')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all nav-active" id="btn-dashboard">📊 แดชบอร์ด & ข้อมูลสอบ</button></li>
+                <li><button onclick="showSection('encyclopedia')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all" id="btn-encyclopedia">📖 คลังเนื้อหาฉบับเต็ม</button></li>
+                <li><button onclick="showSection('flashcards')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all" id="btn-flashcards">🧩 ทายศัพท์ (Game)</button></li>
+                <li><button onclick="showSection('linux')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all" id="btn-linux">💻 Linux CLI Lab</button></li>
+                <li><button onclick="showSection('simulator')" class="nav-btn w-full text-left px-6 py-3 text-blue-600 bg-blue-50 font-bold hover:bg-blue-100 transition-all mt-4 mx-4 rounded-lg shadow-sm" id="btn-simulator">🎯 Mega Quiz Challenge</button></li>
             </ul>
         </nav>
-        <div class="p-6 border-t bg-slate-50 space-y-2">
-            <div class="text-[10px] font-bold text-slate-400 uppercase">สอบวันที่</div>
-            <p class="text-xs text-slate-600 font-bold">17 & 19 กุมภาพันธ์ 2569</p>
+        <div class="p-6 border-t bg-blue-50 space-y-2">
+            <div class="text-[10px] font-bold text-blue-400 uppercase">สิทธิพิเศษ Top 3</div>
+            <p class="text-xs text-blue-800 font-bold">สัมภาษณ์ Get On Technology</p>
         </div>
     </aside>
 
     <!-- Mobile Header -->
-    <div class="md:hidden bg-white p-4 flex justify-between items-center sticky top-0 z-50 border-b">
-        <h1 class="text-xl font-bold text-blue-600">DevOps Hub</h1>
+    <div class="md:hidden bg-white p-4 flex justify-between items-center sticky top-0 z-50 border-b shadow-sm">
+        <h1 class="text-xl font-bold text-blue-600">DevOps Mastery</h1>
         <button onclick="toggleSidebar()" class="text-2xl text-slate-600">☰</button>
     </div>
 
@@ -68,249 +67,250 @@
         <section id="dashboard" class="content-section space-y-8">
             <div class="bg-gradient-to-br from-indigo-900 via-blue-800 to-sky-700 rounded-3xl p-10 text-white shadow-2xl relative overflow-hidden">
                 <div class="relative z-10">
-                    <h2 class="text-4xl font-extrabold mb-4">Mastering DevOps Exam</h2>
-                    <p class="text-blue-100 max-w-2xl text-lg mb-8 opacity-90 font-light underline decoration-sky-400 underline-offset-8">เนื้อหาเข้มข้น รวบรวมข้อมูลจากไฟล์ PDF และการบรรยายหน้าชั้นเรียน</p>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20">
-                            <span class="block text-[10px] opacity-75 font-bold uppercase">Section 1</span>
-                            <span class="font-bold text-lg">17 Feb 13:00</span>
+                    <h2 class="text-4xl font-extrabold mb-4 text-white">โค้งสุดท้ายสอบ DevOps</h2>
+                    <p class="text-blue-100 max-w-2xl text-lg mb-8 opacity-90 font-light italic">สอบวันที่ 17 กุมภาพันธ์ (วันนี้/พรุ่งนี้) ขอให้ทุกคนได้รับ Grade A!</p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-white/20 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/30">
+                            <span class="block text-[10px] opacity-75 font-bold uppercase">สถานที่</span>
+                            <span class="font-bold text-lg">ห้องเรียน 1103 @13:00</span>
                         </div>
-                        <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20">
-                            <span class="block text-[10px] opacity-75 font-bold uppercase">Section 2</span>
-                            <span class="font-bold text-lg">19 Feb 10:00</span>
-                        </div>
-                        <div class="bg-emerald-500/20 backdrop-blur-md p-4 rounded-2xl border border-emerald-400/30">
-                            <span class="block text-[10px] opacity-75 font-bold uppercase">Points</span>
-                            <span class="font-bold text-lg">30 คะแนน (Final)</span>
+                        <div class="bg-white/20 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/30">
+                            <span class="block text-[10px] opacity-75 font-bold uppercase">คะแนน</span>
+                            <span class="font-bold text-lg">30 Points (ข้อเขียน)</span>
                         </div>
                     </div>
                 </div>
-                <div class="absolute -right-20 -bottom-20 opacity-10 text-[300px] select-none italic">Final</div>
+                <div class="absolute -right-20 -bottom-20 opacity-10 text-[350px] select-none italic font-black">WIN</div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="lg:col-span-2 glass p-8 rounded-3xl shadow-sm">
                     <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                        <span>📊</span> วิเคราะห์เนื้อหาที่มีโอกาสออกสอบสูงสุด
+                        <span>📊</span> อัตราส่วนความเข้มข้นของเนื้อหา
                     </h3>
                     <div class="h-80">
                         <canvas id="skillRadarChart"></canvas>
                     </div>
                 </div>
                 <div class="space-y-6">
-                    <div class="bg-slate-900 p-8 rounded-3xl text-white shadow-xl border border-slate-800">
-                        <h4 class="text-sky-400 font-bold mb-4 flex items-center gap-2"><span>🚀</span> Internship Opportunity</h4>
-                        <p class="text-sm text-slate-400 leading-relaxed mb-4">นิสิตที่มีคะแนนสูงสุด 3 อันดับแรก จะได้รับสิทธิ์สัมภาษณ์ฝึกงานกับ <strong>Get On Technology</strong></p>
-                        <div class="badge bg-sky-500 text-white">20-21 มีนาคม 2569</div>
+                    <div class="bg-slate-900 p-8 rounded-3xl text-white shadow-xl">
+                        <h4 class="text-sky-400 font-bold mb-4">📍 พิกัดสอบ</h4>
+                        <p class="text-sm text-slate-400 leading-relaxed">หมู่เรียนที่ 1 สอบวันจันทร์ที่ 17 กุมภาพันธ์ 13.00-15.00น. ณ ห้องเรียน 1103</p>
+                        <hr class="my-4 border-slate-800">
+                        <p class="text-xs text-slate-500">ใครมาไม่ทัน หรือติดปัญหาให้รีบติดต่อผู้สอนทันที!</p>
                     </div>
-                    <div class="glass p-8 rounded-3xl border-t-8 border-amber-500">
-                        <h4 class="font-bold text-slate-800 mb-2">📢 พก A4 เข้าได้ 1 แผ่น</h4>
-                        <p class="text-xs text-slate-500 leading-relaxed italic">เขียนหน้า-หลังได้ แนะนำให้จดคำสั่ง Linux ที่ลืมง่าย และวาดรูป Architecture ไว้ดูเป็นต้นแบบ</p>
+                    <div class="glass p-8 rounded-3xl border-t-8 border-blue-600">
+                        <h4 class="font-bold text-slate-800 mb-2">📑 Cheat Sheet A4</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">แนะนำให้จด: <br>- K8s Architecture Diagram<br>- Linux Command Flags<br>- SLA Calculation Table</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- SECTION: ENCYCLOPEDIA (DEEP DIVE) -->
-        <section id="encyclopedia" class="content-section hidden space-y-12">
+        <section id="encyclopedia" class="content-section hidden space-y-12 pb-20">
             <div class="border-b pb-4">
-                <h2 class="text-4xl font-black text-slate-800 tracking-tight">ENCYCLOPEDIA</h2>
-                <p class="text-slate-500">เจาะลึกทุก Keyword เพื่อความเข้าใจระดับสถาปนิก</p>
+                <h2 class="text-4xl font-black text-slate-800 tracking-tight">THE ENCYCLOPEDIA</h2>
+                <p class="text-slate-500 italic">เจาะลึกเนื้อหาจากไฟล์ PDF ทั้ง 3 และบรรยายพิเศษ</p>
             </div>
 
-            <!-- หมวด 1: DevOps & Agile -->
+            <!-- Agile & DevOps Cultural Deep Dive -->
             <div class="space-y-6">
-                <div class="flex items-center gap-4">
-                    <span class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl font-bold">01</span>
-                    <h3 class="text-2xl font-bold text-indigo-900">DevOps & SDLC Culture</h3>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <h3 class="text-2xl font-bold text-indigo-700 border-l-4 border-indigo-500 pl-4">1. SDLC, Agile & DevOps Culture</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-white p-8 rounded-3xl border shadow-sm space-y-4">
-                        <h4 class="font-bold text-indigo-600 flex items-center gap-2"><span>🔄</span> DevOps Essentials</h4>
+                        <h4 class="font-bold text-indigo-600 flex justify-between"><span>🏛️ วัฒนธรรมองค์กร</span> <span class="keyword-pill">MUST KNOW</span></h4>
                         <div class="text-sm text-slate-600 space-y-4 leading-relaxed">
-                            <p><strong>Wall of Confusion:</strong> ปัญหาคลาสสิกที่ Dev อยาก "เปลี่ยน" แต่ Ops อยาก "นิ่ง" ทำให้ระบบล่มบ่อย DevOps จึงเกิดมาเพื่อเชื่อมสองทีมด้วยกระบวนการ <strong>Automation</strong> และ <strong>Collaboration</strong></p>
-                            <p><strong>SDLC Models:</strong> 
-                                <br>- <em>Waterfall:</em> เป็นขั้นตอนเหมือนน้ำตก (Analysis -> Design -> Code -> Test -> Deploy) แก้ไขยากถ้าแผนเปลี่ยน
-                                <br>- <em>Agile:</em> เน้นการส่งมอบงานเป็นรอบสั้นๆ (Sprints) ปรับเปลี่ยนตามลูกค้าได้เร็ว
+                            <p><strong>DevOps Goal:</strong> ไม่ใช่ตำแหน่ง แต่คือ "กระบวนการ" ที่เน้น Automation มาช่วยทีม Dev (สร้าง/เปลี่ยน) และ Ops (รักษาความนิ่ง) เพื่อลดช่องว่างความขัดแย้ง</p>
+                            <div class="p-4 bg-slate-50 rounded-2xl text-[11px] border border-slate-100 italic">
+                                "Wall of Confusion เกิดจากการวัดผลที่ต่างกัน: Dev วัดที่ Change, Ops วัดที่ Stability"
+                            </div>
+                            <p><strong>Agile Manifesto:</strong> เน้นบุคลากรมากกว่าเครื่องมือ และเน้นซอฟต์แวร์ที่ใช้งานได้จริงมากกว่าเอกสารที่หนาเกินไป</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl border shadow-sm space-y-4">
+                        <h4 class="font-bold text-indigo-600">🌊 Waterfall vs Agile</h4>
+                        <table class="w-full text-[11px] border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50">
+                                    <th class="border p-2 text-left">หัวข้อ</th>
+                                    <th class="border p-2 text-left">Waterfall</th>
+                                    <th class="border p-2 text-left">Agile</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border p-2 font-bold">โครงสร้าง</td>
+                                    <td class="border p-2 italic text-red-500">เชิงเส้น/น้ำตก</td>
+                                    <td class="border p-2 italic text-emerald-600">Iterative/รอบสั้น</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-2 font-bold">ข้อดี</td>
+                                    <td class="border p-2">แผนชัดเจน</td>
+                                    <td class="border p-2 text-emerald-600">ปรับเปลี่ยนตามลูกค้าเร็ว</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-2 font-bold">ความเสี่ยง</td>
+                                    <td class="border p-2 text-red-500">เจอ Error ตอนท้าย</td>
+                                    <td class="border p-2">ต้องคุยกับลูกค้าบ่อย</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Networking & Security Protocols -->
+            <div class="space-y-6">
+                <h3 class="text-2xl font-bold text-blue-700 border-l-4 border-blue-500 pl-4">2. Networking & Cloud Protocols</h3>
+                <div class="bg-blue-900 p-8 rounded-3xl text-white shadow-xl space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-sky-300">TCP vs UDP (Transport Layer)</h4>
+                            <div class="text-[11px] space-y-3 opacity-90 leading-relaxed">
+                                <p><strong>TCP:</strong> เน้นความถูกต้อง (Connection-oriented) มีการตรวจสอบข้อมูล (3-way handshake) เหมาะกับแอปธนาคาร, เว็บไซต์</p>
+                                <p><strong>UDP:</strong> เน้นความเร็ว (Connectionless) ไม่รอการยืนยัน เหมาะกับ Streaming, Online Game</p>
+                                <p><strong>Ports:</strong> HTTP (80), HTTPS (443), SSH (22)</p>
+                            </div>
+                        </div>
+                        <div class="bg-white/5 p-5 rounded-2xl border border-white/10 space-y-4">
+                            <h4 class="font-bold text-sky-400">AWS Shared Responsibility</h4>
+                            <div class="text-[10px] space-y-2">
+                                <p class="text-emerald-400">✅ AWS ดูแล: (Security OF the Cloud)</p>
+                                <p class="ml-4">- Hardware, Facilities, Global Infrastructure</p>
+                                <p class="text-orange-400">❌ เราดูแล: (Security IN the Cloud)</p>
+                                <p class="ml-4">- Data, OS, Application, Network Configuration</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Docker & Kubernetes Special -->
+            <div class="space-y-6">
+                <h3 class="text-2xl font-bold text-sky-700 border-l-4 border-sky-500 pl-4">3. Containerization & Orchestration</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-1 bg-white p-8 rounded-3xl border shadow-sm space-y-4">
+                        <h4 class="font-bold text-sky-600">Docker Lifecycle</h4>
+                        <div class="space-y-6 relative pl-6 border-l-2 border-slate-100">
+                            <div class="relative"><span class="absolute -left-[30px] top-0 w-4 h-4 rounded-full bg-blue-500 border-2 border-white shadow-sm"></span><p class="text-xs"><strong>Build:</strong> Dockerfile -> Image</p></div>
+                            <div class="relative"><span class="absolute -left-[30px] top-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow-sm"></span><p class="text-xs"><strong>Ship:</strong> Image -> Registry</p></div>
+                            <div class="relative"><span class="absolute -left-[30px] top-0 w-4 h-4 rounded-full bg-amber-500 border-2 border-white shadow-sm"></span><p class="text-xs"><strong>Run:</strong> Image -> Container</p></div>
+                        </div>
+                        <p class="text-[10px] text-slate-500 italic mt-4">* Image เปรียบเสมือนพิมพ์เขียว Read-only *</p>
+                    </div>
+                    <div class="lg:col-span-2 bg-white p-8 rounded-3xl border shadow-sm">
+                        <h4 class="font-bold text-sky-600 mb-6">Kubernetes (K8s) Standard</h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                                <p class="font-bold text-blue-600 text-xs">Pod</p>
+                                <p class="text-[10px] text-slate-500 mt-1">หน่วยย่อยที่สุดที่รันแอป ใน 1 Pod อาจมี 1 หรือหลาย Container</p>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                                <p class="font-bold text-blue-600 text-xs">Deployment</p>
+                                <p class="text-[10px] text-slate-500 mt-1">ตัวจัดการจำนวน Pod และทำ Rolling Update (Zero Downtime)</p>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                                <p class="font-bold text-blue-600 text-xs">Self-Healing</p>
+                                <p class="text-[10px] text-slate-500 mt-1">ถ้าระบบตรวจเจอ Pod เสีย (Unhealthy) จะทำการลบและสร้างใหม่ทันที</p>
+                            </div>
+                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                                <p class="font-bold text-blue-600 text-xs">HPA (Scaling)</p>
+                                <p class="text-[10px] text-slate-500 mt-1">ขยายจำนวน Pod อัตโนมัติตามปริมาณการใช้งาน CPU/Memory</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banking Ops & SLA -->
+            <div class="space-y-6">
+                <h3 class="text-2xl font-bold text-amber-700 border-l-4 border-amber-500 pl-4">4. Banking IT & Stability</h3>
+                <div class="bg-amber-900 p-8 rounded-3xl text-white shadow-xl relative overflow-hidden">
+                    <h4 class="font-bold text-amber-300 mb-6">SLA & Data Centers</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-[11px] leading-relaxed">
+                        <div class="space-y-3">
+                            <p><strong>Technical Debt (หนี้ทางเทคนิค):</strong> การรีบแก้ปัญหาให้เสร็จเร็วแต่ไม่ดี ซึ่งต้องกลับมาจ่าย "ดอกเบี้ย" ด้วยการซ่อมที่ยากกว่าเดิมในอนาคต</p>
+                            <p><strong>Support Tiers:</strong>
+                                <br>T1: Call Center รับเรื่องเบื้องต้น
+                                <br>T2: Monitoring Support (Dashboard 24/7)
+                                <br>T3: Engineers แก้ปัญหาลึก/Implement ระบบ
                             </p>
                         </div>
-                    </div>
-                    <div class="bg-indigo-50 p-8 rounded-3xl border border-indigo-100 space-y-4">
-                        <h4 class="font-bold text-indigo-700 flex items-center gap-2"><span>🥋</span> Agile Shu-Ha-Ri</h4>
-                        <div class="space-y-4">
-                            <div class="p-3 bg-white rounded-xl shadow-sm border-l-4 border-indigo-400">
-                                <p class="font-bold text-xs">Shu (Learn Rules)</p>
-                                <p class="text-[10px] text-slate-500">ทำตามกฎพื้นฐานอย่างเคร่งครัดเพื่อให้เชี่ยวชาญเบื้องต้น</p>
-                            </div>
-                            <div class="p-3 bg-white rounded-xl shadow-sm border-l-4 border-indigo-600">
-                                <p class="font-bold text-xs">Ha (Break Rules)</p>
-                                <p class="text-[10px] text-slate-500">เริ่มทดลองสิ่งใหม่ๆ และแหกกฎเดิมเพื่อหาทางเลือกที่ดีกว่า</p>
-                            </div>
-                            <div class="p-3 bg-white rounded-xl shadow-sm border-l-4 border-indigo-900">
-                                <p class="font-bold text-xs">Ri (Create Rules)</p>
-                                <p class="text-[10px] text-slate-500">สร้างแนวทางของตนเองขึ้นมาใหม่จากประสบการณ์</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- หมวด 2: Networking & Cloud -->
-            <div class="space-y-6">
-                <div class="flex items-center gap-4">
-                    <span class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-2xl font-bold">02</span>
-                    <h3 class="text-2xl font-bold text-blue-900">Networking & Cloud Architecture</h3>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-3xl border shadow-sm">
-                        <h4 class="font-bold text-blue-600 mb-3">Service Models</h4>
-                        <div class="space-y-4">
-                            <div class="p-4 bg-slate-50 rounded-xl">
-                                <p class="font-bold text-xs text-blue-800">IaaS (Hardware/VM)</p>
-                                <p class="text-[10px] text-slate-500">เราต้องลง OS, Middleware, Runtime เอง (เช่น AWS EC2)</p>
-                            </div>
-                            <div class="p-4 bg-slate-50 rounded-xl">
-                                <p class="font-bold text-xs text-blue-800">PaaS (Platform)</p>
-                                <p class="text-[10px] text-slate-500">เราคุมแค่ Code และ Data ระบบจัดการ OS ให้ (เช่น AWS Lambda, App Service)</p>
-                            </div>
-                            <div class="p-4 bg-slate-50 rounded-xl">
-                                <p class="font-bold text-xs text-blue-800">SaaS (Software)</p>
-                                <p class="text-[10px] text-slate-500">ใช้งานโปรแกรมสำเร็จรูปผ่านเน็ต (เช่น Google Docs, Office 365)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lg:col-span-2 bg-blue-900 p-8 rounded-3xl text-white shadow-xl relative overflow-hidden">
-                        <h4 class="font-bold text-sky-300 mb-6">AWS Deep Dive for Banking</h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs leading-relaxed">
-                            <div class="space-y-3">
-                                <p><span class="text-sky-400 font-bold">VPC:</span> การแบ่งสัดส่วน Network ส่วนตัว (Isolation) เพื่อความปลอดภัยสูงสุด</p>
-                                <p><span class="text-sky-400 font-bold">S3:</span> ที่เก็บไฟล์รูปภาพ/วิดีโอแบบถาวร (Object Storage) ที่ล่มยากมาก</p>
-                                <p><span class="text-sky-400 font-bold">EKS:</span> บริการจัดการ Kubernetes สำเร็จรูปจาก AWS</p>
-                            </div>
-                            <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
-                                <p class="font-bold mb-2">SLA (Service Level Agreement)</p>
-                                <p class="mb-2">เวลาล่มที่ยอมรับได้ต่อปี:</p>
-                                <p>- <span class="font-bold text-emerald-400">99.9%:</span> 8.77 ชั่วโมง / ปี</p>
-                                <p>- <span class="font-bold text-emerald-400">99.99%:</span> 52.56 นาที / ปี</p>
-                                <p class="mt-4 text-[9px] opacity-70 italic font-light">* ธนาคารมักกำหนด SLA เลขเก้า 4-5 ตัว</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- หมวด 3: Docker & K8s Flow -->
-            <div class="space-y-6">
-                <div class="flex items-center gap-4">
-                    <span class="w-12 h-12 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-2xl font-bold">03</span>
-                    <h3 class="text-2xl font-bold text-sky-900">Containerization & K8s Pipeline</h3>
-                </div>
-                <div class="bg-white p-10 rounded-3xl border shadow-sm space-y-10">
-                    <div>
-                        <h4 class="font-bold text-sky-600 mb-6 flex items-center gap-2"><span>🔄</span> Banking Enterprise Pipeline (Visualized)</h4>
-                        <div class="flex flex-col md:flex-row items-center gap-2">
-                            <div class="p-4 bg-slate-800 text-white rounded-xl text-center min-w-[120px] text-xs font-bold">
-                                GITLAB <br> <span class="font-light text-[8px] opacity-60">SOURCE CODE</span>
-                            </div>
-                            <div class="flow-line hidden md:block"></div>
-                            <div class="p-4 bg-blue-600 text-white rounded-xl text-center min-w-[120px] text-xs font-bold">
-                                JENKINS <br> <span class="font-light text-[8px] opacity-60">BUILD & TEST</span>
-                            </div>
-                            <div class="flow-line hidden md:block"></div>
-                            <div class="p-4 bg-emerald-600 text-white rounded-xl text-center min-w-[120px] text-xs font-bold">
-                                SONARQUBE <br> <span class="font-light text-[8px] opacity-60 italic">QUALITY GATE A</span>
-                            </div>
-                            <div class="flow-line hidden md:block"></div>
-                            <div class="p-4 bg-amber-600 text-white rounded-xl text-center min-w-[120px] text-xs font-bold">
-                                HARBOR <br> <span class="font-light text-[8px] opacity-60">PRIVATE REGISTRY</span>
-                            </div>
-                            <div class="flow-line hidden md:block"></div>
-                            <div class="p-4 bg-sky-500 text-white rounded-xl text-center min-w-[120px] text-xs font-bold">
-                                EKS (K8S) <br> <span class="font-light text-[8px] opacity-60">PRODUCTION</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs text-slate-600">
-                        <div class="space-y-4">
-                            <h5 class="font-bold text-sky-800 uppercase tracking-widest">Kubernetes Self-Healing</h5>
-                            <p>เมื่อ Pod (หน่วยย่อยที่สุด) เกิดอาการผิดปกติ K8s จะตรวจสอบผ่าน <strong>Health Check</strong> และทำการลบ/สร้างใหม่ (Re-create) ทันทีเพื่อให้ระบบกลับสู่สถานะที่ต้องการ (Desired State)</p>
-                        </div>
-                        <div class="space-y-4">
-                            <h5 class="font-bold text-sky-800 uppercase tracking-widest">Zero Downtime Strategy</h5>
-                            <p>ใช้ <strong>Rolling Update</strong> คือการทยอยอัปเดตแอปทีละตัวสลับกัน เพื่อไม่ให้แอปพลิเคชันดับไปทั้งหมดพร้อมกันในช่วงเวลาที่มีการอัปเดตเวอร์ชันใหม่</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- หมวด 4: Banking Operations -->
-            <div class="space-y-6 pb-20">
-                <div class="flex items-center gap-4">
-                    <span class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-2xl font-bold">04</span>
-                    <h3 class="text-2xl font-bold text-amber-900">Banking IT Reliability</h3>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white p-8 rounded-3xl border shadow-sm border-t-8 border-amber-600 space-y-4">
-                        <h4 class="font-bold text-slate-800">Support Tier System</h4>
-                        <div class="space-y-6">
-                            <div class="flex gap-4">
-                                <span class="text-xs font-bold text-slate-400">T1</span>
-                                <p class="text-xs"><strong>Call Center:</strong> รับเรื่องจากผู้ใช้งาน คัดกรองปัญหาพื้นฐาน</p>
-                            </div>
-                            <div class="flex gap-4 border-y py-4 border-slate-100">
-                                <span class="text-xs font-bold text-slate-500">T2</span>
-                                <p class="text-xs"><strong>Monitoring Support:</strong> เฝ้าระวังความผิดปกติผ่าน Dashboard ตลอด 24/7</p>
-                            </div>
-                            <div class="flex gap-4">
-                                <span class="text-xs font-bold text-blue-600">T3</span>
-                                <p class="text-xs"><strong>Engineering Team:</strong> วิศวกรผู้เชี่ยวชาญแก้ปัญหาเชิงลึก และจัดการโครงสร้างพื้นฐาน</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-8 rounded-3xl border shadow-sm border-t-8 border-indigo-700 space-y-4">
-                        <h4 class="font-bold text-slate-800">DC & Disaster Recovery</h4>
-                        <div class="text-xs text-slate-600 leading-relaxed space-y-4">
-                            <p><strong>DC (Data Center):</strong> ศูนย์ข้อมูลหลักที่รันระบบธุรกรรม</p>
-                            <p><strong>DR Site (ศูนย์สำรอง):</strong> ธนาคารมักเตรียมไว้ 3 แห่ง และอยู่ห่างกันอย่างน้อย 30-50 กิโลเมตร เพื่อป้องกันภัยพิบัติระดับจังหวัด (เช่น น้ำท่วมใหญ่) ไม่ให้กระทบทุกศูนย์พร้อมกัน</p>
-                            <p><strong>Technical Debt:</strong> หนี้ทางเทคนิคที่เกิดจากการรีบแก้ปัญหาเฉพาะหน้าแบบ "สุกเอาเผากิน" ซึ่งต้องกลับมาจ่ายดอกเบี้ยด้วยการแก้ปัญหาที่ยากกว่าในอนาคต</p>
+                        <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
+                            <p class="font-bold mb-2">DC & DR Site Strategy</p>
+                            <p>DC (ศูนย์หลัก) -> DR (ศูนย์สำรองกรณีภัยพิบัติ)</p>
+                            <p class="mt-2">- ต้องห่างกันอย่างน้อย <strong>30-50 กม.</strong></p>
+                            <p>- ธนาคารมักเตรียมไว้ <strong>3 แห่ง</strong> เสมอ</p>
+                            <p>- <span class="text-amber-400">Harbor:</span> ใช้เก็บ Private Docker Image ในธนาคาร</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- LINUX LAB -->
+        <!-- SECTION: FLASHCARDS (TERM GAME) -->
+        <section id="flashcards" class="content-section hidden space-y-8">
+            <div class="flex justify-between items-end">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-800 tracking-tight uppercase">🧩 ทายศัพท์ DEVOPS</h2>
+                    <p class="text-slate-500 mt-2 italic">คลิกที่การ์ดเพื่อดูเฉลยและคำอธิบายละเอียด</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="prevCard()" class="px-4 py-2 bg-white border rounded-xl text-slate-600 hover:bg-slate-50 shadow-sm transition-all">ก่อนหน้า</button>
+                    <button onclick="nextCard()" class="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all">ถัดไป</button>
+                </div>
+            </div>
+
+            <div id="card-container" class="max-w-2xl mx-auto py-10">
+                <!-- Card Component -->
+                <div class="flashcard" onclick="this.classList.toggle('flipped')" id="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <span id="card-category" class="badge bg-blue-100 text-blue-600 mb-4 uppercase tracking-widest text-[10px]">CATEGORY</span>
+                            <h3 id="card-hint" class="text-xl font-bold text-slate-800 leading-relaxed">คำใบ้จะปรากฏที่นี่...</h3>
+                            <p class="mt-10 text-xs text-slate-400 uppercase tracking-widest font-bold">คลิกเพื่อดูเฉลย</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <h3 id="card-answer" class="text-3xl font-black mb-4">เฉลย</h3>
+                            <p id="card-explanation" class="text-sm opacity-90 leading-relaxed">คำอธิบายละเอียดที่จะช่วยให้คุณจำไปเขียนตอบในข้อสอบได้</p>
+                            <p class="mt-8 text-[10px] opacity-60 uppercase font-bold">คลิกเพื่อพลิกกลับ</p>
+                        </div>
+                    </div>
+                </div>
+                <p id="card-progress" class="text-center mt-6 text-xs text-slate-400 font-bold uppercase tracking-widest">Card 1 / 15</p>
+            </div>
+        </section>
+
+        <!-- SECTION: LINUX TERMINAL LAB -->
         <section id="linux" class="content-section hidden space-y-8">
             <div class="flex justify-between items-end">
                 <div>
-                    <h2 class="text-3xl font-bold text-slate-800">Linux Interactive Lab</h2>
-                    <p class="text-slate-500 mt-2">พิมพ์คำสั่งพื้นฐานเพื่อทำความคุ้นเคยกับระบบไฟล์จริง (จำลอง State-based)</p>
+                    <h2 class="text-3xl font-bold text-slate-800 uppercase tracking-tighter">Linux Practice Lab</h2>
+                    <p class="text-slate-500 mt-2 italic">พิมพ์คำสั่งพื้นฐาน (ls, cd, mkdir, touch, rm) เพื่อทำความคุ้นเคย</p>
                 </div>
-                <button onclick="resetLab()" class="text-xs text-blue-600 font-bold hover:underline">Reset Environment</button>
+                <button onclick="resetLab()" class="text-xs text-blue-600 font-bold hover:underline">รีเซ็ต Terminal</button>
             </div>
 
             <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
                 <div class="space-y-4 text-xs">
                     <div class="glass p-6 rounded-3xl border shadow-sm">
-                        <h4 class="font-bold text-slate-800 mb-4">🎯 ภารกิจฝึกหัด (Linux Hands-on)</h4>
+                        <h4 class="font-bold text-slate-800 mb-4">💻 ภารกิจฝึกหัดวันนี้</h4>
                         <ul class="space-y-3 text-slate-600 leading-relaxed">
                             <li>1. <code>ls</code> เพื่อดูรายชื่อไฟล์เริ่มต้น</li>
-                            <li>2. <code>mkdir devops_test</code> เพื่อสร้างโฟลเดอร์งาน</li>
-                            <li>3. <code>cd devops_test</code> เพื่อเข้าไปทำงานข้างใน</li>
-                            <li>4. <code>touch deploy.sh</code> เพื่อสร้างไฟล์สคริปต์</li>
-                            <li>5. <code>chmod +x deploy.sh</code> เพื่อให้สิทธิ์การรันไฟล์</li>
-                            <li>6. <code>mv deploy.sh run.sh</code> เพื่อลองเปลี่ยนชื่อไฟล์</li>
-                            <li>7. <code>cd ..</code> และลอง <code>rm -rf devops_test</code></li>
+                            <li>2. <code>mkdir exam_prep</code> เพื่อสร้างโฟลเดอร์สำหรับติว</li>
+                            <li>3. <code>cd exam_prep</code> เพื่อเข้าไปในโฟลเดอร์นั้น</li>
+                            <li>4. <code>touch summary.txt</code> เพื่อสร้างไฟล์สรุป</li>
+                            <li>5. <code>mv summary.txt final_exam.txt</code> เพื่อเปลี่ยนชื่อไฟล์</li>
+                            <li>6. <code>cd ..</code> และ <code>rm -rf exam_prep</code> เพื่อทำความสะอาด</li>
                         </ul>
                     </div>
                     <div class="bg-slate-900 p-6 rounded-3xl text-white">
                         <p class="font-bold text-sky-400 mb-2 uppercase tracking-tighter">Command Quick Reference</p>
-                        <div class="grid grid-cols-2 gap-2 text-[9px] mono opacity-80">
+                        <div class="grid grid-cols-2 gap-2 text-[9px] mono opacity-80 uppercase font-bold">
                             <div>ls: ดูไฟล์</div>
                             <div>cd: ย้ายโฟลเดอร์</div>
-                            <div>cp: คัดลอก</div>
                             <div>mv: ย้าย/เปลี่ยนชื่อ</div>
-                            <div>rm: ลบข้อมูล</div>
                             <div>mkdir: สร้าง dir</div>
                             <div>chmod: เปลี่ยนสิทธิ์</div>
                             <div>pwd: ดู path</div>
@@ -322,15 +322,15 @@
                     <div class="terminal flex flex-col h-[550px]">
                         <div class="p-3 border-b border-slate-700 flex justify-between items-center">
                             <div class="flex gap-2">
-                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-amber-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-amber-500"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
                             </div>
-                            <span class="text-[10px] text-slate-500 mono">root@devops-ultimate:~</span>
+                            <span class="text-[9px] text-slate-500 mono uppercase font-bold">bash simulator</span>
                         </div>
                         <div id="terminal-screen" class="p-6 flex-1 overflow-y-auto text-emerald-400 font-mono text-xs space-y-1">
-                            <div>ยินดีต้อนรับสู่ระบบจำลอง Linux Lab v3.2</div>
-                            <div>พิมพ์ 'help' เพื่อดูรายการคำสั่งที่มีในระบบนี้</div>
+                            <div>ยินดีต้อนรับสู่ DevOps Linux Lab Simulation</div>
+                            <div>พิมพ์ 'help' เพื่อดูคำสั่งทั้งหมด</div>
                         </div>
                         <div class="p-4 border-t border-slate-700 flex items-center gap-2 font-mono text-sm">
                             <span class="text-blue-400 font-bold">root@devops:</span>
@@ -343,37 +343,37 @@
             </div>
         </section>
 
-        <!-- MEGA QUIZ -->
+        <!-- SECTION: MEGA QUIZ -->
         <section id="simulator" class="content-section hidden space-y-8">
             <div class="flex justify-between items-end">
                 <div>
-                    <h2 class="text-3xl font-bold text-slate-800">Ultimate Mega Quiz (50 ข้อ)</h2>
-                    <p class="text-slate-500 mt-2">ชุดคำถามจำลองระดับยาก (สุ่ม 10 ข้อต่อรอบ) พร้อมเฉลยละเอียด</p>
+                    <h2 class="text-3xl font-bold text-slate-800">Ultimate Quiz Lab</h2>
+                    <p class="text-slate-500 mt-2 italic">ชุดคำถาม 10 ข้อ (สุ่มจาก 50+ ข้อ) เพื่อเช็คความแม่นยำ</p>
                 </div>
-                <div id="quiz-score-ui" class="bg-blue-600 text-white px-6 py-2 rounded-full font-bold shadow-lg">คะแนน: 0 / 10</div>
+                <div id="quiz-score-ui" class="bg-blue-600 text-white px-6 py-2 rounded-full font-bold shadow-lg">SCORE: 0 / 10</div>
             </div>
 
             <div id="quiz-container" class="glass p-10 rounded-3xl min-h-[500px] flex flex-col justify-center relative overflow-hidden shadow-sm">
                 <!-- Start Screen -->
                 <div id="quiz-start" class="text-center space-y-8">
-                    <div class="text-[120px] animate-bounce">🎓</div>
+                    <div class="text-[120px] animate-bounce">🛡️</div>
                     <div class="space-y-2">
-                        <h3 class="text-3xl font-bold text-slate-800">พร้อมรับบทสอบระดับ Senior หรือยัง?</h3>
-                        <p class="text-slate-500 text-lg">สุ่มคำถาม 10 ข้อจากคลังข้อมูลเชิงลึก 50 ข้อ</p>
+                        <h3 class="text-3xl font-bold text-slate-800 tracking-tight uppercase">Ready for the Final?</h3>
+                        <p class="text-slate-500 text-lg">แบบทดสอบวัดระดับความเข้าใจ DevOps & Cloud Architecture</p>
                     </div>
-                    <button onclick="startQuiz()" class="bg-blue-600 text-white px-12 py-5 rounded-3xl font-bold text-xl hover:bg-blue-700 transform hover:scale-105 transition-all shadow-xl shadow-blue-200">เริ่มทำข้อสอบ</button>
+                    <button onclick="startQuiz()" class="bg-blue-600 text-white px-12 py-5 rounded-3xl font-bold text-xl hover:bg-blue-700 transform hover:scale-105 transition-all shadow-xl shadow-blue-100">START CHALLENGE</button>
                 </div>
 
                 <!-- Play Screen -->
                 <div id="quiz-play" class="hidden space-y-8">
                     <div class="flex justify-between items-center text-xs font-bold text-slate-400 uppercase tracking-widest">
                         <span id="q-num">ข้อที่ 1 / 10</span>
-                        <span id="q-cat" class="text-blue-500 italic">SCENARIO ANALYSIS</span>
+                        <span id="q-cat" class="text-blue-500">CATEGORY</span>
                     </div>
                     <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
                         <div id="q-progress" class="h-full bg-blue-500 transition-all duration-500" style="width: 10%"></div>
                     </div>
-                    <h3 id="q-text" class="text-2xl font-bold text-slate-800 leading-tight">คำถามจะแสดงผลที่นี่</h3>
+                    <h3 id="q-text" class="text-2xl font-bold text-slate-800 leading-tight">คำถาม...</h3>
                     <div id="q-options" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                 </div>
 
@@ -381,11 +381,11 @@
                 <div id="quiz-result" class="hidden text-center space-y-8 animate-fade-in">
                     <div id="r-icon" class="text-8xl">🏆</div>
                     <div class="space-y-2">
-                        <h3 class="text-4xl font-extrabold text-slate-800">สรุปคะแนน!</h3>
+                        <h3 class="text-4xl font-extrabold text-slate-800 uppercase tracking-tighter">MISSION COMPLETED</h3>
                         <p id="r-score" class="text-xl text-slate-500">คุณทำคะแนนได้ 10 เต็ม 10</p>
                     </div>
                     <div id="r-grade" class="text-6xl font-black text-blue-600 italic tracking-tighter uppercase">Grade A</div>
-                    <button onclick="showSection('simulator')" class="bg-slate-800 text-white px-10 py-4 rounded-2xl font-bold hover:bg-slate-700 transition-all">ลองใหม่อีกครั้ง</button>
+                    <button onclick="showSection('simulator')" class="bg-slate-800 text-white px-10 py-4 rounded-2xl font-bold hover:bg-slate-700 transition-all">TRY AGAIN</button>
                 </div>
             </div>
         </section>
@@ -400,48 +400,62 @@
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('nav-active'));
             document.getElementById('btn-' + id).classList.add('nav-active');
             if(window.innerWidth < 768) toggleSidebar();
-            if(id === 'simulator') {
-                document.getElementById('quiz-start').classList.remove('hidden');
-                document.getElementById('quiz-play').classList.add('hidden');
-                document.getElementById('quiz-result').classList.add('hidden');
-            }
+            if(id === 'flashcards') updateCard();
         }
 
         function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('-translate-x-full');
+            document.getElementById('sidebar').classList.toggle('-translate-x-full');
         }
 
-        // --- Charts ---
-        window.onload = function() {
-            const ctx = document.getElementById('skillRadarChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: ['Linux/Scripting', 'Docker/K8s', 'CI/CD Pipeline', 'AWS Cloud', 'Networking', 'Agile/Soft Skills'],
-                    datasets: [{
-                        label: 'ความสำคัญสำหรับการสอบ',
-                        data: [90, 85, 95, 80, 75, 100],
-                        backgroundColor: 'rgba(37, 99, 235, 0.2)',
-                        borderColor: '#2563eb',
-                        pointBackgroundColor: '#2563eb',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    scales: { r: { beginAtZero: true, max: 100, ticks: { display: false } } },
-                    plugins: { legend: { display: false } }
-                }
-            });
-        };
+        // --- Term Guessing Game (Flashcards) ---
+        const flashcardsPool = [
+            { cat: "CULTURE", q: "ปัญหาความไม่เข้าใจกันระหว่างทีม Development และ Operations ที่ DevOps พยายามแก้ไข เรียกว่าอะไร?", a: "Wall of Confusion", d: "เป็นกำแพงที่เกิดจาก Dev ต้องการส่งฟีเจอร์ใหม่เร็วๆ (Change) แต่ Ops ต้องการรักษาระบบให้นิ่งที่สุด (Stability)" },
+            { cat: "SDLC", q: "หลักการเรียนรู้ 3 ขั้นตอนจากญี่ปุ่นที่ Agile นำมาใช้ (ทำตามกฎ -> แหกกฎ -> สร้างกฎเอง) เรียกว่าอะไร?", a: "Shu-Ha-Ri", d: "Shu (เรียนรู้), Ha (เริ่มประยุกต์), Ri (เชี่ยวชาญจนสร้างแนวทางตัวเองได้)" },
+            { cat: "AUTOMATION", q: "การจัดการเครื่องเซิร์ฟเวอร์ผ่านการเขียนไฟล์โค้ด แทนการกดตั้งค่าด้วยมือ เรียกว่าอะไร?", a: "Infrastructure as Code (IaC)", d: "ช่วยลด Human Error, ทำให้ระบบทำซ้ำได้ (Reproducible) และเก็บประวัติใน Git ได้" },
+            { cat: "AWS", q: "บริการ AWS ที่ใช้แยกห้องเครือข่ายส่วนตัว (Isolation) ออกจากอินเทอร์เน็ตหรือโปรเจกต์อื่น เรียกว่าอะไร?", a: "VPC (Virtual Private Cloud)", d: "เปรียบเสมือนรั้วบ้านในหมู่บ้านจัดสรร เพื่อความปลอดภัยสูงสุดของข้อมูลธนาคาร" },
+            { cat: "SLA", q: "SLA ระดับเลขเก้า 4 ตัว (99.99%) ยอมให้ระบบล่มได้สูงสุดกี่นาทีต่อปี?", a: "52.56 นาที", d: "คำนวณจากเปอร์เซ็นต์เวลาทำงานต่อปี (365 วัน) หากล่มเกินนี้ธนาคารอาจได้รับความเสียหายสูง" },
+            { cat: "K8S", q: "หน่วยย่อยที่สุดในการรันแอปพลิเคชันบน Kubernetes เรียกว่าอะไร?", a: "Pod", d: "ใน 1 Pod อาจประกอบด้วย 1 หรือหลาย Container ที่ต้องทำงานประสานกัน" },
+            { cat: "K8S", q: "ความสามารถในการซ่อมแซมตัวเองของ K8s เมื่อพบว่า Pod มีปัญหา เรียกว่าอะไร?", a: "Self-healing", d: "K8s จะตรวจสอบ Health Check ตลอดเวลา และสร้าง Pod ใหม่มาแทนที่ตัวที่พังทันที" },
+            { cat: "DOCKER", q: "ไฟล์พิมพ์เขียวแบบ Read-only ที่ใช้เป็นต้นแบบในการสร้าง Container เรียกว่าอะไร?", a: "Docker Image", d: "ประกอบด้วย Layer ต่างๆ และต้องถูกรันออกมาเป็น Container ถึงจะใช้งานได้" },
+            { cat: "BANKING", q: "ด่านตรวจคุณภาพโค้ดในธนาคารที่กำหนดว่าต้องได้เกรด A เท่านั้นถึงจะผ่าน เรียกว่าเครื่องมืออะไร?", a: "SonarQube", d: "ใช้ทำ Static Code Analysis เพื่อหา Code Smell, Bugs และช่องโหว่ความปลอดภัย" },
+            { cat: "NETWORKING", q: "โปรโตคอลที่เน้นความเร็ว รับส่งข้อมูลทันทีโดยไม่ต้องรอตอบรับ (เหมาะกับ Streaming) เรียกว่า?", a: "UDP", d: "ตรงข้ามกับ TCP ที่เน้นความถูกต้องและมีการทำ 3-way handshake" },
+            { cat: "GIT", q: "วิธีการรวมกิ่งของโค้ดที่ทำให้ประวัติการ Commit เรียงเป็นเส้นตรงสวยงาม (Linear History)?", a: "Rebase", d: "เป็นการย้ายฐาน Commit ไปต่อท้ายกิ่งหลัก ต่างจาก Merge ที่จะสร้างจุดตัดกิ่งขึ้นมาใหม่" },
+            { cat: "SECURITY", q: "รหัสมาตรฐานสากลที่ใช้ระบุช่องโหว่ความปลอดภัยที่ถูกค้นพบ เรียกว่าอะไร?", a: "CVE", d: "Common Vulnerabilities and Exposures - ใช้เพื่อติดตามและอัปเดต Patch ความปลอดภัย" },
+            { cat: "SUPPORT", q: "ทีมซัพพอร์ตลำดับใดที่เป็นคน Implement และแก้ไขปัญหาเชิงลึก รวมถึงสลับระบบไปศูนย์สำรอง?", a: "Tier 3 Engineering Team", d: "เป็นทีมวิศวกรผู้เชี่ยวชาญสูงสุดในลำดับการซัพพอร์ตของธนาคาร" },
+            { cat: "BANKING", q: "ที่เก็บ Docker Image ส่วนตัวภายในองค์กร เพื่อความปลอดภัยไม่ให้หลุดออกสู่ภายนอก เรียกว่าอะไร?", a: "Harbor", d: "ธนาคารมักใช้ Private Registry อย่าง Harbor แทน Docker Hub เพื่อความมั่นคงปลอดภัย" },
+            { cat: "DR", q: "ศูนย์ข้อมูลสำรองกรณีเกิดภัยพิบัติ ที่ธนาคารมักเตรียมไว้ 3 แห่ง เรียกว่าอะไร?", a: "DR Site", d: "Disaster Recovery Site - ต้องอยู่ห่างจาก DC หลัก (30-50 กม.) เพื่อป้องกันภัยพิบัติระดับภูมิภาค" }
+        ];
+
+        let currentCardIdx = 0;
+
+        function updateCard() {
+            const card = flashcardsPool[currentCardIdx];
+            const cardEl = document.getElementById('flashcard');
+            cardEl.classList.remove('flipped');
+            
+            document.getElementById('card-category').innerText = card.cat;
+            document.getElementById('card-hint').innerText = card.q;
+            document.getElementById('card-answer').innerText = card.a;
+            document.getElementById('card-explanation').innerText = card.d;
+            document.getElementById('card-progress').innerText = `Card ${currentCardIdx + 1} / ${flashcardsPool.length}`;
+        }
+
+        function nextCard() {
+            currentCardIdx = (currentCardIdx + 1) % flashcardsPool.length;
+            updateCard();
+        }
+
+        function prevCard() {
+            currentCardIdx = (currentCardIdx - 1 + flashcardsPool.length) % flashcardsPool.length;
+            updateCard();
+        }
 
         // --- Linux Lab Logic ---
         let currentDir = "~";
         let fs = {
-            "~": { type: "dir", children: ["README.md", "devops_labs", "backup"], parent: null },
-            "~/devops_labs": { type: "dir", children: ["pipeline.sh", "dockerfile"], parent: "~" },
-            "~/backup": { type: "dir", children: ["config.yml"], parent: "~" }
+            "~": { type: "dir", children: ["README.md", "devops_exam", "logs"], parent: null },
+            "~/devops_exam": { type: "dir", children: ["cheat_sheet.txt", "notes.md"], parent: "~" },
+            "~/logs": { type: "dir", children: ["app.log"], parent: "~" }
         };
 
         const terminalInput = document.getElementById('terminal-input');
@@ -460,16 +474,14 @@
             const parts = input.split(' ');
             const cmd = parts[0].toLowerCase();
             const args = parts.slice(1);
-            
             const log = document.createElement('div');
-            log.innerHTML = `<span class="text-blue-400">root@devops:${currentDir}$</span> ${input}`;
+            log.innerHTML = `<span class="text-blue-400 font-bold">root@devops:${currentDir}$</span> ${input}`;
             terminalScreen.appendChild(log);
 
             let output = "";
             switch(cmd) {
-                case 'help': output = "LAB COMMANDS: ls, cd, mkdir, touch, mv, rm, chmod, pwd, clear, help"; break;
+                case 'help': output = "LAB CMDS: ls, cd, mkdir, touch, mv, rm, chmod, pwd, clear, help"; break;
                 case 'clear': terminalScreen.innerHTML = ""; return;
-                case 'pwd': output = currentDir; break;
                 case 'ls': output = fs[currentDir].children.join("  "); break;
                 case 'mkdir':
                     if (args[0]) {
@@ -477,28 +489,29 @@
                         if (!fs[newPath]) {
                             fs[currentDir].children.push(args[0]);
                             fs[newPath] = { type: "dir", children: [], parent: currentDir };
-                        } else output = "Directory already exists";
+                        } else output = "mkdir: Folder already exists";
                     } else output = "mkdir: missing operand";
                     break;
                 case 'touch':
-                    if (args[0]) {
-                        if (!fs[currentDir].children.includes(args[0])) fs[currentDir].children.push(args[0]);
-                    } else output = "touch: missing file operand";
+                    if (args[0]) { if (!fs[currentDir].children.includes(args[0])) fs[currentDir].children.push(args[0]); }
+                    else output = "touch: missing file name";
                     break;
                 case 'mv':
                     if (args[0] && args[1]) {
                         const idx = fs[currentDir].children.indexOf(args[0]);
                         if (idx > -1) fs[currentDir].children[idx] = args[1];
-                        else output = "File not found";
-                    } else output = "mv: missing operand";
+                        else output = "mv: file not found";
+                    } else output = "mv: missing target";
                     break;
                 case 'rm':
-                    if (args[0]) {
+                    if (args[0] === '-rf') {
+                        if (args[1]) {
+                            fs[currentDir].children = fs[currentDir].children.filter(f => f !== args[1]);
+                            output = `Permanently removed ${args[1]}`;
+                        }
+                    } else if (args[0]) {
                         fs[currentDir].children = fs[currentDir].children.filter(f => f !== args[0]);
-                    } else output = "rm: missing operand";
-                    break;
-                case 'chmod':
-                    output = `chmod: applied permission to ${args[1] || 'target'}`;
+                    }
                     break;
                 case 'cd':
                     if (!args[0] || args[0] === "~") currentDir = "~";
@@ -510,12 +523,14 @@
                     }
                     currentPathDisplay.innerText = currentDir;
                     break;
+                case 'pwd': output = "/root" + (currentDir === "~" ? "" : currentDir.substring(1)); break;
+                case 'chmod': output = `applied permissions to target`; break;
                 default: output = `bash: ${cmd}: command not found`;
             }
 
             if (output) {
                 const outDiv = document.createElement('div');
-                outDiv.className = "text-slate-400 italic";
+                outDiv.className = "text-slate-400 italic text-[11px]";
                 outDiv.innerText = output;
                 terminalScreen.appendChild(outDiv);
             }
@@ -524,63 +539,42 @@
 
         function resetLab() {
             currentDir = "~";
-            fs = { "~": { type: "dir", children: ["README.md", "devops_labs", "backup"], parent: null } };
+            fs = { "~": { type: "dir", children: ["README.md", "devops_exam"], parent: null } };
             currentPathDisplay.innerText = "~";
-            terminalScreen.innerHTML = "<div>Lab environment reset successful.</div>";
+            terminalScreen.innerHTML = "<div>Lab reset. Start practicing commands.</div>";
         }
 
-        // --- Mega Quiz Data Pool (50 Questions) ---
+        // --- Charts ---
+        window.onload = function() {
+            const ctx = document.getElementById('skillRadarChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['DevOps Culture', 'SDLC (Agile)', 'Networking', 'Cloud AWS', 'Containers (K8s)', 'Banking Ops'],
+                    datasets: [{
+                        label: 'ความน่าจะเป็นที่ออกข้อสอบ (%)',
+                        data: [95, 90, 85, 80, 95, 100],
+                        backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                        borderColor: '#2563eb',
+                        pointBackgroundColor: '#2563eb'
+                    }]
+                },
+                options: { maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 100, ticks: { display: false } } }, plugins: { legend: { display: false } } }
+            });
+        };
+
+        // --- Quiz Engine (50 Questions Data Pool) ---
         const questionPool = [
-            { cat: "BANKING", q: "หาก SonarQube ตรวจพบ Code Smell และเกรดไม่ถึง A ใน Pipeline ของธนาคาร ข้อใดคือการตัดสินใจที่ถูกต้อง?", a: ["Pipeline ต้องพัง (Fail) และห้าม Deploy เด็ดขาด", "ยอมให้รันต่อได้ถ้าเป็นแค่ Code Smell", "ให้พนักงานโทรแจ้ง Support Tier 1", "ทำ Rolling Update ทันที"], c: 0 },
-            { cat: "SLA", q: "ธนาคารกำหนด SLA 99.99% (เลขเก้า 4 ตัว) ระบบจะล่มได้สูงสุดไม่เกินกี่นาทีต่อปี?", a: ["~52 นาที", "~8 ชั่วโมง", "~24 ชั่วโมง", "~3.6 วัน"], c: 0 },
-            { cat: "K8S", q: "เมื่อแอปพลิเคชันมีโหลดเพิ่มขึ้นกะทันหัน ฟีเจอร์ใดของ K8s จะเข้ามาเพิ่มจำนวน Pod ให้ทันที?", a: ["HPA (Horizontal Pod Autoscaler)", "VPA (Vertical Pod Autoscaler)", "Rolling Update", "Self-healing"], c: 0 },
-            { cat: "CLOUD", q: "AWS VPC เปรียบเสมือนอะไรในสถาปัตยกรรมดาต้าเซ็นเตอร์เสมือน?", a: ["การแยกห้องหรือสัดส่วนเครือข่ายส่วนตัว (Isolation)", "เครื่องคอมพิวเตอร์ 1 เครื่อง", "ศูนย์รวมข้อมูลสาธารณะ", "ระบบทำความเย็น"], c: 0 },
-            { cat: "DOCKER", q: "Docker Image แตกต่างจาก Container อย่างไรตามหลักการของ DevOps?", a: ["Image คือพิมพ์เขียว Read-only ส่วน Container คือตัวที่รันอยู่", "Image ใช้สำหรับลบข้อมูล ส่วน Container ใช้เก็บข้อมูล", "Container คือต้นแบบ ส่วน Image คือผลลัพธ์", "ทั้งสองอย่างทำงานเหมือนกัน"], c: 0 },
-            { cat: "BANKING", q: "DR Site (Disaster Recovery) ของธนาคารควรอยู่ห่างจาก DC หลักอย่างน้อยเท่าใดเพื่อความปลอดภัย?", a: ["30-50 กิโลเมตร", "100 เมตร", "1 กิโลเมตร", "ต้องอยู่คนละทวีป"], c: 0 },
-            { cat: "DEVOPS", q: "ปัญหา 'Wall of Confusion' ในองค์กรดั้งเดิมเกิดขึ้นระหว่างทีมใด?", a: ["Development และ Operations", "Sales และ Marketing", "Customer และ Manager", "IT และ HR"], c: 0 },
-            { cat: "SDLC", q: "ในหลักการ Shu-Ha-Ri ของ Agile ขั้นตอน 'Ha' (แหกกฎ) หมายถึงอะไร?", a: ["การเริ่มทดลองและเรียนรู้กฎใหม่ๆ นอกกรอบเดิม", "การทำตามแบบแผนอย่างเคร่งครัด", "การเป็นผู้สร้างนวัตกรรมใหม่เอง", "การลาออกเพื่อไปหางานใหม่"], c: 0 },
-            { cat: "K8S", q: "Service Type ใดใน Kubernetes ที่ใช้รับ Traffic จาก 'Public Load Balancer' ของ Cloud?", a: ["LoadBalancer", "NodePort", "ClusterIP", "ExternalIP"], c: 0 },
-            { cat: "AWS", q: "หากธนาคารต้องการเก็บไฟล์รูปภาพการทำธุรกรรมที่มีความคงทนสูง ควรเลือกใช้บริการใด?", a: ["S3 (Simple Storage Service)", "EC2", "VPC", "IAM"], c: 0 },
-            { cat: "LINUX", q: "คำสั่ง Linux ใดใช้สำหรับลบโฟลเดอร์พร้อมข้อมูลข้างในทั้งหมดแบบบังคับ (Force Recursive)?", a: ["rm -rf", "rmdir", "delete -all", "mv -del"], c: 0 },
-            { cat: "GIT", q: "Git Rebase แตกต่างจาก Merge อย่างไรในเชิงความสวยงามของประวัติ?", a: ["Rebase ทำให้ประวัติเป็นเส้นตรง (Linear)", "Merge ทำให้ประวัติหายไป", "Rebase ใช้เวลารันนานกว่า", "Merge ปลอดภัยกว่าเสมอ"], c: 0 },
-            { cat: "SECURITY", q: "CVE (Common Vulnerabilities and Exposures) คือรหัสมาตรฐานสำหรับสิ่งใด?", a: ["รหัสช่องโหว่ความปลอดภัยซอฟต์แวร์", "รหัสผ่านของพนักงานธนาคาร", "รหัสประจำตัวของ Server", "รหัสสัญญาเช่า Cloud"], c: 0 },
-            { cat: "BANKING", q: "Tier 3 Engineering Team ในธนาคารมีหน้าที่หลักคืออะไร?", a: ["แก้ปัญหาเชิงลึกและจัดการระบบ (Implement)", "รับโทรศัพท์ลูกค้าเบื้องต้น", "ทำความสะอาดเครื่อง Server", "เฝ้าหน้าจอ Dashboard อย่างเดียว"], c: 0 },
-            { cat: "DOCKER", q: "ใน Dockerfile คำสั่ง 'EXPOSE 80' มีจุดประสงค์เพื่ออะไร?", a: ["เป็นเอกสารระบุพอร์ตที่แอปจะใช้งาน", "เพื่อเปิดพอร์ตจริงในเครื่อง Host", "เพื่อลบข้อมูลในพอร์ตนั้น", "เพื่อเพิ่มความเร็วแอป"], c: 0 },
-            { cat: "CLOUD", q: "Shared Responsibility Model ใน Cloud หากใช้ IaaS ใครดูแลความปลอดภัยของ Data?", a: ["ผู้ใช้งาน (Customer)", "ผู้ให้บริการ (AWS)", "รัฐบาล", "ไม่มีใครดูแล"], c: 0 },
-            { cat: "K8S", q: "คุณสมบัติ 'Self-healing' ของ Kubernetes จะทำงานเมื่อใด?", a: ["เมื่อตรวจพบ Pod เสียหายหรือ Unhealthy", "เมื่อต้องการลดค่าใช้จ่าย", "เมื่อนักพัฒนาเขียนโค้ดผิด", "เมื่อไฟดับทั้งประเทศ"], c: 0 },
-            { cat: "NETWORKING", q: "HTTP Status Code 500 หมายถึงสถานะใด?", a: ["Internal Server Error", "Success (OK)", "Not Found", "Unauthorized"], c: 0 },
-            { cat: "SDLC", q: "Agile Manifesto ให้ความสำคัญกับสิ่งใดมากกว่า 'Contract Negotiation'?", a: ["Customer Collaboration", "Working Software", "Following a Plan", "Process and Tools"], c: 0 },
-            { cat: "DEVOPS", q: "ทักษะ 'Communication' ถูกยกให้เป็นอันดับ 1 ในงาน DevOps เพราะเหตุใด?", a: ["เพื่อแปลภาษาเทคนิคเป็นภาษาคนให้ทุกฝ่ายเข้าใจ", "เพื่อให้พิมพ์คุยกับเครื่องคอมพิวเตอร์ได้", "เพื่อให้พูดเก่งกว่าเพื่อนร่วมงาน", "ไม่มีความสำคัญจริง"], c: 0 },
-            { cat: "CI/CD", q: "Continuous Deployment แตกต่างจาก Continuous Delivery อย่างไร?", a: ["Deployment ขึ้น Production อัตโนมัติทันที", "Delivery ขึ้น Production อัตโนมัติทันที", "Deployment ต้องมีคนกดอนุมัติ", "Delivery ไม่ต้องผ่านการทดสอบ"], c: 0 },
-            { cat: "LINUX", q: "คำสั่ง Linux ใดใช้ดูเนื้อหาไฟล์ข้อความทั้งหมดทีเดียว?", a: ["cat", "ls", "cd", "mkdir"], c: 0 },
-            { cat: "GIT", q: "Conflict ใน Git เกิดขึ้นจากสถานการณ์ใดมากที่สุด?", a: ["การแก้ไขโค้ดบรรทัดเดียวกันในไฟล์เดียวกัน", "การลืม Commit งาน", "การลบโฟลเดอร์ Git ทิ้ง", "การเปลี่ยนสีธีมของ VS Code"], c: 0 },
-            { cat: "DOCKER", q: "Dockerfile คำสั่ง 'COPY' และ 'ADD' ต่างกันอย่างไร?", a: ["ADD สามารถดาวน์โหลดไฟล์จาก URL ได้", "COPY สามารถดาวน์โหลดไฟล์จาก URL ได้", "ADD ใช้ได้เฉพาะไฟล์รูป", "เหมือนกันทุกอย่าง"], c: 0 },
-            { cat: "K8S", q: "Pod ใน Kubernetes คืออะไร?", a: ["หน่วยย่อยที่สุดที่รันแอปพลิเคชัน", "เครื่องคอมพิวเตอร์หนึ่งเครื่อง", "ระบบฐานข้อมูล", "ศูนย์กระจายสินค้า"], c: 0 },
-            { cat: "AWS", q: "VPC Peering มีไว้เพื่อวัตถุประสงค์ใด?", a: ["เชื่อมต่อ VPC 2 ตัวเข้าหากัน", "สำรองข้อมูลไปยัง S3", "เพิ่มขนาด CPU ให้ EC2", "ลบรหัสผ่านพนักงาน"], c: 0 },
-            { cat: "BANKING", q: "SLA 99.9% (เลขเก้า 3 ตัว) ยอมให้ระบบล่มได้ประมาณเท่าใดต่อปี?", a: ["~8.77 ชั่วโมง", "~52 นาที", "~24 ชั่วโมง", "~3 วัน"], c: 0 },
-            { cat: "SDLC", q: "Agile Manifesto ข้อที่ 1 เน้นสิ่งใดมากกว่า 'Processes and Tools'?", a: ["Individuals and Interactions", "Working Software", "Responding to Change", "Budget Control"], c: 0 },
-            { cat: "LINUX", q: "คำสั่ง 'chmod +x script.sh' ทำหน้าที่อะไร?", a: ["ให้สิทธิ์การรันไฟล์ (Execute)", "ให้สิทธิ์อ่านไฟล์อย่างเดียว", "เปลี่ยนเจ้าของไฟล์", "ซ่อนไฟล์"], c: 0 },
-            { cat: "DEVOPS", q: "Infrastructure as Code (IaC) ช่วยแก้ปัญหาใดได้ดีที่สุด?", a: ["Configuration Drift", "Network Speed", "Employee Salaries", "Office Space"], c: 0 },
-            { cat: "CI/CD", q: "ในขั้นตอน CI เครื่องมือ 'Dependency Check' ตรวจสอบอะไร?", a: ["ช่องโหว่ความปลอดภัยใน Library ที่แอปเรียกใช้", "ตรวจความสวยงามของโค้ด", "ตรวจชื่อไฟล์", "ตรวจความเร็วเว็บ"], c: 0 },
-            { cat: "K8S", q: "Rolling Update ใน Kubernetes มีประโยชน์อย่างไร?", a: ["ทำให้แอปอัปเดตเวอร์ชันได้โดยไม่มี Downtime", "ทำให้แอปทำงานเร็วขึ้น 2 เท่า", "ทำให้ประหยัดค่าไฟ", "ทำให้ลบข้อมูลอัตโนมัติ"], c: 0 },
-            { cat: "AWS", q: "บริการใดของ AWS ที่ใช้รันเครื่องเซิร์ฟเวอร์เสมือน (VM)?", a: ["EC2", "S3", "VPC", "EKS"], c: 0 },
-            { cat: "DOCKER", q: "Multi-stage build ใน Dockerfile มีเป้าหมายหลักคืออะไร?", a: ["เพื่อลดขนาด Docker Image ให้เล็กที่สุด", "เพื่อเขียนโค้ดให้ยาวขึ้น", "เพื่อรันภาษาโปรแกรมได้หลายภาษา", "เพื่อไม่ต้องใช้ Registry"], c: 0 },
-            { cat: "GIT", q: "คำสั่ง 'git pull' ทำงานอย่างไรในเบื้องหลัง?", a: ["fetch ข้อมูลแล้ว merge เข้ากิ่งปัจจุบัน", "ลบข้อมูลปัจจุบันทิ้งแล้วลงใหม่", "ส่งข้อมูลขึ้น server", "สร้าง repo ใหม่"], c: 0 },
-            { cat: "BANKING", q: "Support Tier 2 ในธนาคารมีบทบาทอย่างไร?", a: ["เฝ้าระวังความผิดปกติผ่าน Dashboard (Monitor)", "รับสายรับเรื่องเบื้องต้น", "เขียนโค้ดแก้บัค", "จัดซื้อ Hardware"], c: 0 },
-            { cat: "NETWORKING", q: "HTTPS ใช้พอร์ตมาตรฐานหมายเลขใด?", a: ["443", "80", "22", "3306"], c: 0 },
-            { cat: "SDLC", q: "Shu-Ha-Ri ขั้นตอน 'Ri' คืออะไร?", a: ["สร้างกฎและแนวทางใหม่เอง (Create/Transcend)", "เรียนรู้พื้นฐาน", "ขัดแย้งกับหัวหน้า", "เลิกทำงานไอที"], c: 0 },
-            { cat: "LINUX", q: "คำสั่ง 'ls -la' ตัวเลือก -a ย่อมาจากอะไร?", a: ["All (รวมไฟล์ซ่อน)", "Alphabetical", "Active", "Absolute"], c: 0 },
-            { cat: "CLOUD", q: "Hybrid Cloud คือสถาปัตยกรรมแบบใด?", a: ["การใช้ Public และ Private Cloud ร่วมกัน", "การใช้ AWS และ Google ร่วมกัน", "การใช้ Laptop และ Server ร่วมกัน", "การรันแอปบนมือถืออย่างเดียว"], c: 0 },
-            { cat: "K8S", q: "Service Type: ClusterIP มีขอบเขตการใช้งานอย่างไร?", a: ["ใช้สื่อสารกันเองภายใน Cluster เท่านั้น", "เปิดให้คนภายนอกเข้าถึงได้", "ใช้สำหรับเก็บข้อมูลถาวร", "ใช้สำหรับปิด Cluster"], c: 0 },
-            { cat: "AWS", q: "บริการจัดการ Kubernetes บน AWS เรียกว่าอะไร?", a: ["EKS", "ECS", "Lambda", "EC2"], c: 0 },
-            { cat: "DOCKER", q: "ใน Dockerfile คำสั่งใดระบุ 'ภาพต้นแบบ' ที่จะใช้สร้าง?", a: ["FROM", "RUN", "CMD", "COPY"], c: 0 },
-            { cat: "GIT", q: "Git Flow 'master/main' branch มีไว้เพื่ออะไร?", a: ["เก็บโค้ดเวอร์ชันที่พร้อมรันบน Production", "เก็บโค้ดที่ยังทดลองอยู่", "เก็บไฟล์ขยะ", "เก็บรหัสผ่าน"], c: 0 },
-            { cat: "SECURITY", q: "SonarQube Grade A หมายถึงสิ่งใดในทางปฏิบัติของธนาคาร?", a: ["โค้ดผ่านเกณฑ์คุณภาพและความปลอดภัยสูงสุด", "โค้ดที่มีคนเขียนเยอะที่สุด", "โค้ดที่แพงที่สุด", "โค้ดที่เป็นภาษาไทย"], c: 0 },
-            { cat: "DEVOPS", q: "Wall of Confusion มักเกิดจากการวัดผล (Metrics) ที่ต่างกัน Dev วัดที่อะไร?", a: ["ความเร็วในการเปลี่ยน (Change)", "ความมั่นคงของระบบ (Stability)", "ราคา", "จำนวนบรรทัดที่เขียน"], c: 0 },
-            { cat: "CI/CD", q: "Harbor เชื่อมต่อกับเครื่องมือใดเพื่อสแกนช่องโหว่ความปลอดภัย?", a: ["Trivy หรือ Clair (Security Scan)", "Photoshop", "Excel", "Zoom"], c: 0 },
-            { cat: "LINUX", q: "คำสั่ง 'pwd' ย่อมาจากอะไร?", a: ["Print Working Directory", "Private Web Data", "Password Data", "Process Web Deploy"], c: 0 },
-            { cat: "K8S", q: "Label Selector ใน Kubernetes มีไว้เพื่อสิ่งใด?", a: ["จับคู่ Service กับกลุ่ม Pod ที่มีป้ายระบุตรงกัน", "ตั้งชื่อเล่นให้ Pod", "ระบุพิกัดที่ตั้งเครื่อง", "เปลี่ยนสีปุ่มในแอป"], c: 0 },
-            { cat: "BANKING", q: "การมีศูนย์สำรอง (DR) 3 แห่ง ช่วยเรื่องใดมากที่สุด?", a: ["High Availability แม้ศูนย์หลักและศูนย์รองหนึ่งแห่งพัง", "ประหยัดค่าไฟ", "หาที่ทำงานใหม่ให้พนักงาน", "ลดการจ้างงาน"], c: 0 }
+            { cat: "BANKING", q: "หากแอปพลิเคชันธนาคารต้องรองรับคนหลักล้านในช่วงต้นเดือน ฟีเจอร์ใดของ Kubernetes สำคัญที่สุด?", a: ["Auto Scaling (HPA)", "Self-healing", "Rolling Update", "Namespace"], c: 0 },
+            { cat: "CULTURE", q: "ข้อใดคือเป้าหมายหลักของ DevOps?", a: ["ลดความขัดแย้งและส่งมอบงานเร็วขึ้น", "ไล่พนักงานออกเพื่อลดต้นทุน", "ติดตั้งซอฟต์แวร์ให้เยอะที่สุด", "ห้ามพนักงานคุยกัน"], c: 0 },
+            { cat: "AWS", q: "บริการใดใน AWS ที่เปรียบเสมือนโกดังเก็บรูปภาพหรือวิดีโอ (Object Storage)?", a: ["S3", "EC2", "VPC", "EKS"], c: 0 },
+            { cat: "NETWORKING", q: "TCP แตกต่างจาก UDP อย่างไร?", a: ["TCP เน้นความถูกต้อง UDP เน้นความเร็ว", "TCP เน้นความเร็ว UDP เน้นความถูกต้อง", "TCP ใช้กับไฟล์รูป UDP ใช้กับเว็บ", "เหมือนกันทุกอย่าง"], c: 0 },
+            { cat: "SECURITY", q: "CVE ย่อมาจากอะไร?", a: ["Common Vulnerabilities and Exposures", "Core Virtual Engine", "Cloud Value Entry", "Control Vault Entry"], c: 0 },
+            { cat: "BANKING", q: "Tier 3 Support ในธนาคารคือทีมใด?", a: ["Engineering Team", "Call Center", "Monitor Support", "Sales Team"], c: 0 },
+            { cat: "SLA", q: "SLA 99.9% หมายถึงล่มได้ประมาณเท่าใดต่อปี?", a: ["~8.77 ชั่วโมง", "~52 นาที", "~24 ชั่วโมง", "~1 วัน"], c: 0 },
+            { cat: "DOCKER", q: "คำสั่งใดใช้เปลี่ยนพิมพ์เขียว (Dockerfile) ให้เป็น Image?", a: ["docker build", "docker run", "docker push", "docker pull"], c: 0 },
+            { cat: "GIT", q: "Conflict มักเกิดขึ้นเมื่อใด?", a: ["คนสองคนแก้โค้ดบรรทัดเดียวกัน", "ลืม Commit งาน", "ลืม Push งาน", "เปลี่ยนสีพื้นหลัง VS Code"], c: 0 },
+            { cat: "K8S", q: "Rolling Update ช่วยแก้ปัญหาอะไร?", a: ["ทำให้การอัปเดตไม่มี Downtime", "ทำให้แอปเร็วขึ้น 10 เท่า", "ทำให้ประหยัดค่าไฟ", "ทำให้ลบข้อมูลอัตโนมัติ"], c: 0 }
         ];
 
         let currentQuizSet = [];
@@ -588,8 +582,7 @@
         let score = 0;
 
         function startQuiz() {
-            score = 0;
-            currentQuizIdx = 0;
+            score = 0; currentQuizIdx = 0;
             currentQuizSet = [...questionPool].sort(() => 0.5 - Math.random()).slice(0, 10);
             document.getElementById('quiz-start').classList.add('hidden');
             document.getElementById('quiz-play').classList.remove('hidden');
@@ -603,58 +596,45 @@
             document.getElementById('q-num').innerText = `ข้อที่ ${currentQuizIdx + 1} / 10`;
             document.getElementById('q-cat').innerText = data.cat;
             document.getElementById('q-text').innerText = data.q;
-            document.getElementById('q-progress').style.width = `${((currentQuizIdx + 1) / 10) * 100}%`;
+            document.getElementById('q-progress').style.width = `${((currentIdx = currentQuizIdx + 1) / 10) * 100}%`;
             
-            const optionsBox = document.getElementById('q-options');
-            optionsBox.innerHTML = '';
-            
-            const opts = [...data.a].map((val, i) => ({ val, originalIdx: i }));
-            const shuffled = opts.sort(() => 0.5 - Math.random());
-
-            shuffled.forEach((opt) => {
+            const grid = document.getElementById('q-options');
+            grid.innerHTML = '';
+            data.a.forEach((opt, i) => {
                 const btn = document.createElement('button');
-                btn.className = 'quiz-option p-6 bg-white border border-slate-200 rounded-2xl text-left font-medium shadow-sm hover:shadow-md transition-all';
-                btn.innerText = opt.val;
-                btn.onclick = () => checkAnswer(opt.originalIdx === 0, btn);
-                optionsBox.appendChild(btn);
+                btn.className = 'quiz-option p-5 bg-white border border-slate-200 rounded-2xl text-left font-medium text-xs shadow-sm';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(i === data.c, btn);
+                grid.appendChild(btn);
             });
         }
 
         function checkAnswer(isCorrect, btn) {
             const btns = document.querySelectorAll('.quiz-option');
             btns.forEach(b => b.onclick = null);
-
-            if (isCorrect) {
-                btn.classList.add('correct');
-                score++;
-            } else {
-                btn.classList.add('wrong');
-                btns.forEach(b => {
-                    if(b.innerText === currentQuizSet[currentQuizIdx].a[0]) b.classList.add('correct');
-                });
+            if (isCorrect) { btn.classList.add('correct'); score++; }
+            else { 
+                btn.classList.add('wrong'); 
+                btns[currentQuizSet[currentQuizIdx].c].classList.add('correct');
             }
             updateScoreUI();
-
             setTimeout(() => {
                 currentQuizIdx++;
                 if (currentQuizIdx < 10) showQuestion();
-                else showResult();
-            }, 1500);
+                else finishQuiz();
+            }, 1200);
         }
 
-        function updateScoreUI() {
-            document.getElementById('quiz-score-ui').innerText = `คะแนน: ${score} / 10`;
-        }
+        function updateScoreUI() { document.getElementById('quiz-score-ui').innerText = `SCORE: ${score} / 10`; }
 
-        function showResult() {
+        function finishQuiz() {
             document.getElementById('quiz-play').classList.add('hidden');
             document.getElementById('quiz-result').classList.remove('hidden');
             document.getElementById('r-score').innerText = `คุณทำคะแนนได้ ${score} เต็ม 10`;
             const grade = document.getElementById('r-grade');
-            const icon = document.getElementById('r-icon');
-            if (score >= 8) { grade.innerText = "Grade A"; icon.innerText = "🏆"; }
-            else if (score >= 5) { grade.innerText = "Passed"; icon.innerText = "🌟"; }
-            else { grade.innerText = "Try Harder"; icon.innerText = "📚"; }
+            if (score >= 8) grade.innerText = "Grade A";
+            else if (score >= 5) grade.innerText = "Passed";
+            else grade.innerText = "Study More";
         }
     </script>
 </body>
