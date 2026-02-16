@@ -37,15 +37,15 @@
     <aside id="sidebar" class="hidden md:flex flex-col w-80 bg-white border-r border-slate-200 fixed h-full z-40 transition-transform duration-300 transform -translate-x-full md:translate-x-0">
         <div class="p-8 border-b">
             <h1 class="text-2xl font-bold text-blue-600">DevOps Mastery</h1>
-            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1 italic underline decoration-blue-500">The Final Shield v4.1</p>
+            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1 italic underline decoration-blue-500">Exam Ready v4.2</p>
         </div>
         <nav class="flex-1 overflow-y-auto py-6">
             <ul class="space-y-1">
                 <li><button onclick="showSection('dashboard')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all nav-active" id="btn-dashboard">📊 แดชบอร์ด & ข้อมูลสอบ</button></li>
-                <li><button onclick="showSection('encyclopedia')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all" id="btn-encyclopedia">📖 คลังเนื้อหาฉบับเต็ม</button></li>
-                <li><button onclick="showSection('flashcards')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all" id="btn-flashcards">🧩 ทายศัพท์ (Game)</button></li>
+                <li><button onclick="showSection('encyclopedia')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all" id="btn-encyclopedia">📖 สรุปเนื้อหาเจาะลึก</button></li>
+                <li><button onclick="showSection('flashcards')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all" id="btn-flashcards">🧩 ทายศัพท์ (Flashcards)</button></li>
                 <li><button onclick="showSection('linux')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all" id="btn-linux">💻 Linux CLI Lab</button></li>
-                <li><button onclick="showSection('simulator')" class="nav-btn w-full text-left px-6 py-3 text-blue-600 bg-blue-50 font-bold hover:bg-blue-100 transition-all mt-4 mx-4 rounded-lg shadow-sm" id="btn-simulator">🎯 Mega Quiz Challenge</button></li>
+                <li><button onclick="showSection('simulator')" class="nav-btn w-full text-left px-6 py-3 text-blue-600 bg-blue-50 font-bold hover:bg-blue-100 transition-all mt-4 mx-4 rounded-lg shadow-sm" id="btn-simulator">🎯 แบบทดสอบฝึกฝน</button></li>
             </ul>
         </nav>
         <div class="p-6 border-t bg-blue-50 space-y-2">
@@ -67,26 +67,26 @@
         <section id="dashboard" class="content-section space-y-8">
             <div class="bg-gradient-to-br from-indigo-900 via-blue-800 to-sky-700 rounded-3xl p-10 text-white shadow-2xl relative overflow-hidden">
                 <div class="relative z-10">
-                    <h2 class="text-4xl font-extrabold mb-4 text-white">โค้งสุดท้ายสอบ DevOps</h2>
-                    <p class="text-blue-100 max-w-2xl text-lg mb-8 opacity-90 font-light italic">สอบวันที่ 17 กุมภาพันธ์ (วันนี้/พรุ่งนี้) ขอให้ทุกคนได้รับ Grade A!</p>
+                    <h2 class="text-4xl font-extrabold mb-4 text-white">เตรียมสอบ DevOps Final</h2>
+                    <p class="text-blue-100 max-w-2xl text-lg mb-8 opacity-90 font-light italic">วันจันทร์ที่ 17 กุมภาพันธ์ (หมู่เรียนที่ 1) @13:00</p>
                     <div class="flex flex-wrap gap-4">
                         <div class="bg-white/20 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/30">
                             <span class="block text-[10px] opacity-75 font-bold uppercase">สถานที่</span>
-                            <span class="font-bold text-lg">ห้องเรียน 1103 @13:00</span>
+                            <span class="font-bold text-lg">ห้องเรียน 1103</span>
                         </div>
                         <div class="bg-white/20 backdrop-blur-md px-6 py-3 rounded-2xl border border-white/30">
-                            <span class="block text-[10px] opacity-75 font-bold uppercase">คะแนน</span>
-                            <span class="font-bold text-lg">30 Points (ข้อเขียน)</span>
+                            <span class="block text-[10px] opacity-75 font-bold uppercase">รูปแบบ</span>
+                            <span class="font-bold text-lg">30 คะแนน (ข้อเขียน)</span>
                         </div>
                     </div>
                 </div>
-                <div class="absolute -right-20 -bottom-20 opacity-10 text-[350px] select-none italic font-black">WIN</div>
+                <div class="absolute -right-20 -bottom-20 opacity-10 text-[350px] select-none font-black italic">A+</div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="lg:col-span-2 glass p-8 rounded-3xl shadow-sm">
                     <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                        <span>📊</span> อัตราส่วนความเข้มข้นของเนื้อหา
+                        <span>📊</span> อัตราส่วนความสำคัญของเนื้อหา
                     </h3>
                     <div class="h-80">
                         <canvas id="skillRadarChart"></canvas>
@@ -94,167 +94,72 @@
                 </div>
                 <div class="space-y-6">
                     <div class="bg-slate-900 p-8 rounded-3xl text-white shadow-xl">
-                        <h4 class="text-sky-400 font-bold mb-4">📍 พิกัดสอบ</h4>
-                        <p class="text-sm text-slate-400 leading-relaxed">หมู่เรียนที่ 1 สอบวันจันทร์ที่ 17 กุมภาพันธ์ 13.00-15.00น. ณ ห้องเรียน 1103</p>
+                        <h4 class="text-sky-400 font-bold mb-4">📍 ข้อมูลการสอบ</h4>
+                        <p class="text-sm text-slate-400 leading-relaxed italic">หมู่เรียนที่ 1: จันทร์ 17 ก.พ. 69 <br>เวลา 13.00-15.00น. ห้อง 1103</p>
                         <hr class="my-4 border-slate-800">
-                        <p class="text-xs text-slate-500">ใครมาไม่ทัน หรือติดปัญหาให้รีบติดต่อผู้สอนทันที!</p>
+                        <p class="text-[10px] text-slate-500 font-bold uppercase">เตรียมตัวให้พร้อม!</p>
                     </div>
                     <div class="glass p-8 rounded-3xl border-t-8 border-blue-600">
                         <h4 class="font-bold text-slate-800 mb-2">📑 Cheat Sheet A4</h4>
-                        <p class="text-xs text-slate-500 leading-relaxed">แนะนำให้จด: <br>- K8s Architecture Diagram<br>- Linux Command Flags<br>- SLA Calculation Table</p>
+                        <p class="text-xs text-slate-500 leading-relaxed">จดได้ 1 แผ่น (หน้า-หลัง) <br>เน้นวาดรูป DevOps Lifecycle และ Docker Build Flow ไว้ดูประกอบครับ</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION: ENCYCLOPEDIA (DEEP DIVE) -->
+        <!-- SECTION: ENCYCLOPEDIA -->
         <section id="encyclopedia" class="content-section hidden space-y-12 pb-20">
             <div class="border-b pb-4">
-                <h2 class="text-4xl font-black text-slate-800 tracking-tight">THE ENCYCLOPEDIA</h2>
-                <p class="text-slate-500 italic">เจาะลึกเนื้อหาจากไฟล์ PDF ทั้ง 3 และบรรยายพิเศษ</p>
+                <h2 class="text-4xl font-black text-slate-800 tracking-tight">สรุปเนื้อหาเจาะลึก</h2>
+                <p class="text-slate-500 italic">ทุก Keyword ที่ต้องรู้ก่อนเข้าห้องสอบ</p>
             </div>
 
-            <!-- Agile & DevOps Cultural Deep Dive -->
-            <div class="space-y-6">
-                <h3 class="text-2xl font-bold text-indigo-700 border-l-4 border-indigo-500 pl-4">1. SDLC, Agile & DevOps Culture</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-white p-8 rounded-3xl border shadow-sm space-y-4">
-                        <h4 class="font-bold text-indigo-600 flex justify-between"><span>🏛️ วัฒนธรรมองค์กร</span> <span class="keyword-pill">MUST KNOW</span></h4>
-                        <div class="text-sm text-slate-600 space-y-4 leading-relaxed">
-                            <p><strong>DevOps Goal:</strong> ไม่ใช่ตำแหน่ง แต่คือ "กระบวนการ" ที่เน้น Automation มาช่วยทีม Dev (สร้าง/เปลี่ยน) และ Ops (รักษาความนิ่ง) เพื่อลดช่องว่างความขัดแย้ง</p>
-                            <div class="p-4 bg-slate-50 rounded-2xl text-[11px] border border-slate-100 italic">
-                                "Wall of Confusion เกิดจากการวัดผลที่ต่างกัน: Dev วัดที่ Change, Ops วัดที่ Stability"
-                            </div>
-                            <p><strong>Agile Manifesto:</strong> เน้นบุคลากรมากกว่าเครื่องมือ และเน้นซอฟต์แวร์ที่ใช้งานได้จริงมากกว่าเอกสารที่หนาเกินไป</p>
-                        </div>
-                    </div>
-                    <div class="bg-white p-8 rounded-3xl border shadow-sm space-y-4">
-                        <h4 class="font-bold text-indigo-600">🌊 Waterfall vs Agile</h4>
-                        <table class="w-full text-[11px] border-collapse">
-                            <thead>
-                                <tr class="bg-slate-50">
-                                    <th class="border p-2 text-left">หัวข้อ</th>
-                                    <th class="border p-2 text-left">Waterfall</th>
-                                    <th class="border p-2 text-left">Agile</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="border p-2 font-bold">โครงสร้าง</td>
-                                    <td class="border p-2 italic text-red-500">เชิงเส้น/น้ำตก</td>
-                                    <td class="border p-2 italic text-emerald-600">Iterative/รอบสั้น</td>
-                                </tr>
-                                <tr>
-                                    <td class="border p-2 font-bold">ข้อดี</td>
-                                    <td class="border p-2">แผนชัดเจน</td>
-                                    <td class="border p-2 text-emerald-600">ปรับเปลี่ยนตามลูกค้าเร็ว</td>
-                                </tr>
-                                <tr>
-                                    <td class="border p-2 font-bold">ความเสี่ยง</td>
-                                    <td class="border p-2 text-red-500">เจอ Error ตอนท้าย</td>
-                                    <td class="border p-2">ต้องคุยกับลูกค้าบ่อย</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-3xl border shadow-sm space-y-4">
+                    <h4 class="font-bold text-indigo-600">🏛️ DevOps & Agile</h4>
+                    <ul class="text-sm text-slate-600 space-y-3 leading-relaxed">
+                        <li>• <strong>DevOps:</strong> วัฒนธรรมที่รวม Dev และ Ops เพื่อลดความขัดแย้ง (Wall of Confusion)</li>
+                        <li>• <strong>Agile:</strong> การทำงานเป็นรอบสั้นๆ (Sprints) เน้นการปรับตัวตามลูกค้า</li>
+                        <li>• <strong>CI (Integration):</strong> การรวมโค้ดและ Build อัตโนมัติเพื่อหา Error เร็ว</li>
+                        <li>• <strong>IaC:</strong> ตั้งค่า Server ผ่านโค้ด ทำให้ทำซ้ำได้ (Reproducible)</li>
+                    </ul>
                 </div>
-            </div>
-
-            <!-- Networking & Security Protocols -->
-            <div class="space-y-6">
-                <h3 class="text-2xl font-bold text-blue-700 border-l-4 border-blue-500 pl-4">2. Networking & Cloud Protocols</h3>
-                <div class="bg-blue-900 p-8 rounded-3xl text-white shadow-xl space-y-8">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="space-y-4">
-                            <h4 class="font-bold text-sky-300">TCP vs UDP (Transport Layer)</h4>
-                            <div class="text-[11px] space-y-3 opacity-90 leading-relaxed">
-                                <p><strong>TCP:</strong> เน้นความถูกต้อง (Connection-oriented) มีการตรวจสอบข้อมูล (3-way handshake) เหมาะกับแอปธนาคาร, เว็บไซต์</p>
-                                <p><strong>UDP:</strong> เน้นความเร็ว (Connectionless) ไม่รอการยืนยัน เหมาะกับ Streaming, Online Game</p>
-                                <p><strong>Ports:</strong> HTTP (80), HTTPS (443), SSH (22)</p>
-                            </div>
-                        </div>
-                        <div class="bg-white/5 p-5 rounded-2xl border border-white/10 space-y-4">
-                            <h4 class="font-bold text-sky-400">AWS Shared Responsibility</h4>
-                            <div class="text-[10px] space-y-2">
-                                <p class="text-emerald-400">✅ AWS ดูแล: (Security OF the Cloud)</p>
-                                <p class="ml-4">- Hardware, Facilities, Global Infrastructure</p>
-                                <p class="text-orange-400">❌ เราดูแล: (Security IN the Cloud)</p>
-                                <p class="ml-4">- Data, OS, Application, Network Configuration</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bg-white p-8 rounded-3xl border shadow-sm space-y-4">
+                    <h4 class="font-bold text-blue-600">☁️ Cloud & K8s</h4>
+                    <ul class="text-sm text-slate-600 space-y-3 leading-relaxed">
+                        <li>• <strong>IaaS:</strong> เช่า Hardware เราลง OS เอง (เช่น AWS EC2)</li>
+                        <li>• <strong>VPC:</strong> การล้อมรั้ว Network ส่วนตัวในคลาวด์</li>
+                        <li>• <strong>Pod:</strong> หน่วยที่เล็กที่สุดในการรันแอปบน Kubernetes</li>
+                        <li>• <strong>Self-Healing:</strong> Pod เสีย ระบบจะสร้างใหม่ให้เองอัตโนมัติ</li>
+                    </ul>
                 </div>
-            </div>
-
-            <!-- Docker & Kubernetes Special -->
-            <div class="space-y-6">
-                <h3 class="text-2xl font-bold text-sky-700 border-l-4 border-sky-500 pl-4">3. Containerization & Orchestration</h3>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class="lg:col-span-1 bg-white p-8 rounded-3xl border shadow-sm space-y-4">
-                        <h4 class="font-bold text-sky-600">Docker Lifecycle</h4>
-                        <div class="space-y-6 relative pl-6 border-l-2 border-slate-100">
-                            <div class="relative"><span class="absolute -left-[30px] top-0 w-4 h-4 rounded-full bg-blue-500 border-2 border-white shadow-sm"></span><p class="text-xs"><strong>Build:</strong> Dockerfile -> Image</p></div>
-                            <div class="relative"><span class="absolute -left-[30px] top-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow-sm"></span><p class="text-xs"><strong>Ship:</strong> Image -> Registry</p></div>
-                            <div class="relative"><span class="absolute -left-[30px] top-0 w-4 h-4 rounded-full bg-amber-500 border-2 border-white shadow-sm"></span><p class="text-xs"><strong>Run:</strong> Image -> Container</p></div>
-                        </div>
-                        <p class="text-[10px] text-slate-500 italic mt-4">* Image เปรียบเสมือนพิมพ์เขียว Read-only *</p>
-                    </div>
-                    <div class="lg:col-span-2 bg-white p-8 rounded-3xl border shadow-sm">
-                        <h4 class="font-bold text-sky-600 mb-6">Kubernetes (K8s) Standard</h4>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                                <p class="font-bold text-blue-600 text-xs">Pod</p>
-                                <p class="text-[10px] text-slate-500 mt-1">หน่วยย่อยที่สุดที่รันแอป ใน 1 Pod อาจมี 1 หรือหลาย Container</p>
-                            </div>
-                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                                <p class="font-bold text-blue-600 text-xs">Deployment</p>
-                                <p class="text-[10px] text-slate-500 mt-1">ตัวจัดการจำนวน Pod และทำ Rolling Update (Zero Downtime)</p>
-                            </div>
-                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                                <p class="font-bold text-blue-600 text-xs">Self-Healing</p>
-                                <p class="text-[10px] text-slate-500 mt-1">ถ้าระบบตรวจเจอ Pod เสีย (Unhealthy) จะทำการลบและสร้างใหม่ทันที</p>
-                            </div>
-                            <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                                <p class="font-bold text-blue-600 text-xs">HPA (Scaling)</p>
-                                <p class="text-[10px] text-slate-500 mt-1">ขยายจำนวน Pod อัตโนมัติตามปริมาณการใช้งาน CPU/Memory</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bg-white p-8 rounded-3xl border shadow-sm space-y-4">
+                    <h4 class="font-bold text-emerald-600">🐙 Git Mastery</h4>
+                    <ul class="text-sm text-slate-600 space-y-3 leading-relaxed">
+                        <li>• <strong>Merge:</strong> รวมกิ่งโดยเก็บประวัติการแตกกิ่งไว้</li>
+                        <li>• <strong>Rebase:</strong> รวมกิ่งโดยทำให้ประวัติเรียงเป็นเส้นตรง</li>
+                        <li>• <strong>Conflict:</strong> เกิดเมื่อแก้โค้ดบรรทัดเดียวกันในที่เดียวกัน</li>
+                        <li>• <strong>Pull:</strong> คือการทำ fetch + merge ในคำสั่งเดียว</li>
+                    </ul>
                 </div>
-            </div>
-
-            <!-- Banking Ops & SLA -->
-            <div class="space-y-6">
-                <h3 class="text-2xl font-bold text-amber-700 border-l-4 border-amber-500 pl-4">4. Banking IT & Stability</h3>
-                <div class="bg-amber-900 p-8 rounded-3xl text-white shadow-xl relative overflow-hidden">
-                    <h4 class="font-bold text-amber-300 mb-6">SLA & Data Centers</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-[11px] leading-relaxed">
-                        <div class="space-y-3">
-                            <p><strong>Technical Debt (หนี้ทางเทคนิค):</strong> การรีบแก้ปัญหาให้เสร็จเร็วแต่ไม่ดี ซึ่งต้องกลับมาจ่าย "ดอกเบี้ย" ด้วยการซ่อมที่ยากกว่าเดิมในอนาคต</p>
-                            <p><strong>Support Tiers:</strong>
-                                <br>T1: Call Center รับเรื่องเบื้องต้น
-                                <br>T2: Monitoring Support (Dashboard 24/7)
-                                <br>T3: Engineers แก้ปัญหาลึก/Implement ระบบ
-                            </p>
-                        </div>
-                        <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
-                            <p class="font-bold mb-2">DC & DR Site Strategy</p>
-                            <p>DC (ศูนย์หลัก) -> DR (ศูนย์สำรองกรณีภัยพิบัติ)</p>
-                            <p class="mt-2">- ต้องห่างกันอย่างน้อย <strong>30-50 กม.</strong></p>
-                            <p>- ธนาคารมักเตรียมไว้ <strong>3 แห่ง</strong> เสมอ</p>
-                            <p>- <span class="text-amber-400">Harbor:</span> ใช้เก็บ Private Docker Image ในธนาคาร</p>
-                        </div>
-                    </div>
+                <div class="bg-white p-8 rounded-3xl border shadow-sm space-y-4">
+                    <h4 class="font-bold text-amber-600">🏦 Banking Operations</h4>
+                    <ul class="text-sm text-slate-600 space-y-3 leading-relaxed">
+                        <li>• <strong>SLA 99.99%:</strong> ระบบล่มได้ไม่เกิน ~52 นาทีต่อปี</li>
+                        <li>• <strong>Tier 3:</strong> ทีมวิศวกรผู้เชี่ยวชาญแก้ปัญหาเชิงลึก</li>
+                        <li>• <strong>DR Site:</strong> ศูนย์สำรองภัยพิบัติ ต้องห่างจากศูนย์หลัก 30-50 กม.</li>
+                        <li>• <strong>Technical Debt:</strong> หนี้ที่เกิดจากโค้ดที่ไม่ดี ต้องมาแก้ลำบากภายหลัง</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION: FLASHCARDS (TERM GAME) -->
+        <!-- SECTION: FLASHCARDS -->
         <section id="flashcards" class="content-section hidden space-y-8">
             <div class="flex justify-between items-end">
                 <div>
-                    <h2 class="text-3xl font-bold text-slate-800 tracking-tight uppercase">🧩 ทายศัพท์ DEVOPS</h2>
-                    <p class="text-slate-500 mt-2 italic">คลิกที่การ์ดเพื่อดูเฉลยและคำอธิบายละเอียด</p>
+                    <h2 class="text-3xl font-bold text-slate-800 tracking-tight uppercase">🧩 ทายศัพท์ (Flashcards)</h2>
+                    <p class="text-slate-500 mt-2 italic">คลิกที่การ์ดเพื่อดูเฉลย เป็นแนวทางข้อสอบเติมคำ</p>
                 </div>
                 <div class="flex gap-2">
                     <button onclick="prevCard()" class="px-4 py-2 bg-white border rounded-xl text-slate-600 hover:bg-slate-50 shadow-sm transition-all">ก่อนหน้า</button>
@@ -263,18 +168,16 @@
             </div>
 
             <div id="card-container" class="max-w-2xl mx-auto py-10">
-                <!-- Card Component -->
                 <div class="flashcard" onclick="this.classList.toggle('flipped')" id="flashcard">
                     <div class="flashcard-inner">
                         <div class="flashcard-front">
                             <span id="card-category" class="badge bg-blue-100 text-blue-600 mb-4 uppercase tracking-widest text-[10px]">CATEGORY</span>
-                            <h3 id="card-hint" class="text-xl font-bold text-slate-800 leading-relaxed">คำใบ้จะปรากฏที่นี่...</h3>
-                            <p class="mt-10 text-xs text-slate-400 uppercase tracking-widest font-bold">คลิกเพื่อดูเฉลย</p>
+                            <h3 id="card-hint" class="text-xl font-bold text-slate-800 leading-relaxed">...</h3>
+                            <p class="mt-10 text-[10px] text-slate-400 font-bold uppercase tracking-widest">คลิกเพื่อดูเฉลย</p>
                         </div>
                         <div class="flashcard-back">
                             <h3 id="card-answer" class="text-3xl font-black mb-4">เฉลย</h3>
-                            <p id="card-explanation" class="text-sm opacity-90 leading-relaxed">คำอธิบายละเอียดที่จะช่วยให้คุณจำไปเขียนตอบในข้อสอบได้</p>
-                            <p class="mt-8 text-[10px] opacity-60 uppercase font-bold">คลิกเพื่อพลิกกลับ</p>
+                            <p id="card-explanation" class="text-sm opacity-90 leading-relaxed">...</p>
                         </div>
                     </div>
                 </div>
@@ -282,55 +185,38 @@
             </div>
         </section>
 
-        <!-- SECTION: LINUX TERMINAL LAB -->
+        <!-- SECTION: LINUX LAB -->
         <section id="linux" class="content-section hidden space-y-8">
             <div class="flex justify-between items-end">
                 <div>
                     <h2 class="text-3xl font-bold text-slate-800 uppercase tracking-tighter">Linux Practice Lab</h2>
-                    <p class="text-slate-500 mt-2 italic">พิมพ์คำสั่งพื้นฐาน (ls, cd, mkdir, touch, rm) เพื่อทำความคุ้นเคย</p>
+                    <p class="text-slate-500 mt-2 italic">ฝึกพิมพ์คำสั่งเบื้องต้นก่อนเข้าสอบจริง</p>
                 </div>
-                <button onclick="resetLab()" class="text-xs text-blue-600 font-bold hover:underline">รีเซ็ต Terminal</button>
+                <button onclick="resetLab()" class="text-xs text-blue-600 font-bold hover:underline">รีเซ็ต</button>
             </div>
 
             <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
                 <div class="space-y-4 text-xs">
                     <div class="glass p-6 rounded-3xl border shadow-sm">
-                        <h4 class="font-bold text-slate-800 mb-4">💻 ภารกิจฝึกหัดวันนี้</h4>
+                        <h4 class="font-bold text-slate-800 mb-4">💻 ภารกิจฝึกหัด</h4>
                         <ul class="space-y-3 text-slate-600 leading-relaxed">
-                            <li>1. <code>ls</code> เพื่อดูรายชื่อไฟล์เริ่มต้น</li>
-                            <li>2. <code>mkdir exam_prep</code> เพื่อสร้างโฟลเดอร์สำหรับติว</li>
-                            <li>3. <code>cd exam_prep</code> เพื่อเข้าไปในโฟลเดอร์นั้น</li>
-                            <li>4. <code>touch summary.txt</code> เพื่อสร้างไฟล์สรุป</li>
-                            <li>5. <code>mv summary.txt final_exam.txt</code> เพื่อเปลี่ยนชื่อไฟล์</li>
-                            <li>6. <code>cd ..</code> และ <code>rm -rf exam_prep</code> เพื่อทำความสะอาด</li>
+                            <li>1. <code>ls</code>: ดูไฟล์เริ่มต้น</li>
+                            <li>2. <code>mkdir test</code>: สร้างโฟลเดอร์ชื่อ test</li>
+                            <li>3. <code>cd test</code>: เข้าไปในโฟลเดอร์ test</li>
+                            <li>4. <code>touch hello.txt</code>: สร้างไฟล์เปล่า</li>
+                            <li>5. <code>mv hello.txt exam.txt</code>: เปลี่ยนชื่อไฟล์</li>
                         </ul>
-                    </div>
-                    <div class="bg-slate-900 p-6 rounded-3xl text-white">
-                        <p class="font-bold text-sky-400 mb-2 uppercase tracking-tighter">Command Quick Reference</p>
-                        <div class="grid grid-cols-2 gap-2 text-[9px] mono opacity-80 uppercase font-bold">
-                            <div>ls: ดูไฟล์</div>
-                            <div>cd: ย้ายโฟลเดอร์</div>
-                            <div>mv: ย้าย/เปลี่ยนชื่อ</div>
-                            <div>mkdir: สร้าง dir</div>
-                            <div>chmod: เปลี่ยนสิทธิ์</div>
-                            <div>pwd: ดู path</div>
-                        </div>
                     </div>
                 </div>
 
                 <div class="xl:col-span-2">
-                    <div class="terminal flex flex-col h-[550px]">
-                        <div class="p-3 border-b border-slate-700 flex justify-between items-center">
-                            <div class="flex gap-2">
-                                <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
-                                <div class="w-2.5 h-2.5 rounded-full bg-amber-500"></div>
-                                <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-                            </div>
-                            <span class="text-[9px] text-slate-500 mono uppercase font-bold">bash simulator</span>
+                    <div class="terminal flex flex-col h-[500px]">
+                        <div class="p-3 border-b border-slate-700 flex justify-between items-center text-slate-500 font-mono text-[10px]">
+                            <div class="flex gap-2"><div class="w-2.5 h-2.5 rounded-full bg-red-500"></div><div class="w-2.5 h-2.5 rounded-full bg-amber-500"></div><div class="w-2.5 h-2.5 rounded-full bg-green-500"></div></div>
+                            <span>BASH TERMINAL</span>
                         </div>
                         <div id="terminal-screen" class="p-6 flex-1 overflow-y-auto text-emerald-400 font-mono text-xs space-y-1">
-                            <div>ยินดีต้อนรับสู่ DevOps Linux Lab Simulation</div>
-                            <div>พิมพ์ 'help' เพื่อดูคำสั่งทั้งหมด</div>
+                            <div>Welcome to DevOps Terminal Lab. Type 'help' for commands.</div>
                         </div>
                         <div class="p-4 border-t border-slate-700 flex items-center gap-2 font-mono text-sm">
                             <span class="text-blue-400 font-bold">root@devops:</span>
@@ -343,28 +229,26 @@
             </div>
         </section>
 
-        <!-- SECTION: MEGA QUIZ -->
+        <!-- SECTION: SIMULATOR (EASY LEVEL) -->
         <section id="simulator" class="content-section hidden space-y-8">
             <div class="flex justify-between items-end">
                 <div>
-                    <h2 class="text-3xl font-bold text-slate-800">Ultimate Quiz Lab</h2>
-                    <p class="text-slate-500 mt-2 italic">ชุดคำถาม 10 ข้อ (สุ่มจาก 50+ ข้อ) เพื่อเช็คความแม่นยำ</p>
+                    <h2 class="text-3xl font-bold text-slate-800 uppercase tracking-tighter">แบบทดสอบฝึกฝน</h2>
+                    <p class="text-slate-500 mt-2 italic">เน้นพื้นฐานที่สำคัญ (ระดับความยาก: ง่ายถึงปานกลาง)</p>
                 </div>
                 <div id="quiz-score-ui" class="bg-blue-600 text-white px-6 py-2 rounded-full font-bold shadow-lg">SCORE: 0 / 10</div>
             </div>
 
             <div id="quiz-container" class="glass p-10 rounded-3xl min-h-[500px] flex flex-col justify-center relative overflow-hidden shadow-sm">
-                <!-- Start Screen -->
                 <div id="quiz-start" class="text-center space-y-8">
-                    <div class="text-[120px] animate-bounce">🛡️</div>
+                    <div class="text-[120px] animate-bounce">⚔️</div>
                     <div class="space-y-2">
-                        <h3 class="text-3xl font-bold text-slate-800 tracking-tight uppercase">Ready for the Final?</h3>
-                        <p class="text-slate-500 text-lg">แบบทดสอบวัดระดับความเข้าใจ DevOps & Cloud Architecture</p>
+                        <h3 class="text-3xl font-bold text-slate-800 tracking-tight">เริ่มการทดสอบความพร้อม</h3>
+                        <p class="text-slate-500 text-lg italic">ชุดคำถาม 10 ข้อสำหรับนิสิตที่ต้องการทวนพื้นฐาน</p>
                     </div>
-                    <button onclick="startQuiz()" class="bg-blue-600 text-white px-12 py-5 rounded-3xl font-bold text-xl hover:bg-blue-700 transform hover:scale-105 transition-all shadow-xl shadow-blue-100">START CHALLENGE</button>
+                    <button onclick="startQuiz()" class="bg-blue-600 text-white px-12 py-5 rounded-3xl font-bold text-xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-100">START</button>
                 </div>
 
-                <!-- Play Screen -->
                 <div id="quiz-play" class="hidden space-y-8">
                     <div class="flex justify-between items-center text-xs font-bold text-slate-400 uppercase tracking-widest">
                         <span id="q-num">ข้อที่ 1 / 10</span>
@@ -373,19 +257,16 @@
                     <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
                         <div id="q-progress" class="h-full bg-blue-500 transition-all duration-500" style="width: 10%"></div>
                     </div>
-                    <h3 id="q-text" class="text-2xl font-bold text-slate-800 leading-tight">คำถาม...</h3>
+                    <h3 id="q-text" class="text-2xl font-bold text-slate-800 leading-tight italic">...</h3>
                     <div id="q-options" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                 </div>
 
-                <!-- Result Screen -->
                 <div id="quiz-result" class="hidden text-center space-y-8 animate-fade-in">
                     <div id="r-icon" class="text-8xl">🏆</div>
-                    <div class="space-y-2">
-                        <h3 class="text-4xl font-extrabold text-slate-800 uppercase tracking-tighter">MISSION COMPLETED</h3>
-                        <p id="r-score" class="text-xl text-slate-500">คุณทำคะแนนได้ 10 เต็ม 10</p>
-                    </div>
-                    <div id="r-grade" class="text-6xl font-black text-blue-600 italic tracking-tighter uppercase">Grade A</div>
-                    <button onclick="showSection('simulator')" class="bg-slate-800 text-white px-10 py-4 rounded-2xl font-bold hover:bg-slate-700 transition-all">TRY AGAIN</button>
+                    <h3 class="text-4xl font-extrabold text-slate-800 uppercase tracking-tighter">ผลการทดสอบ</h3>
+                    <p id="r-score" class="text-xl text-slate-500">...</p>
+                    <div id="r-grade" class="text-6xl font-black text-blue-600 italic tracking-tighter uppercase">GRADE A</div>
+                    <button onclick="showSection('simulator')" class="bg-slate-800 text-white px-10 py-4 rounded-2xl font-bold hover:bg-slate-700 transition-all">ลองใหม่</button>
                 </div>
             </div>
         </section>
@@ -407,66 +288,42 @@
             document.getElementById('sidebar').classList.toggle('-translate-x-full');
         }
 
-        // --- Term Guessing Game (Flashcards) ---
+        // --- Flashcards Data ---
         const flashcardsPool = [
-            { cat: "CULTURE", q: "ปัญหาความไม่เข้าใจกันระหว่างทีม Development และ Operations ที่ DevOps พยายามแก้ไข เรียกว่าอะไร?", a: "Wall of Confusion", d: "เป็นกำแพงที่เกิดจาก Dev ต้องการส่งฟีเจอร์ใหม่เร็วๆ (Change) แต่ Ops ต้องการรักษาระบบให้นิ่งที่สุด (Stability)" },
-            { cat: "SDLC", q: "หลักการเรียนรู้ 3 ขั้นตอนจากญี่ปุ่นที่ Agile นำมาใช้ (ทำตามกฎ -> แหกกฎ -> สร้างกฎเอง) เรียกว่าอะไร?", a: "Shu-Ha-Ri", d: "Shu (เรียนรู้), Ha (เริ่มประยุกต์), Ri (เชี่ยวชาญจนสร้างแนวทางตัวเองได้)" },
-            { cat: "AUTOMATION", q: "การจัดการเครื่องเซิร์ฟเวอร์ผ่านการเขียนไฟล์โค้ด แทนการกดตั้งค่าด้วยมือ เรียกว่าอะไร?", a: "Infrastructure as Code (IaC)", d: "ช่วยลด Human Error, ทำให้ระบบทำซ้ำได้ (Reproducible) และเก็บประวัติใน Git ได้" },
-            { cat: "AWS", q: "บริการ AWS ที่ใช้แยกห้องเครือข่ายส่วนตัว (Isolation) ออกจากอินเทอร์เน็ตหรือโปรเจกต์อื่น เรียกว่าอะไร?", a: "VPC (Virtual Private Cloud)", d: "เปรียบเสมือนรั้วบ้านในหมู่บ้านจัดสรร เพื่อความปลอดภัยสูงสุดของข้อมูลธนาคาร" },
-            { cat: "SLA", q: "SLA ระดับเลขเก้า 4 ตัว (99.99%) ยอมให้ระบบล่มได้สูงสุดกี่นาทีต่อปี?", a: "52.56 นาที", d: "คำนวณจากเปอร์เซ็นต์เวลาทำงานต่อปี (365 วัน) หากล่มเกินนี้ธนาคารอาจได้รับความเสียหายสูง" },
-            { cat: "K8S", q: "หน่วยย่อยที่สุดในการรันแอปพลิเคชันบน Kubernetes เรียกว่าอะไร?", a: "Pod", d: "ใน 1 Pod อาจประกอบด้วย 1 หรือหลาย Container ที่ต้องทำงานประสานกัน" },
-            { cat: "K8S", q: "ความสามารถในการซ่อมแซมตัวเองของ K8s เมื่อพบว่า Pod มีปัญหา เรียกว่าอะไร?", a: "Self-healing", d: "K8s จะตรวจสอบ Health Check ตลอดเวลา และสร้าง Pod ใหม่มาแทนที่ตัวที่พังทันที" },
-            { cat: "DOCKER", q: "ไฟล์พิมพ์เขียวแบบ Read-only ที่ใช้เป็นต้นแบบในการสร้าง Container เรียกว่าอะไร?", a: "Docker Image", d: "ประกอบด้วย Layer ต่างๆ และต้องถูกรันออกมาเป็น Container ถึงจะใช้งานได้" },
-            { cat: "BANKING", q: "ด่านตรวจคุณภาพโค้ดในธนาคารที่กำหนดว่าต้องได้เกรด A เท่านั้นถึงจะผ่าน เรียกว่าเครื่องมืออะไร?", a: "SonarQube", d: "ใช้ทำ Static Code Analysis เพื่อหา Code Smell, Bugs และช่องโหว่ความปลอดภัย" },
-            { cat: "NETWORKING", q: "โปรโตคอลที่เน้นความเร็ว รับส่งข้อมูลทันทีโดยไม่ต้องรอตอบรับ (เหมาะกับ Streaming) เรียกว่า?", a: "UDP", d: "ตรงข้ามกับ TCP ที่เน้นความถูกต้องและมีการทำ 3-way handshake" },
-            { cat: "GIT", q: "วิธีการรวมกิ่งของโค้ดที่ทำให้ประวัติการ Commit เรียงเป็นเส้นตรงสวยงาม (Linear History)?", a: "Rebase", d: "เป็นการย้ายฐาน Commit ไปต่อท้ายกิ่งหลัก ต่างจาก Merge ที่จะสร้างจุดตัดกิ่งขึ้นมาใหม่" },
-            { cat: "SECURITY", q: "รหัสมาตรฐานสากลที่ใช้ระบุช่องโหว่ความปลอดภัยที่ถูกค้นพบ เรียกว่าอะไร?", a: "CVE", d: "Common Vulnerabilities and Exposures - ใช้เพื่อติดตามและอัปเดต Patch ความปลอดภัย" },
-            { cat: "SUPPORT", q: "ทีมซัพพอร์ตลำดับใดที่เป็นคน Implement และแก้ไขปัญหาเชิงลึก รวมถึงสลับระบบไปศูนย์สำรอง?", a: "Tier 3 Engineering Team", d: "เป็นทีมวิศวกรผู้เชี่ยวชาญสูงสุดในลำดับการซัพพอร์ตของธนาคาร" },
-            { cat: "BANKING", q: "ที่เก็บ Docker Image ส่วนตัวภายในองค์กร เพื่อความปลอดภัยไม่ให้หลุดออกสู่ภายนอก เรียกว่าอะไร?", a: "Harbor", d: "ธนาคารมักใช้ Private Registry อย่าง Harbor แทน Docker Hub เพื่อความมั่นคงปลอดภัย" },
-            { cat: "DR", q: "ศูนย์ข้อมูลสำรองกรณีเกิดภัยพิบัติ ที่ธนาคารมักเตรียมไว้ 3 แห่ง เรียกว่าอะไร?", a: "DR Site", d: "Disaster Recovery Site - ต้องอยู่ห่างจาก DC หลัก (30-50 กม.) เพื่อป้องกันภัยพิบัติระดับภูมิภาค" }
+            { cat: "CULTURE", q: "กำแพงความขัดแย้งระหว่างทีม Dev และ Ops เรียกว่า?", a: "Wall of Confusion", d: "Dev อยากเปลี่ยนเร็ว Ops อยากรักษาระบบให้นิ่ง" },
+            { cat: "AUTOMATION", q: "การจัดการ Server ผ่านการเขียนโค้ด แทนการกดด้วยมือ?", a: "IaC (Infrastructure as Code)", d: "ช่วยลดความผิดพลาดจากคน (Human Error)" },
+            { cat: "AWS", q: "บริการเช่าเครื่อง Server เสมือนใน AWS?", a: "EC2", d: "Elastic Compute Cloud (โมเดล IaaS)" },
+            { cat: "AWS", q: "บริการที่แบ่งแยกเครือข่ายส่วนตัวในคลาวด์?", a: "VPC", d: "Virtual Private Cloud" },
+            { cat: "K8S", q: "หน่วยย่อยที่สุดที่รันแอปบน Kubernetes?", a: "Pod", d: "บรรจุ Container ที่ทำงานร่วมกัน" },
+            { cat: "K8S", q: "เมื่อ Pod พัง ระบบจะสร้างใหม่มาแทนที่อัตโนมัติ เรียกว่า?", a: "Self-healing", d: "รักษา Desired State ของระบบ" },
+            { cat: "DOCKER", q: "แม่พิมพ์ Read-only ที่ใช้สร้าง Container?", a: "Docker Image", d: "เป็น Artifact ที่ได้จากการ build" },
+            { cat: "BANKING", q: "หนี้ที่เกิดจากการเขียนโค้ดไม่ดีเพื่อเน้นเสร็จเร็ว?", a: "Technical Debt", d: "หนี้ทางเทคนิคที่ต้องตามแก้ภายหลัง" },
+            { cat: "GIT", q: "คำสั่งดูไฟล์ที่ถูกแก้ไขแต่ยังไม่ commit?", a: "git status", d: "ใช้เช็คสถานะไฟล์ปัจจุบัน" },
+            { cat: "SDLC", q: "หลักการ Shu-Ha-Ri ขั้นที่ทำตามกฎพื้นฐาน?", a: "Shu", d: "ทำตามแบบแผนอย่างเคร่งครัด" }
         ];
 
         let currentCardIdx = 0;
-
         function updateCard() {
             const card = flashcardsPool[currentCardIdx];
-            const cardEl = document.getElementById('flashcard');
-            cardEl.classList.remove('flipped');
-            
+            document.getElementById('flashcard').classList.remove('flipped');
             document.getElementById('card-category').innerText = card.cat;
             document.getElementById('card-hint').innerText = card.q;
             document.getElementById('card-answer').innerText = card.a;
             document.getElementById('card-explanation').innerText = card.d;
             document.getElementById('card-progress').innerText = `Card ${currentCardIdx + 1} / ${flashcardsPool.length}`;
         }
+        function nextCard() { currentCardIdx = (currentCardIdx + 1) % flashcardsPool.length; updateCard(); }
+        function prevCard() { currentCardIdx = (currentCardIdx - 1 + flashcardsPool.length) % flashcardsPool.length; updateCard(); }
 
-        function nextCard() {
-            currentCardIdx = (currentCardIdx + 1) % flashcardsPool.length;
-            updateCard();
-        }
-
-        function prevCard() {
-            currentCardIdx = (currentCardIdx - 1 + flashcardsPool.length) % flashcardsPool.length;
-            updateCard();
-        }
-
-        // --- Linux Lab Logic ---
+        // --- Linux Lab ---
         let currentDir = "~";
-        let fs = {
-            "~": { type: "dir", children: ["README.md", "devops_exam", "logs"], parent: null },
-            "~/devops_exam": { type: "dir", children: ["cheat_sheet.txt", "notes.md"], parent: "~" },
-            "~/logs": { type: "dir", children: ["app.log"], parent: "~" }
-        };
+        let fs = { "~": { type: "dir", children: ["README.md", "devops_exam"], parent: null }, "~/devops_exam": { type: "dir", children: ["notes.txt"], parent: "~" } };
 
-        const terminalInput = document.getElementById('terminal-input');
-        const terminalScreen = document.getElementById('terminal-screen');
-        const currentPathDisplay = document.getElementById('current-path');
-
-        terminalInput.addEventListener('keydown', (e) => {
+        document.getElementById('terminal-input').addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
-                const cmdLine = terminalInput.value.trim();
+                const cmdLine = e.target.value.trim();
                 if (cmdLine) executeCmd(cmdLine);
-                terminalInput.value = '';
+                e.target.value = '';
             }
         });
 
@@ -475,167 +332,93 @@
             const cmd = parts[0].toLowerCase();
             const args = parts.slice(1);
             const log = document.createElement('div');
-            log.innerHTML = `<span class="text-blue-400 font-bold">root@devops:${currentDir}$</span> ${input}`;
+            log.innerHTML = `<span class="text-blue-400">root@devops:${currentDir}$</span> ${input}`;
             terminalScreen.appendChild(log);
 
             let output = "";
             switch(cmd) {
-                case 'help': output = "LAB CMDS: ls, cd, mkdir, touch, mv, rm, chmod, pwd, clear, help"; break;
+                case 'help': output = "ls, cd, mkdir, touch, mv, rm, pwd, clear"; break;
                 case 'clear': terminalScreen.innerHTML = ""; return;
                 case 'ls': output = fs[currentDir].children.join("  "); break;
-                case 'mkdir':
-                    if (args[0]) {
-                        const newPath = currentDir === "~" ? "~/"+args[0] : currentDir+"/"+args[0];
-                        if (!fs[newPath]) {
-                            fs[currentDir].children.push(args[0]);
-                            fs[newPath] = { type: "dir", children: [], parent: currentDir };
-                        } else output = "mkdir: Folder already exists";
-                    } else output = "mkdir: missing operand";
-                    break;
-                case 'touch':
-                    if (args[0]) { if (!fs[currentDir].children.includes(args[0])) fs[currentDir].children.push(args[0]); }
-                    else output = "touch: missing file name";
-                    break;
-                case 'mv':
-                    if (args[0] && args[1]) {
-                        const idx = fs[currentDir].children.indexOf(args[0]);
-                        if (idx > -1) fs[currentDir].children[idx] = args[1];
-                        else output = "mv: file not found";
-                    } else output = "mv: missing target";
-                    break;
-                case 'rm':
-                    if (args[0] === '-rf') {
-                        if (args[1]) {
-                            fs[currentDir].children = fs[currentDir].children.filter(f => f !== args[1]);
-                            output = `Permanently removed ${args[1]}`;
-                        }
-                    } else if (args[0]) {
-                        fs[currentDir].children = fs[currentDir].children.filter(f => f !== args[0]);
-                    }
-                    break;
+                case 'pwd': output = "/root" + (currentDir === "~" ? "" : currentDir.substring(1)); break;
                 case 'cd':
                     if (!args[0] || args[0] === "~") currentDir = "~";
                     else if (args[0] === "..") { if (fs[currentDir].parent) currentDir = fs[currentDir].parent; }
                     else {
                         const target = currentDir === "~" ? "~/"+args[0] : currentDir+"/"+args[0];
-                        if (fs[target]) currentDir = target;
-                        else output = "cd: No such directory";
+                        if (fs[target]) currentDir = target; else output = "cd: directory not found";
                     }
                     currentPathDisplay.innerText = currentDir;
                     break;
-                case 'pwd': output = "/root" + (currentDir === "~" ? "" : currentDir.substring(1)); break;
-                case 'chmod': output = `applied permissions to target`; break;
-                default: output = `bash: ${cmd}: command not found`;
+                case 'mkdir': if(args[0]) { fs[currentDir].children.push(args[0]); fs[currentDir === "~" ? "~/"+args[0] : currentDir+"/"+args[0]] = { type: "dir", children: [], parent: currentDir }; } break;
+                case 'touch': if(args[0] && !fs[currentDir].children.includes(args[0])) fs[currentDir].children.push(args[0]); break;
+                default: output = "bash: command not found";
             }
-
-            if (output) {
-                const outDiv = document.createElement('div');
-                outDiv.className = "text-slate-400 italic text-[11px]";
-                outDiv.innerText = output;
-                terminalScreen.appendChild(outDiv);
-            }
+            if (output) { const outDiv = document.createElement('div'); outDiv.className = "text-slate-400 italic text-[11px]"; outDiv.innerText = output; terminalScreen.appendChild(outDiv); }
             terminalScreen.scrollTop = terminalScreen.scrollHeight;
         }
 
-        function resetLab() {
-            currentDir = "~";
-            fs = { "~": { type: "dir", children: ["README.md", "devops_exam"], parent: null } };
-            currentPathDisplay.innerText = "~";
-            terminalScreen.innerHTML = "<div>Lab reset. Start practicing commands.</div>";
-        }
+        function resetLab() { currentDir = "~"; fs = { "~": { type: "dir", children: ["README.md"], parent: null } }; currentPathDisplay.innerText = "~"; terminalScreen.innerHTML = "<div>Reset complete.</div>"; }
 
-        // --- Charts ---
-        window.onload = function() {
-            const ctx = document.getElementById('skillRadarChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'radar',
-                data: {
-                    labels: ['DevOps Culture', 'SDLC (Agile)', 'Networking', 'Cloud AWS', 'Containers (K8s)', 'Banking Ops'],
-                    datasets: [{
-                        label: 'ความน่าจะเป็นที่ออกข้อสอบ (%)',
-                        data: [95, 90, 85, 80, 95, 100],
-                        backgroundColor: 'rgba(37, 99, 235, 0.2)',
-                        borderColor: '#2563eb',
-                        pointBackgroundColor: '#2563eb'
-                    }]
-                },
-                options: { maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 100, ticks: { display: false } } }, plugins: { legend: { display: false } } }
-            });
-        };
-
-        // --- Quiz Engine (50 Questions Data Pool) ---
+        // --- Simplified Quiz Data ---
         const questionPool = [
-            { cat: "BANKING", q: "หากแอปพลิเคชันธนาคารต้องรองรับคนหลักล้านในช่วงต้นเดือน ฟีเจอร์ใดของ Kubernetes สำคัญที่สุด?", a: ["Auto Scaling (HPA)", "Self-healing", "Rolling Update", "Namespace"], c: 0 },
-            { cat: "CULTURE", q: "ข้อใดคือเป้าหมายหลักของ DevOps?", a: ["ลดความขัดแย้งและส่งมอบงานเร็วขึ้น", "ไล่พนักงานออกเพื่อลดต้นทุน", "ติดตั้งซอฟต์แวร์ให้เยอะที่สุด", "ห้ามพนักงานคุยกัน"], c: 0 },
-            { cat: "AWS", q: "บริการใดใน AWS ที่เปรียบเสมือนโกดังเก็บรูปภาพหรือวิดีโอ (Object Storage)?", a: ["S3", "EC2", "VPC", "EKS"], c: 0 },
-            { cat: "NETWORKING", q: "TCP แตกต่างจาก UDP อย่างไร?", a: ["TCP เน้นความถูกต้อง UDP เน้นความเร็ว", "TCP เน้นความเร็ว UDP เน้นความถูกต้อง", "TCP ใช้กับไฟล์รูป UDP ใช้กับเว็บ", "เหมือนกันทุกอย่าง"], c: 0 },
-            { cat: "SECURITY", q: "CVE ย่อมาจากอะไร?", a: ["Common Vulnerabilities and Exposures", "Core Virtual Engine", "Cloud Value Entry", "Control Vault Entry"], c: 0 },
-            { cat: "BANKING", q: "Tier 3 Support ในธนาคารคือทีมใด?", a: ["Engineering Team", "Call Center", "Monitor Support", "Sales Team"], c: 0 },
-            { cat: "SLA", q: "SLA 99.9% หมายถึงล่มได้ประมาณเท่าใดต่อปี?", a: ["~8.77 ชั่วโมง", "~52 นาที", "~24 ชั่วโมง", "~1 วัน"], c: 0 },
-            { cat: "DOCKER", q: "คำสั่งใดใช้เปลี่ยนพิมพ์เขียว (Dockerfile) ให้เป็น Image?", a: ["docker build", "docker run", "docker push", "docker pull"], c: 0 },
-            { cat: "GIT", q: "Conflict มักเกิดขึ้นเมื่อใด?", a: ["คนสองคนแก้โค้ดบรรทัดเดียวกัน", "ลืม Commit งาน", "ลืม Push งาน", "เปลี่ยนสีพื้นหลัง VS Code"], c: 0 },
-            { cat: "K8S", q: "Rolling Update ช่วยแก้ปัญหาอะไร?", a: ["ทำให้การอัปเดตไม่มี Downtime", "ทำให้แอปเร็วขึ้น 10 เท่า", "ทำให้ประหยัดค่าไฟ", "ทำให้ลบข้อมูลอัตโนมัติ"], c: 0 }
+            { cat: "CULTURE", q: "DevOps มุ่งเน้นการรวมทีมใดเข้าด้วยกัน?", a: ["Development + Operations", "Sales + Marketing", "Manager + Customer", "IT + HR"], c: 0 },
+            { cat: "SDLC", q: "Agile มีการส่งมอบงานรูปแบบใด?", a: ["ส่งมอบเป็นรอบสั้นๆ (Iterative)", "ส่งมอบทีเดียวตอนจบโปรเจกต์", "ไม่มีการส่งมอบงาน", "ส่งมอบทางไปรษณีย์"], c: 0 },
+            { cat: "LINUX", q: "คำสั่งดูรายชื่อไฟล์คืออะไร?", a: ["ls", "cd", "rm", "mv"], c: 0 },
+            { cat: "DOCKER", q: "คำสั่งสร้าง Docker Image จาก Dockerfile?", a: ["docker build", "docker run", "docker push", "docker start"], c: 0 },
+            { cat: "K8S", q: "ฟีเจอร์ที่สร้าง Pod ใหม่มาแทนที่ตัวที่พังเรียกว่า?", a: ["Self-healing", "Auto Scaling", "Load Balancing", "Networking"], c: 0 },
+            { cat: "AWS", q: "EC2 เป็นบริการรูปแบบใด?", a: ["IaaS (Hardware/VM)", "PaaS (Platform)", "SaaS (Software)", "BaaS (Backend)"], c: 0 },
+            { cat: "BANKING", q: "SLA ในธุรกิจธนาคารวัดเรื่องอะไร?", a: ["ความพร้อมใช้งาน/เสถียรภาพ", "ความสวยงามของแอป", "จำนวนพนักงานไอที", "ราคาสินค้าในธนาคาร"], c: 0 },
+            { cat: "GIT", q: "Conflict เกิดเมื่อไหร่?", a: ["แก้โค้ดบรรทัดเดียวกันพร้อมกัน", "ลืมเซฟไฟล์", "เน็ตหลุดตอนเขียนโค้ด", "ลบโฟลเดอร์ขยะทิ้ง"], c: 0 },
+            { cat: "CI/CD", q: "CI (Continuous Integration) เน้นเรื่องใด?", a: ["การรวมโค้ดและทดสอบสม่ำเสมอ", "การแจกใบปลิวซอฟต์แวร์", "การปิดเซิร์ฟเวอร์ตอนดึก", "การคุยกับฝ่ายบุคคล"], c: 0 },
+            { cat: "K8S", q: "HPA (Autoscaler) ทำหน้าที่อะไร?", a: ["เพิ่ม/ลดจำนวน Pod ตามการใช้งาน", "เปลี่ยนสีปุ่มในแอป", "เก็บข้อมูลถาวร", "จำรหัสผ่านลูกค้า"], c: 0 }
         ];
 
-        let currentQuizSet = [];
-        let currentQuizIdx = 0;
-        let score = 0;
-
+        let quizSet = []; let quizIdx = 0; let score = 0;
         function startQuiz() {
-            score = 0; currentQuizIdx = 0;
-            currentQuizSet = [...questionPool].sort(() => 0.5 - Math.random()).slice(0, 10);
-            document.getElementById('quiz-start').classList.add('hidden');
-            document.getElementById('quiz-play').classList.remove('hidden');
-            document.getElementById('quiz-result').classList.add('hidden');
-            updateScoreUI();
-            showQuestion();
+            score = 0; quizIdx = 0; quizSet = [...questionPool].sort(() => 0.5 - Math.random()).slice(0, 10);
+            document.getElementById('quiz-start').classList.add('hidden'); document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-play').classList.remove('hidden'); updateScoreUI(); showQuestion();
         }
-
         function showQuestion() {
-            const data = currentQuizSet[currentQuizIdx];
-            document.getElementById('q-num').innerText = `ข้อที่ ${currentQuizIdx + 1} / 10`;
+            const data = quizSet[quizIdx];
+            document.getElementById('q-num').innerText = `ข้อที่ ${quizIdx + 1} / 10`;
             document.getElementById('q-cat').innerText = data.cat;
             document.getElementById('q-text').innerText = data.q;
-            document.getElementById('q-progress').style.width = `${((currentIdx = currentQuizIdx + 1) / 10) * 100}%`;
-            
-            const grid = document.getElementById('q-options');
-            grid.innerHTML = '';
+            document.getElementById('q-progress').style.width = `${((quizIdx + 1) / 10) * 100}%`;
+            const grid = document.getElementById('q-options'); grid.innerHTML = '';
             data.a.forEach((opt, i) => {
-                const btn = document.createElement('button');
-                btn.className = 'quiz-option p-5 bg-white border border-slate-200 rounded-2xl text-left font-medium text-xs shadow-sm';
-                btn.innerText = opt;
-                btn.onclick = () => checkAnswer(i === data.c, btn);
-                grid.appendChild(btn);
+                const btn = document.createElement('button'); btn.className = 'quiz-option p-5 bg-white border border-slate-200 rounded-2xl text-left font-medium text-xs shadow-sm';
+                btn.innerText = opt; btn.onclick = () => checkAnswer(i === data.c, btn); grid.appendChild(btn);
             });
         }
-
-        function checkAnswer(isCorrect, btn) {
-            const btns = document.querySelectorAll('.quiz-option');
-            btns.forEach(b => b.onclick = null);
-            if (isCorrect) { btn.classList.add('correct'); score++; }
-            else { 
-                btn.classList.add('wrong'); 
-                btns[currentQuizSet[currentQuizIdx].c].classList.add('correct');
-            }
-            updateScoreUI();
-            setTimeout(() => {
-                currentQuizIdx++;
-                if (currentQuizIdx < 10) showQuestion();
-                else finishQuiz();
-            }, 1200);
+        function checkAnswer(correct, btn) {
+            const btns = document.querySelectorAll('.quiz-option'); btns.forEach(b => b.onclick = null);
+            if (correct) { btn.classList.add('correct'); score++; } else { btn.classList.add('wrong'); btns[quizSet[quizIdx].c].classList.add('correct'); }
+            updateScoreUI(); setTimeout(() => { quizIdx++; if (quizIdx < 10) showQuestion(); else finishQuiz(); }, 1200);
         }
-
         function updateScoreUI() { document.getElementById('quiz-score-ui').innerText = `SCORE: ${score} / 10`; }
-
         function finishQuiz() {
-            document.getElementById('quiz-play').classList.add('hidden');
-            document.getElementById('quiz-result').classList.remove('hidden');
+            document.getElementById('quiz-play').classList.add('hidden'); document.getElementById('quiz-result').classList.remove('hidden');
             document.getElementById('r-score').innerText = `คุณทำคะแนนได้ ${score} เต็ม 10`;
             const grade = document.getElementById('r-grade');
-            if (score >= 8) grade.innerText = "Grade A";
-            else if (score >= 5) grade.innerText = "Passed";
-            else grade.innerText = "Study More";
+            if (score >= 8) { grade.innerText = "GRADE A"; grade.className = "text-6xl font-black text-blue-600"; }
+            else { grade.innerText = "KEEP STUDYING"; grade.className = "text-4xl font-bold text-slate-400"; }
         }
+
+        // --- Radar Chart ---
+        const ctxRadar = document.getElementById('skillRadarChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: ['DevOps Culture', 'SDLC (Agile)', 'Networking', 'Cloud (AWS)', 'Docker/K8s', 'Banking IT'],
+                datasets: [{
+                    label: 'น้ำหนักในข้อสอบ (%)', data: [95, 90, 85, 80, 95, 100],
+                    backgroundColor: 'rgba(37, 99, 235, 0.2)', borderColor: '#2563eb', pointBackgroundColor: '#2563eb'
+                }]
+            },
+            options: { maintainAspectRatio: false, scales: { r: { beginAtZero: true, max: 100, ticks: { display: false } } }, plugins: { legend: { display: false } } }
+        });
     </script>
 </body>
 </html>
