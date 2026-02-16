@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevOps Final Mastery 2026 - Ultimate Edition</title>
+    <title>DevOps Final Mastery 2026 - Encyclopedia & Lab</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Kanit', sans-serif; background-color: #f1f5f9; color: #1e293b; }
         .mono { font-family: 'Fira Code', monospace; }
-        .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border: 1px solid rgba(226, 232, 240, 0.8); }
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(226, 232, 240, 0.8); }
         .nav-active { background-color: #eff6ff; color: #2563eb; border-right: 4px solid #2563eb; font-weight: 600; }
         .terminal { background: #0f172a; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
         .content-section { animation: fadeIn 0.4s ease-out; }
@@ -20,178 +20,256 @@
         .correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #166534; }
         .wrong { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b; }
         .cmd-input { background: transparent; border: none; outline: none; color: #10b981; width: 100%; }
-        .step-card { transition: all 0.3s; }
-        .step-card:hover { transform: translateY(-5px); }
+        .flow-line { height: 2px; background: #cbd5e1; flex-grow: 1; position: relative; }
+        .flow-line::after { content: '▶'; position: absolute; right: -5px; top: -7px; color: #cbd5e1; font-size: 10px; }
     </style>
 </head>
 <body class="flex flex-col md:flex-row min-h-screen">
 
     <!-- Sidebar -->
-    <aside id="sidebar" class="hidden md:flex flex-col w-72 bg-white border-r border-slate-200 fixed h-full z-40 transition-transform duration-300 transform -translate-x-full md:translate-x-0">
+    <aside id="sidebar" class="hidden md:flex flex-col w-80 bg-white border-r border-slate-200 fixed h-full z-40 transition-transform duration-300 transform -translate-x-full md:translate-x-0">
         <div class="p-8 border-b">
             <h1 class="text-2xl font-bold text-blue-600">DevOps Final</h1>
-            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Comprehensive Study v4</p>
+            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">Ultimate Encyclopedia Edition</p>
         </div>
         <nav class="flex-1 overflow-y-auto py-6">
             <ul class="space-y-1">
-                <li><button onclick="showSection('dashboard')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all nav-active" id="btn-dashboard">📊 Dashboard Overview</button></li>
-                <li><button onclick="showSection('summary')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all" id="btn-summary">📖 สรุปเนื้อหา 3 ไฟล์</button></li>
-                <li><button onclick="showSection('linux')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all" id="btn-linux">💻 Linux Terminal Lab</button></li>
-                <li><button onclick="showSection('simulator')" class="nav-btn w-full text-left px-6 py-3 text-blue-600 bg-blue-50 font-bold hover:bg-blue-100 transition-all mt-4 mx-4 rounded-lg shadow-sm" id="btn-simulator">🎮 Mega Quiz (50 ข้อ)</button></li>
+                <li><button onclick="showSection('dashboard')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all nav-active" id="btn-dashboard">📊 Dashboard</button></li>
+                <li><button onclick="showSection('encyclopedia')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all" id="btn-encyclopedia">📖 คลังความรู้เจาะลึก (Hub)</button></li>
+                <li><button onclick="showSection('linux')" class="nav-btn w-full text-left px-6 py-3 text-slate-600 hover:bg-slate-50 transition-all" id="btn-linux">💻 Linux CLI Lab</button></li>
+                <li><button onclick="showSection('simulator')" class="nav-btn w-full text-left px-6 py-3 text-blue-600 bg-blue-50 font-bold hover:bg-blue-100 transition-all mt-4 mx-4 rounded-lg" id="btn-simulator">🎮 Mega Quiz (50 ข้อ)</button></li>
             </ul>
         </nav>
         <div class="p-6 border-t bg-slate-50">
-            <div class="text-xs font-bold text-slate-700 italic">"Wall of Confusion" No More!</div>
+            <div class="text-xs font-bold text-slate-700">Krungsri Nimble Special</div>
+            <p class="text-[10px] text-slate-500 mt-1 italic">VPC, Harbor, SonarQube, SLA</p>
         </div>
     </aside>
 
     <!-- Mobile Header -->
-    <div class="md:hidden bg-white p-4 flex justify-between items-center sticky top-0 z-50 border-b">
-        <h1 class="text-xl font-bold text-blue-600">DevOps Prep</h1>
+    <div class="md:hidden bg-white p-4 flex justify-between items-center sticky top-0 z-50 border-b shadow-sm">
+        <h1 class="text-xl font-bold text-blue-600">DevOps Hub</h1>
         <button onclick="toggleSidebar()" class="text-2xl text-slate-600">☰</button>
     </div>
 
     <!-- Main Content -->
-    <main class="flex-1 md:ml-72 p-4 md:p-10">
+    <main class="flex-1 md:ml-80 p-4 md:p-10 overflow-x-hidden">
 
-        <!-- SECTION: DASHBOARD -->
+        <!-- DASHBOARD -->
         <section id="dashboard" class="content-section space-y-8">
-            <div class="bg-gradient-to-br from-blue-700 to-indigo-800 rounded-3xl p-10 text-white shadow-xl relative overflow-hidden">
+            <div class="bg-gradient-to-br from-indigo-900 via-blue-800 to-sky-700 rounded-3xl p-10 text-white shadow-2xl relative overflow-hidden">
                 <div class="relative z-10">
-                    <h2 class="text-4xl font-extrabold mb-2 text-white">DevOps Final Mastery 2026</h2>
-                    <p class="text-blue-100 max-w-2xl text-lg mb-8 opacity-90">รวบรวมเนื้อหาครบถ้วนจากสไลด์อาจารย์ และ Talk ของวิทยากรทั้งสองท่าน (คุณพวริศ & คุณเม)</p>
-                    <div class="flex flex-wrap gap-4 text-xs font-bold uppercase tracking-wider">
-                        <div class="bg-white/20 px-4 py-2 rounded-xl border border-white/30 shadow-lg">📅 Sec 1: 17 ก.พ. @1103</div>
-                        <div class="bg-white/20 px-4 py-2 rounded-xl border border-white/30 shadow-lg">📅 Sec 2: 19 ก.พ. @1106</div>
+                    <h2 class="text-4xl font-extrabold mb-4 text-white">ติวเข้ม DevOps 2026</h2>
+                    <p class="text-blue-100 max-w-2xl text-lg mb-8 opacity-90 font-light">สรุปครบถ้วนจากสไลด์คุณพวริศ, คุณเม (Krungsri Nimble) และเนื้อหาอาจารย์</p>
+                    <div class="flex flex-wrap gap-4 text-xs">
+                        <div class="bg-white/20 px-4 py-2 rounded-xl font-bold border border-white/30 shadow-lg">📅 หมู่ 1: 17 ก.พ. @1103</div>
+                        <div class="bg-white/20 px-4 py-2 rounded-xl font-bold border border-white/30 shadow-lg">📅 หมู่ 2: 19 ก.พ. @1106</div>
                         <div class="bg-emerald-500/30 px-4 py-2 rounded-xl border border-emerald-400/30 shadow-lg">🎯 30 คะแนนปลายภาค</div>
                     </div>
                 </div>
-                <div class="absolute -right-20 -bottom-20 opacity-10 text-[350px] select-none">🐳</div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="glass p-8 rounded-3xl">
-                    <h3 class="text-xl font-bold mb-6 text-slate-800">DevOps Skill Breakdown</h3>
+                    <h3 class="text-xl font-bold mb-6 text-slate-800">ทักษะสำคัญที่มักออกสอบ</h3>
                     <div class="h-64">
-                        <canvas id="skillChart"></canvas>
+                        <canvas id="skillRadarChart"></canvas>
                     </div>
                 </div>
-                <div class="glass p-8 rounded-3xl space-y-6">
-                    <h3 class="text-xl font-bold text-blue-600">💡 เคล็ดลับการเตรียมตัว</h3>
-                    <ul class="text-sm space-y-4 text-slate-600">
-                        <li class="flex items-start gap-3">
-                            <span class="text-blue-500 font-bold">1.</span>
-                            <p><strong>A4 Cheat Sheet:</strong> เน้นจดคำสั่ง Linux, K8s Architecture, และ SLA Calculations</p>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-blue-500 font-bold">2.</span>
-                            <p><strong>Architecture Drawing:</strong> ข้อสอบมักให้วาด Flow การทำงาน (เช่น CI/CD Pipeline) วาดรูปได้คะแนนดีกว่าเขียนตัวหนังสือเยอะๆ</p>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-blue-500 font-bold">3.</span>
-                            <p><strong>Krungsri Special:</strong> แม่นยำเรื่อง Support Tiers (1-3) และ DC/DR Site (มีอย่างน้อย 3 แห่ง)</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION: CONTENT SUMMARY -->
-        <section id="summary" class="content-section hidden space-y-8">
-            <h2 class="text-3xl font-bold text-slate-800">สรุปเนื้อหาจาก 3 ไฟล์หลัก</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Core DevOps -->
-                <div class="bg-white p-8 rounded-3xl border shadow-sm">
-                    <h3 class="text-xl font-bold text-blue-600 mb-4">DevOps & SDLC Core</h3>
-                    <div class="space-y-4 text-sm text-slate-600">
-                        <p><strong>DevOps Culture:</strong> การแก้ปัญหา "Wall of Confusion" ระหว่าง Dev (ต้องการเปลี่ยน) และ Ops (ต้องการนิ่ง)</p>
-                        <p><strong>Agile Shu-Ha-Ri:</strong> Shu (ทำตามกฎ), Ha (แหกกฎ), Ri (สร้างกฎเอง)</p>
-                        <p><strong>Waterfall vs Agile:</strong> Waterfall เน้นแผนเป๊ะเปลี่ยนยาก Agile เน้นปรับตามลูกค้าและส่งมอบเร็ว</p>
-                        <p><strong>CI vs CD:</strong> CI (Build/Test), Continuous Delivery (พร้อม Deploy แต่ต้องมีคนกด), Continuous Deployment (Deploy อัตโนมัติ 100%)</p>
-                    </div>
-                </div>
-                <!-- Infrastructure & Cloud -->
-                <div class="bg-white p-8 rounded-3xl border shadow-sm">
-                    <h3 class="text-xl font-bold text-indigo-600 mb-4">Infra & Cloud (AWS Focus)</h3>
-                    <div class="space-y-4 text-sm text-slate-600">
-                        <p><strong>Cloud Models:</strong> IaaS (เราคุม OS), PaaS (เราคุมแค่ Code), SaaS (เราใช้บริการ)</p>
-                        <p><strong>Infrastructure as Code (IaC):</strong> ตั้งค่า Server ผ่านโค้ด ทำให้ทำซ้ำได้ (Reproducible) และตรวจสอบผ่าน Git ได้</p>
-                        <p><strong>AWS Networking:</strong> VPC (Virtual Private Cloud) คือการแยกห้องเครือข่ายส่วนตัว (Isolation)</p>
-                        <p><strong>SLA:</strong> 99.9% (ล่มได้ ~8 ชม./ปี) vs 99.99% (ล่มได้ ~52 นาที/ปี)</p>
-                    </div>
-                </div>
-                <!-- Kubernetes & Docker -->
-                <div class="bg-white p-8 rounded-3xl border shadow-sm">
-                    <h3 class="text-xl font-bold text-sky-600 mb-4">Containers & Orchestration</h3>
-                    <div class="space-y-4 text-sm text-slate-600">
-                        <p><strong>Docker:</strong> Image (พิมพ์เขียว/Read-only) vs Container (สิ่งที่รันอยู่จริง)</p>
-                        <p><strong>K8s Features:</strong> Auto Scaling (HPA), Self-Healing (Pod ตายสร้างใหม่), Zero Downtime (Rolling Update), Load Balancing</p>
-                        <p><strong>K8s Components:</strong> Pod (หน่วยย่อยสุด), Node (เครื่องรัน), Cluster (ก้อนรวมทั้งหมด)</p>
-                        <p><strong>Service Types:</strong> ClusterIP (ในเครื่อง), NodePort (เปิดพอร์ตเครื่อง), LoadBalancer (ใช้ของ Cloud)</p>
-                    </div>
-                </div>
-                <!-- Banking Ops -->
-                <div class="bg-white p-8 rounded-3xl border shadow-sm">
-                    <h3 class="text-xl font-bold text-amber-600 mb-4">Banking IT Operations</h3>
-                    <div class="space-y-4 text-sm text-slate-600">
-                        <p><strong>Support Tiers:</strong> Tier 1 (Call Center), Tier 2 (Monitor/Support), Tier 3 (Engineering - แก้ปัญหาลึก/สลับระบบ)</p>
-                        <p><strong>DC/DR:</strong> DC (ศูนย์หลัก), DR Site (ศูนย์สำรองกรณีภัยพิบัติ มักมีอย่างน้อย 3 แห่ง และอยู่ห่างกัน 30-50 กม.)</p>
-                        <p><strong>Security:</strong> CVE (รหัสช่องโหว่สากล), Dependency Check (ตรวจ Library ภายนอก), SonarQube (Grade A Only)</p>
-                        <p><strong>Harbor:</strong> Private Docker Registry สำหรับเก็บ Image ขององค์กรให้ปลอดภัย</p>
+                <div class="glass p-8 rounded-3xl flex flex-col justify-center">
+                    <h3 class="text-xl font-bold mb-4 text-blue-600">🏆 รางวัล Top 3</h3>
+                    <p class="text-slate-700 leading-relaxed mb-6 font-medium">คะแนนสูงสุด 3 อันดับแรก จะได้รับสิทธิ์สัมภาษณ์ฝึกงานกับบริษัท <b>Get On Technology</b> (20-21 มีนาคม 2569)</p>
+                    <div class="p-5 bg-blue-50 border-l-4 border-blue-500 rounded-r-xl">
+                        <h4 class="font-bold text-blue-800 text-sm mb-2">💡 แนะนำการทำข้อสอบ</h4>
+                        <ul class="text-xs text-blue-700 space-y-2">
+                            <li>• พกเครื่องเขียนมาวาด Flow/Architecture จะได้คะแนนดี</li>
+                            <li>• เน้นหลักการ CI/CD และความต่างของ Cloud Models</li>
+                            <li>• ระบบ K8s Self-Healing และ Auto Scaling คือ Keyword สำคัญ</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION: LINUX TERMINAL LAB -->
+        <!-- ENCYCLOPEDIA (DETAILED CONTENT) -->
+        <section id="encyclopedia" class="content-section hidden space-y-12">
+            <h2 class="text-3xl font-bold text-slate-800">Encyclopedia: คลังเนื้อหาเจาะลึก</h2>
+            
+            <!-- DevOps & Agile -->
+            <div class="space-y-6">
+                <h3 class="text-2xl font-bold text-indigo-700 border-l-4 border-indigo-500 pl-4">1. วัฒนธรรม DevOps และ Agile</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border shadow-sm space-y-3">
+                        <h4 class="font-bold text-indigo-600">DevOps Goal</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">ไม่ใช่แค่ Tool แต่คือ <strong>Culture</strong> ที่ผสาน Dev (ต้องการเปลี่ยน) และ Ops (ต้องการนิ่ง) เพื่อลด <strong>Wall of Confusion</strong> และส่งมอบซอฟต์แวร์คุณภาพสูงด้วยความเร็ว</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border shadow-sm space-y-3">
+                        <h4 class="font-bold text-indigo-600">Agile Shu-Ha-Ri</h4>
+                        <ul class="text-xs text-slate-500 space-y-2 italic">
+                            <li>- <strong>Shu:</strong> ทำตามกฎ (Protect/Learn)</li>
+                            <li>- <strong>Ha:</strong> แหกกฎ (Detach/Break)</li>
+                            <li>- <strong>Ri:</strong> สร้างกฎเอง (Transcends/Create)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl border shadow-sm space-y-3">
+                        <h4 class="font-bold text-indigo-600">Manifesto 4 Values</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            - บุคคลและปฏิสัมพันธ์ > กระบวนการ<br>
+                            - ซอฟต์แวร์ที่ใช้ได้จริง > เอกสาร<br>
+                            - ร่วมมือกับลูกค้า > ต่อรองสัญญา<br>
+                            - ปรับตามการเปลี่ยนแปลง > ทำตามแผน
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cloud & Networking -->
+            <div class="space-y-6">
+                <h3 class="text-2xl font-bold text-blue-700 border-l-4 border-blue-500 pl-4">2. Cloud Architecture & Networking</h3>
+                <div class="bg-white p-8 rounded-3xl border shadow-sm space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-blue-800">Cloud Service Models</h4>
+                            <div class="space-y-2 text-xs">
+                                <p><strong>IaaS:</strong> เช่า Hardware/VM (เราคุม OS เอง) เช่น AWS EC2</p>
+                                <p><strong>PaaS:</strong> เช่า Platform รันแอป (เราคุมแค่ Code) เช่น AWS Lambda, EKS</p>
+                                <p><strong>SaaS:</strong> ซอฟต์แวร์พร้อมใช้ (เราแค่ใช้) เช่น Office 365, Gmail</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-blue-800">AWS Networking Concepts</h4>
+                            <div class="space-y-2 text-xs">
+                                <p><strong>VPC:</strong> เปรียบเสมือนการแบ่งคณะ/ห้องในมหาวิทยาลัย (Isolation)</p>
+                                <p><strong>S3:</strong> Object Storage เก็บไฟล์ขนาดใหญ่ (รูป, วิดีโอ)</p>
+                                <p><strong>Region/AZ:</strong> ศูนย์ข้อมูลกระจายตัวเพื่อความทนทาน</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-xl">
+                        <h4 class="font-bold text-slate-700 text-sm mb-3">OSI 7 Layers (Reference)</h4>
+                        <div class="flex flex-wrap gap-2 text-[10px] font-bold">
+                            <span class="px-2 py-1 bg-slate-200 rounded">1. Physical</span>
+                            <span class="px-2 py-1 bg-slate-200 rounded">2. Data Link</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded">3. Network (IP)</span>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded">4. Transport (TCP/UDP)</span>
+                            <span class="px-2 py-1 bg-slate-200 rounded">5. Session</span>
+                            <span class="px-2 py-1 bg-slate-200 rounded">6. Presentation</span>
+                            <span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded">7. Application (HTTP)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Docker & K8s Pipeline -->
+            <div class="space-y-6">
+                <h3 class="text-2xl font-bold text-sky-700 border-l-4 border-sky-500 pl-4">3. Container Orchestration & Pipeline</h3>
+                <div class="bg-slate-900 p-8 rounded-3xl text-white shadow-xl">
+                    <h4 class="font-bold text-sky-400 mb-6 text-center">🏦 Banking CI/CD Flow (Krungsri Nimble)</h4>
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div class="w-full md:w-32 p-3 bg-white/10 rounded-xl border border-white/20 text-center">
+                            <p class="text-[10px] font-bold">GITLAB</p>
+                            <p class="text-[8px] opacity-60 uppercase">Source</p>
+                        </div>
+                        <div class="flow-line hidden md:block"></div>
+                        <div class="w-full md:w-32 p-3 bg-blue-500/20 rounded-xl border border-blue-400/30 text-center">
+                            <p class="text-[10px] font-bold">JENKINS</p>
+                            <p class="text-[8px] opacity-60 uppercase">Build/Test</p>
+                        </div>
+                        <div class="flow-line hidden md:block"></div>
+                        <div class="w-full md:w-32 p-3 bg-emerald-500/20 rounded-xl border border-emerald-400/30 text-center">
+                            <p class="text-[10px] font-bold">SONARQUBE</p>
+                            <p class="text-[8px] opacity-60 uppercase italic">Grade A only</p>
+                        </div>
+                        <div class="flow-line hidden md:block"></div>
+                        <div class="w-full md:w-32 p-3 bg-amber-500/20 rounded-xl border border-amber-400/30 text-center">
+                            <p class="text-[10px] font-bold">HARBOR</p>
+                            <p class="text-[8px] opacity-60 uppercase">Registry</p>
+                        </div>
+                        <div class="flow-line hidden md:block"></div>
+                        <div class="w-full md:w-32 p-3 bg-sky-500/20 rounded-xl border border-sky-400/30 text-center">
+                            <p class="text-[10px] font-bold">EKS (K8S)</p>
+                            <p class="text-[8px] opacity-60 uppercase">Deploy</p>
+                        </div>
+                    </div>
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 text-xs">
+                        <div class="space-y-2">
+                            <p class="text-sky-300 font-bold">Kubernetes Core Concepts:</p>
+                            <p>- <strong>Pod:</strong> หน่วยย่อยที่สุดในการรันคอนเทนเนอร์</p>
+                            <p>- <strong>Service:</strong> ระบบ Network เพื่อเข้าถึง Pod (ClusterIP, NodePort, LB)</p>
+                            <p>- <strong>HPA:</strong> ขยายจำนวน Pod อัตโนมัติตาม CPU Load</p>
+                        </div>
+                        <div class="space-y-2">
+                            <p class="text-sky-300 font-bold">Docker Essentials:</p>
+                            <p>- <strong>Lifecycle:</strong> Build Image -> Ship to Registry -> Run Container</p>
+                            <p>- <strong>Dockerfile:</strong> FROM (ฐาน), COPY (ใส่ไฟล์), EXPOSE (พอร์ต), CMD (รัน)</p>
+                            <p>- <strong>Multi-stage Build:</strong> แยกขั้นตอน Build ออกเพื่อลดขนาด Image สุดท้าย</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banking Ops -->
+            <div class="space-y-6 pb-20">
+                <h3 class="text-2xl font-bold text-amber-700 border-l-4 border-amber-500 pl-4">4. Banking Operations & Stability</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="glass p-8 rounded-3xl space-y-6 border-t-8 border-amber-600">
+                        <h4 class="font-bold text-slate-800">Reliability & SLA</h4>
+                        <div class="space-y-4 text-xs text-slate-600 leading-relaxed">
+                            <p><strong>SLA 99.9%:</strong> ระบบล่มได้ไม่เกิน <strong>8.77 ชั่วโมง/ปี</strong></p>
+                            <p><strong>SLA 99.99%:</strong> ระบบล่มได้ไม่เกิน <strong>52.56 นาที/ปี</strong></p>
+                            <p><strong>DC/DR:</strong> DC (ศูนย์หลัก), DR Site (ศูนย์สำรองกรณีภัยพิบัติ) ธนาคารมักมี 3 แห่ง และอยู่ห่างกัน 30-50 กม.</p>
+                        </div>
+                    </div>
+                    <div class="glass p-8 rounded-3xl space-y-6 border-t-8 border-blue-600">
+                        <h4 class="font-bold text-slate-800">Support Tiers (Engineering)</h4>
+                        <div class="space-y-4 text-xs text-slate-600">
+                            <p><strong>Tier 1:</strong> Call Center รับเรื่องเบื้องต้น</p>
+                            <p><strong>Tier 2:</strong> Monitor/Support ตรวจสอบความผิดปกติจาก Dashboard</p>
+                            <p><strong>Tier 3:</strong> Engineering Team แก้ปัญหาเชิงลึกและจัดการระบบ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LINUX LAB -->
         <section id="linux" class="content-section hidden space-y-8">
             <div class="flex justify-between items-end">
                 <div>
-                    <h2 class="text-3xl font-bold text-slate-800">Linux Interactive Lab</h2>
-                    <p class="text-slate-500 mt-2">พิมพ์คำสั่งพื้นฐานเพื่อทำความคุ้นเคยกับระบบไฟล์ Linux (จำลองระบบไฟล์จริง)</p>
+                    <h2 class="text-3xl font-bold text-slate-800">Linux Interactive Terminal</h2>
+                    <p class="text-slate-500 mt-2">พิมพ์คำสั่งพื้นฐานเพื่อทำความคุ้นเคยกับระบบไฟล์จริง (จำลอง State-based)</p>
                 </div>
                 <button onclick="resetLab()" class="text-xs text-blue-600 font-bold hover:underline">รีเซ็ตระบบไฟล์</button>
             </div>
 
             <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
-                <div class="space-y-4">
+                <div class="space-y-4 text-xs">
                     <div class="glass p-6 rounded-3xl border shadow-sm">
-                        <h4 class="font-bold text-slate-800 mb-4">🎯 ภารกิจฝึกหัด</h4>
-                        <ul class="text-xs space-y-3 text-slate-600 leading-relaxed">
-                            <li>1. <code>ls</code> เพื่อดูไฟล์เริ่มต้น</li>
-                            <li>2. <code>mkdir lab</code> เพื่อสร้างโฟลเดอร์ชื่อ lab</li>
-                            <li>3. <code>cd lab</code> เพื่อเข้าไปในโฟลเดอร์ lab</li>
-                            <li>4. <code>touch final.txt</code> เพื่อสร้างไฟล์ final.txt</li>
-                            <li>5. <code>mv final.txt study.txt</code> เพื่อเปลี่ยนชื่อไฟล์</li>
-                            <li>6. <code>cd ..</code> และ <code>rm final.txt</code> (ถ้ามี)</li>
+                        <h4 class="font-bold text-slate-800 mb-4">🎯 ภารกิจฝึกหัดก่อนสอบ</h4>
+                        <ul class="space-y-3 text-slate-600 leading-relaxed">
+                            <li>1. <code>ls</code> เพื่อดูรายชื่อไฟล์เริ่มต้น</li>
+                            <li>2. <code>mkdir pipeline</code> เพื่อสร้างโฟลเดอร์สำหรับงาน</li>
+                            <li>3. <code>cd pipeline</code> เพื่อเข้าไปทำงานข้างใน</li>
+                            <li>4. <code>touch deploy.sh</code> เพื่อสร้างไฟล์สคริปต์</li>
+                            <li>5. <code>chmod +x deploy.sh</code> เพื่อให้สิทธิ์รัน (จำลอง)</li>
+                            <li>6. <code>cd ..</code> และ <code>rm deploy.sh</code> (ลองลบดู)</li>
                         </ul>
-                    </div>
-                    <div class="bg-blue-50 p-6 rounded-3xl border border-blue-100 text-xs">
-                        <h4 class="font-bold text-blue-800 mb-2">Cheat Sheet</h4>
-                        <div class="grid grid-cols-2 gap-y-2 text-blue-700">
-                            <span>ls - ดูรายชื่อไฟล์</span>
-                            <span>cd - เปลี่ยนโฟลเดอร์</span>
-                            <span>cp - คัดลอก</span>
-                            <span>mv - ย้าย/เปลี่ยนชื่อ</span>
-                            <span>rm - ลบไฟล์</span>
-                            <span>mkdir - สร้างโฟลเดอร์</span>
-                        </div>
                     </div>
                 </div>
 
                 <div class="xl:col-span-2">
-                    <div class="terminal flex flex-col h-[500px]">
+                    <div class="terminal flex flex-col h-[550px]">
                         <div class="p-3 border-b border-slate-700 flex justify-between items-center">
                             <div class="flex gap-2">
                                 <div class="w-3 h-3 rounded-full bg-red-500"></div>
                                 <div class="w-3 h-3 rounded-full bg-amber-500"></div>
                                 <div class="w-3 h-3 rounded-full bg-green-500"></div>
                             </div>
-                            <span class="text-[10px] text-slate-500 mono italic">root@devops-exam:~</span>
+                            <span class="text-[10px] text-slate-500 mono">root@devops-ultimate:~</span>
                         </div>
-                        <div id="terminal-screen" class="p-6 flex-1 overflow-y-auto text-green-400 font-mono text-sm space-y-1">
-                            <div>ยินดีต้อนรับสู่ DevOps Linux Lab Simulation</div>
-                            <div>พิมพ์ 'help' เพื่อดูคำสั่งทั้งหมด</div>
+                        <div id="terminal-screen" class="p-6 flex-1 overflow-y-auto text-emerald-400 font-mono text-xs space-y-1">
+                            <div>ยินดีต้อนรับสู่ระบบจำลอง Linux Terminal v3.1</div>
+                            <div>พิมพ์ 'help' เพื่อดูคำสั่งที่ใช้งานได้จริงใน Lab นี้</div>
                         </div>
                         <div class="p-4 border-t border-slate-700 flex items-center gap-2 font-mono text-sm">
                             <span class="text-blue-400">root@devops:</span>
@@ -204,12 +282,12 @@
             </div>
         </section>
 
-        <!-- SECTION: MEGA QUIZ -->
+        <!-- MEGA QUIZ -->
         <section id="simulator" class="content-section hidden space-y-8">
             <div class="flex justify-between items-end">
                 <div>
                     <h2 class="text-3xl font-bold text-slate-800">Ultimate Mega Quiz (50 ข้อ)</h2>
-                    <p class="text-slate-500 mt-2">คำถามสุ่ม 10 ข้อจากคลัง 50 ข้อ ครอบคลุมทุกสไลด์</p>
+                    <p class="text-slate-500 mt-2">ชุดคำถามจำลองระดับยาก (สุ่ม 10 ข้อต่อรอบ) พร้อมเฉลยละเอียด</p>
                 </div>
                 <div id="quiz-score-ui" class="bg-blue-600 text-white px-6 py-2 rounded-full font-bold shadow-lg">คะแนน: 0 / 10</div>
             </div>
@@ -219,22 +297,22 @@
                 <div id="quiz-start" class="text-center space-y-8">
                     <div class="text-[120px] animate-bounce">🎓</div>
                     <div class="space-y-2">
-                        <h3 class="text-3xl font-bold text-slate-800">พร้อมท้าทายระดับเซียนหรือยัง?</h3>
-                        <p class="text-slate-500">เนื้อหายากครอบคลุม Banking SLA, K8s Architecture, และ Linux CLI</p>
+                        <h3 class="text-3xl font-bold text-slate-800">พร้อมท้าทายระดับโปรหรือยัง?</h3>
+                        <p class="text-slate-500 text-lg italic">ครอบคลุมเนื้อหาเชิงลึกจากคุณเม Krungsri Nimble และคุณพวริศ</p>
                     </div>
-                    <button onclick="startQuiz()" class="bg-blue-600 text-white px-12 py-5 rounded-3xl font-bold text-xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-100">เริ่มทำข้อสอบ</button>
+                    <button onclick="startQuiz()" class="bg-blue-600 text-white px-12 py-5 rounded-3xl font-bold text-xl hover:bg-blue-700 transform hover:scale-105 transition-all shadow-xl">เริ่มทำข้อสอบ</button>
                 </div>
 
                 <!-- Play Screen -->
                 <div id="quiz-play" class="hidden space-y-8">
                     <div class="flex justify-between items-center text-xs font-bold text-slate-400 uppercase tracking-widest">
                         <span id="q-num">ข้อที่ 1 / 10</span>
-                        <span id="q-cat" class="text-blue-500">CORE DEVOPS</span>
+                        <span id="q-cat" class="text-blue-500 italic">SCENARIO ANALYSIS</span>
                     </div>
                     <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
                         <div id="q-progress" class="h-full bg-blue-500 transition-all duration-500" style="width: 10%"></div>
                     </div>
-                    <h3 id="q-text" class="text-2xl font-bold text-slate-800 leading-tight">คำถามจะแสดงผลที่นี่</h3>
+                    <h3 id="q-text" class="text-2xl font-bold text-slate-800 leading-tight">คำถาม...</h3>
                     <div id="q-options" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                 </div>
 
@@ -242,7 +320,7 @@
                 <div id="quiz-result" class="hidden text-center space-y-8 animate-fade-in">
                     <div id="r-icon" class="text-8xl">🏆</div>
                     <div class="space-y-2">
-                        <h3 class="text-4xl font-extrabold text-slate-800">จบการทดสอบ!</h3>
+                        <h3 class="text-4xl font-extrabold text-slate-800">สรุปคะแนน!</h3>
                         <p id="r-score" class="text-xl text-slate-500">คุณทำคะแนนได้ 10 เต็ม 10</p>
                     </div>
                     <div id="r-grade" class="text-6xl font-black text-blue-600 italic tracking-tighter uppercase">Grade A</div>
@@ -261,26 +339,29 @@
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('nav-active'));
             document.getElementById('btn-' + id).classList.add('nav-active');
             if(window.innerWidth < 768) toggleSidebar();
-            if(id === 'simulator') {
-                document.getElementById('quiz-start').classList.remove('hidden');
-                document.getElementById('quiz-play').classList.add('hidden');
-                document.getElementById('quiz-result').classList.add('hidden');
-            }
+            if(id === 'simulator') resetQuizUI();
         }
 
         function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('-translate-x-full');
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
         }
 
-        // --- Charts ---
+        function resetQuizUI() {
+            document.getElementById('quiz-start').classList.remove('hidden');
+            document.getElementById('quiz-play').classList.add('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+        }
+
+        // --- Charts Implementation ---
         window.onload = function() {
-            const ctx = document.getElementById('skillChart').getContext('2d');
+            const ctx = document.getElementById('skillRadarChart').getContext('2d');
             new Chart(ctx, {
                 type: 'radar',
                 data: {
-                    labels: ['Linux/Scripting', 'Docker/K8s', 'CI/CD Pipeline', 'AWS Cloud', 'Networking', 'Soft Skills'],
+                    labels: ['Linux CLI', 'Docker/K8s', 'CI/CD Pipeline', 'Cloud Arch', 'Networking', 'Agile/Soft Skills'],
                     datasets: [{
-                        label: 'ความสำคัญในการสอบ',
+                        label: 'Weight (%)',
                         data: [90, 85, 95, 80, 75, 100],
                         backgroundColor: 'rgba(37, 99, 235, 0.2)',
                         borderColor: '#2563eb',
@@ -299,8 +380,9 @@
         // --- Linux Lab Logic ---
         let currentDir = "~";
         let fs = {
-            "~": { type: "dir", children: ["README.md", "devops_labs"], parent: null },
-            "~/devops_labs": { type: "dir", children: ["pipeline.yml", "docker-compose.yml"], parent: "~" }
+            "~": { type: "dir", children: ["README.md", "devops_hub", "backup"], parent: null },
+            "~/devops_hub": { type: "dir", children: ["dockerfile", "main.py"], parent: "~" },
+            "~/backup": { type: "dir", children: ["old_config.yml"], parent: "~" }
         };
 
         const terminalInput = document.getElementById('terminal-input');
@@ -326,7 +408,7 @@
 
             let output = "";
             switch(cmd) {
-                case 'help': output = "Commands: ls, cd, mkdir, touch, mv, rm, pwd, clear, help"; break;
+                case 'help': output = "LAB COMMANDS: ls, cd, mkdir, touch, mv, rm, chmod, pwd, clear, help"; break;
                 case 'clear': terminalScreen.innerHTML = ""; return;
                 case 'pwd': output = currentDir; break;
                 case 'ls': output = fs[currentDir].children.join("  "); break;
@@ -336,7 +418,7 @@
                         if (!fs[newPath]) {
                             fs[currentDir].children.push(args[0]);
                             fs[newPath] = { type: "dir", children: [], parent: currentDir };
-                        } else output = "Directory already exists";
+                        } else output = "mkdir: Directory already exists";
                     } else output = "mkdir: missing operand";
                     break;
                 case 'touch':
@@ -348,13 +430,16 @@
                     if (args[0] && args[1]) {
                         const idx = fs[currentDir].children.indexOf(args[0]);
                         if (idx > -1) fs[currentDir].children[idx] = args[1];
-                        else output = "File not found";
-                    } else output = "mv: missing destination file operand";
+                        else output = "mv: file not found";
+                    } else output = "mv: missing operand";
                     break;
                 case 'rm':
                     if (args[0]) {
                         fs[currentDir].children = fs[currentDir].children.filter(f => f !== args[0]);
                     } else output = "rm: missing operand";
+                    break;
+                case 'chmod':
+                    output = `chmod: applied permission to ${args[1] || 'target'}`;
                     break;
                 case 'cd':
                     if (!args[0] || args[0] === "~") currentDir = "~";
@@ -380,66 +465,63 @@
 
         function resetLab() {
             currentDir = "~";
-            fs = {
-                "~": { type: "dir", children: ["README.md", "devops_labs"], parent: null },
-                "~/devops_labs": { type: "dir", children: ["pipeline.yml", "docker-compose.yml"], parent: "~" }
-            };
+            fs = { "~": { type: "dir", children: ["README.md", "devops_hub", "backup"], parent: null } };
             currentPathDisplay.innerText = "~";
-            terminalScreen.innerHTML = "<div>Filesystem reset successfully.</div>";
+            terminalScreen.innerHTML = "<div>Lab environment reset successful.</div>";
         }
 
         // --- Ultimate 50-Question Pool ---
         const questionPool = [
-            { cat: "CI/CD", q: "หาก SonarQube ตรวจพบ Code Smell และเกรดไม่ถึง A ใน Pipeline ของธนาคารควรเกิดอะไรขึ้น?", a: ["Pipeline หยุดทำงาน (Fail) ทันที", "รัน Pipeline ต่อแต่ส่ง Warning", "ทีม Ops ต้องแก้โค้ดให้", "ข้ามขั้นตอนการ Deploy"], c: 0 },
-            { cat: "SLA", q: "SLA 99.99% หมายถึงระบบยอมให้ล่มได้กี่นาทีต่อปี?", a: ["ประมาณ 52 นาที", "ประมาณ 8 ชั่วโมง", "ประมาณ 24 ชั่วโมง", "ล่มไม่ได้เลย"], c: 0 },
-            { cat: "K8S", q: "ฟีเจอร์ใดของ K8s ที่ทำหน้าที่ซ่อมแซม Pod อัตโนมัติเมื่อพบว่า Pod นั้น Unhealthy?", a: ["Self-healing", "Auto Scaling", "Load Balancing", "Zero Downtime"], c: 0 },
-            { cat: "CLOUD", q: "AWS VPC เปรียบเสมือนอะไรในสถาปัตยกรรมเครือข่าย?", a: ["การแยกห้อง/แผนกส่วนตัว", "เครื่องคอมพิวเตอร์ 1 เครื่อง", "ที่เก็บไฟล์ขนาดใหญ่", "ตัวกระจายโหลด"], c: 0 },
-            { cat: "LINUX", q: "คำสั่งใดใช้เปลี่ยนชื่อไฟล์ใน Linux?", a: ["mv", "cp", "rm", "ls"], c: 0 },
-            { cat: "DOCKER", q: "Docker Image แตกต่างจาก Container อย่างไร?", a: ["Image คือแม่พิมพ์ Read-only", "Image คือสิ่งที่รันอยู่", "Container คือพิมพ์เขียว", "เหมือนกันทุกอย่าง"], c: 0 },
-            { cat: "BANKING", q: "ศูนย์ข้อมูลสำรองกรณีภัยพิบัติเรียกว่าอะไร?", a: ["DR Site", "DC Site", "Cloud Site", "EKS Site"], c: 0 },
-            { cat: "DEVOPS", q: "DevOps มุ่งเน้นการแก้ปัญหาความสับสนที่เรียกว่าอะไร?", a: ["Wall of Confusion", "Wall of Fire", "Wall of China", "Wall of Sound"], c: 0 },
-            { cat: "SDLC", q: "Agile Shu-Ha-Ri ขั้นตอน 'Shu' คืออะไร?", a: ["ทำตามกฎ", "แหกกฎ", "สร้างกฎใหม่", "เลิกใช้กฎ"], c: 0 },
-            { cat: "K8S", q: "Service Type ใดที่ใช้เปิดเผยแอปสู่ภายนอกผ่านพอร์ตของเครื่อง Node?", a: ["NodePort", "ClusterIP", "InternalIP", "LoadBalancer"], c: 0 },
-            { cat: "AWS", q: "หากต้องการเก็บไฟล์รูปภาพหรือวิดีโอจำนวนมากใน AWS ควรใช้บริการใด?", a: ["S3", "EC2", "VPC", "EKS"], c: 0 },
-            { cat: "LINUX", q: "คำสั่ง 'chmod +x' มีไว้เพื่ออะไร?", a: ["ให้สิทธิ์รันไฟล์", "ให้สิทธิ์อ่านไฟล์", "ลบไฟล์", "ซ่อนไฟล์"], c: 0 },
-            { cat: "GIT", q: "Git Rebase แตกต่างจาก Merge อย่างไรในเชิงประวัติ?", a: ["Rebase ประวัติเป็นเส้นตรง", "Merge ประวัติเป็นเส้นตรง", "Rebase ลบประวัติทิ้ง", "Merge รันเร็วกว่า"], c: 0 },
-            { cat: "SECURITY", q: "รหัสช่องโหว่ความปลอดภัยที่เป็นมาตรฐานสากลเรียกว่า?", a: ["CVE", "SLA", "ISO", "VIP"], c: 0 },
-            { cat: "K8S", q: "Pod ใน Kubernetes คืออะไร?", a: ["หน่วยย่อยที่สุดในการรันแอป", "เครื่องคอมพิวเตอร์ 1 เครื่อง", "ศูนย์รวมข้อมูล", "ชื่อภาษาโปรแกรม"], c: 0 },
-            { cat: "BANKING", q: "Tier 3 Support ในธนาคารคือทีมใด?", a: ["Engineering Team", "Call Center", "Monitor Team", "Business Team"], c: 0 },
-            { cat: "CLOUD", q: "IaaS ผู้ใช้ต้องรับผิดชอบส่วนใด?", a: ["OS และ Middleware", "Hardware", "ตัวอาคารดาต้าเซ็นเตอร์", "ระบบไฟฟ้า"], c: 0 },
-            { cat: "DOCKER", q: "Multi-stage Build ใน Dockerfile มีประโยชน์เรื่องใดที่สุด?", a: ["ลดขนาด Image", "เขียนโค้ดได้ยาวขึ้น", "รันได้หลายภาษาพร้อมกัน", "ไม่ต้องใช้ Git"], c: 0 },
-            { cat: "NETWORKING", q: "OSI Layer ใดที่จัดการเรื่อง IP Address และการส่งผ่านข้อมูลข้ามเครือข่าย?", a: ["Network Layer", "Physical Layer", "Application Layer", "Data Link Layer"], c: 0 },
-            { cat: "CI/CD", q: "Continuous Delivery ต่างจาก Continuous Deployment อย่างไร?", a: ["Delivery มีคนกดอนุมัติ", "Deployment มีคนกดอนุมัติ", "Delivery เร็วกว่า", "Deployment ปลอดภัยกว่า"], c: 0 },
-            { cat: "GIT", q: "คำสั่ง 'git pull' คือการรวมของคำสั่งใดบ้าง?", a: ["fetch + merge", "push + add", "commit + push", "init + remote"], c: 0 },
-            { cat: "K8S", q: "Rolling Update ใน K8s ช่วยเรื่องใด?", a: ["Zero Downtime", "เพิ่มความเร็วเน็ต", "ลดค่าใช้จ่าย", "แก้ Code Smell"], c: 0 },
-            { cat: "AWS", q: "EKS คือบริการประเภทใด?", a: ["Managed Kubernetes", "Managed Database", "Object Storage", "Virtual Server"], c: 0 },
-            { cat: "LINUX", q: "คำสั่ง 'mkdir -p a/b/c' แฟล็ก -p มีไว้ทำอะไร?", a: ["สร้างโฟลเดอร์แม่ถ้าไม่มี", "ให้สิทธิ์คนอื่นเข้าถึง", "ลบโฟลเดอร์เก่าทิ้ง", "แสดงผลแบบละเอียด"], c: 0 },
-            { cat: "BANKING", q: "DR Site ของธนาคารควรอยู่ห่างจาก DC หลักอย่างน้อยเท่าใด?", a: ["30-50 กิโลเมตร", "100 เมตร", "1 กิโลเมตร", "ต้องอยู่คนละประเทศ"], c: 0 },
-            { cat: "DEVOPS", q: "ทักษะอันดับ 1 ที่สายงาน DevOps ต้องการคืออะไร?", a: ["Communication", "Coding", "Gaming", "Typing"], c: 0 },
-            { cat: "SDLC", q: "Waterfall Model มีจุดอ่อนเรื่องใดมากที่สุด?", a: ["ยืดหยุ่นต่ำเปลี่ยนยาก", "วางแผนไม่เป็นระบบ", "ใช้พนักงานน้อยเกินไป", "ราคาถูกเกินไป"], c: 0 },
-            { cat: "K8S", q: "HPA (Horizontal Pod Autoscaler) วัดค่าอะไรเป็นหลัก?", a: ["CPU/Memory Usage", "จำนวนพนักงาน", "เวลาล่มของระบบ", "ราคาทรัพยากร"], c: 0 },
-            { cat: "DOCKER", q: "Dockerfile คำสั่ง 'COPY' และ 'ADD' ต่างกันอย่างไร?", a: ["ADD โหลดไฟล์จาก URL ได้", "COPY โหลดไฟล์จาก URL ได้", "COPY ลบไฟล์ต้นทาง", "ADD ใช้เฉพาะไฟล์รูป"], c: 0 },
-            { cat: "SECURITY", q: "Dependency Check ใน Pipeline มีไว้เพื่ออะไร?", a: ["ตรวจช่องโหว่ใน Library", "ตรวจชื่อไฟล์ที่ผิดกฎ", "ตรวจราคาสินค้า", "ตรวจสิทธิ์พนักงาน"], c: 0 },
-            { cat: "CLOUD", q: "Shared Responsibility ของ Cloud ใครดูแลข้อมูล (Data)?", a: ["ผู้ใช้งาน (Customer)", "ผู้ให้บริการ (AWS)", "ฝ่ายกฎหมาย", "พนักงานรัฐบาล"], c: 0 },
-            { cat: "LINUX", q: "คำสั่ง 'ls -la' แฟล็ก -a ย่อมาจากอะไร?", a: ["All (รวมไฟล์ซ่อน)", "Advanced", "Alphabetical", "Absolute"], c: 0 },
-            { cat: "GIT", q: "Conflict เกิดขึ้นเมื่อใด?", a: ["แก้โค้ดบรรทัดเดียวกัน", "ลบไฟล์คนละโฟลเดอร์", "พิมพ์ Commit ยาวไป", "ลืม Push งาน"], c: 0 },
-            { cat: "K8S", q: "Label และ Selector ใน K8s มีไว้เพื่อ?", a: ["จัดกลุ่มทรัพยากร", "ตั้งรหัสผ่าน", "ระบุราคา", "เปลี่ยนสี Dashboard"], c: 0 },
-            { cat: "BANKING", q: "SLA 99.9% ยอมให้ระบบล่มได้ประมาณกี่ชั่วโมงต่อปี?", a: ["~8.7 ชั่วโมง", "~24 ชั่วโมง", "~1 ชั่วโมง", "~1 วัน"], c: 0 },
-            { cat: "DEVOPS", q: "IAAC ย่อมาจากอะไร?", a: ["Infrastructure as a Code", "Interaction as a Code", "Integrated as a Code", "Internal as a Code"], c: 0 },
-            { cat: "SDLC", q: "Unit Test ควรทำในขั้นตอนใดของ SDLC?", a: ["Implementation/Coding", "Analysis", "Deployment", "Maintenance"], c: 0 },
-            { cat: "DOCKER", q: "Docker Hub คืออะไร?", a: ["Registry เก็บ Image", "ตัวรันคอนเทนเนอร์", "ที่เก็บโค้ด GitHub", "ชื่อระบบปฏิบัติการ"], c: 0 },
-            { cat: "NETWORKING", q: "HTTP Status Code 500 หมายถึงอะไร?", a: ["Internal Server Error", "Success", "Not Found", "Unauthorized"], c: 0 },
-            { cat: "K8S", q: "Master Node (Control Plane) มีหน้าที่อะไร?", a: ["จัดการสถานะของ Cluster", "รันแอปพลิเคชันอย่างเดียว", "เก็บไฟล์รูปภาพ", "ต่อสายอินเทอร์เน็ต"], c: 0 },
-            { cat: "AWS", q: "EC2 คือบริการประเภทใด?", a: ["Virtual Server", "Object Storage", "Database", "Domain Name"], c: 0 },
-            { cat: "LINUX", q: "คำสั่ง 'rm -rf /' ตัวเลือก -f คืออะไร?", a: ["Force (บังคับลบ)", "Fast", "Folders only", "Fail safe"], c: 0 },
-            { cat: "GIT", q: "คำสั่งใดใช้ยกเลิกการแก้ไขไฟล์ให้กลับไปเหมือนเดิมก่อน Commit?", a: ["git checkout -- file", "git rm", "git push", "git init"], c: 0 },
-            { cat: "SECURITY", q: "SonarQube ตรวจสอบสิ่งใดเป็นหลัก?", a: ["Static Code Analysis", "Network Speed", "Hardware Health", "User Passwords"], c: 0 },
-            { cat: "CLOUD", q: "Hybrid Cloud คือการรวมของสิ่งใด?", a: ["Public + Private Cloud", "AWS + Google Only", "Laptop + Server", "Mobile + Web"], c: 0 },
-            { cat: "DOCKER", q: "คำสั่ง 'docker ps' มีไว้เพื่ออะไร?", a: ["ดู Container ที่รันอยู่", "ลบ Image", "สร้าง Image ใหม่", "สแกนหาไวรัส"], c: 0 },
-            { cat: "K8S", q: "Namespace ใน K8s มีไว้เพื่อ?", a: ["แยกสัดส่วนทรัพยากร", "ตั้งชื่อเล่นให้ Pod", "ระบุพิกัดที่ตั้งเครื่อง", "เก็บข้อมูลส่วนบุคคล"], c: 0 },
-            { cat: "BANKING", q: "DC (Data Center) หลัก มักตั้งอยู่ในที่ใด?", a: ["ศูนย์ข้อมูลที่มีความเสถียรสูง", "บ้านพนักงาน", "ห้างสรรพสินค้า", "สวนสาธารณะ"], c: 0 },
-            { cat: "SDLC", q: "Agile Manifesto เน้นสิ่งใดมากกว่ากระบวนการ?", a: ["Individuals & Interactions", "Comprehensive Docs", "Contract Negotiation", "Following a Plan"], c: 0 },
-            { cat: "CI/CD", q: "Harbor มักจะเชื่อมต่อกับเครื่องมือใดใน Pipeline?", a: ["Jenkins (Push Image)", "Notepad", "Excel", "Zoom"], c: 0 }
+            { cat: "BANKING", q: "หาก SonarQube ตรวจพบ Code Smell และเกรดไม่ถึง A ใน Pipeline ของธนาคาร ข้อใดคือการตัดสินใจที่ถูกต้อง?", a: ["Pipeline ต้องพัง (Fail) และห้าม Deploy เด็ดขาด", "ยอมให้รันต่อได้ถ้าเป็นแค่ Code Smell", "ให้พนักงานโทรแจ้ง Support Tier 1", "ทำ Rolling Update ทันที"], c: 0 },
+            { cat: "SLA", q: "ธนาคารกำหนด SLA 99.99% (เลขเก้า 4 ตัว) ระบบจะล่มได้สูงสุดไม่เกินกี่นาทีต่อปี?", a: ["~52 นาที", "~8 ชั่วโมง", "~24 ชั่วโมง", "~3.6 วัน"], c: 0 },
+            { cat: "K8S", q: "เมื่อแอปพลิเคชันมีโหลดเพิ่มขึ้นกะทันหัน ฟีเจอร์ใดของ K8s จะเข้ามาเพิ่มจำนวน Pod ให้ทันที?", a: ["HPA (Horizontal Pod Autoscaler)", "VPA (Vertical Pod Autoscaler)", "Rolling Update", "Self-healing"], c: 0 },
+            { cat: "CLOUD", q: "AWS VPC เปรียบเสมือนอะไรในสถาปัตยกรรมดาต้าเซ็นเตอร์เสมือน?", a: ["การแยกห้องหรือสัดส่วนเครือข่ายส่วนตัว (Isolation)", "เครื่องคอมพิวเตอร์ 1 เครื่อง", "ศูนย์รวมข้อมูลสาธารณะ", "ระบบทำความเย็น"], c: 0 },
+            { cat: "DOCKER", q: "Docker Image แตกต่างจาก Container อย่างไรตามหลักการของ DevOps?", a: ["Image คือพิมพ์เขียว Read-only ส่วน Container คือตัวที่รันอยู่", "Image ใช้สำหรับลบข้อมูล ส่วน Container ใช้เก็บข้อมูล", "Container คือต้นแบบ ส่วน Image คือผลลัพธ์", "ทั้งสองอย่างทำงานเหมือนกัน"], c: 0 },
+            { cat: "BANKING", q: "DR Site (Disaster Recovery) ของธนาคารควรอยู่ห่างจาก DC หลักอย่างน้อยเท่าใดเพื่อความปลอดภัย?", a: ["30-50 กิโลเมตร", "100 เมตร", "1 กิโลเมตร", "ต้องอยู่คนละทวีป"], c: 0 },
+            { cat: "DEVOPS", q: "ปัญหา 'Wall of Confusion' ในองค์กรดั้งเดิมเกิดขึ้นระหว่างทีมใด?", a: ["Development และ Operations", "Sales และ Marketing", "Customer และ Manager", "IT และ HR"], c: 0 },
+            { cat: "SDLC", q: "ในหลักการ Shu-Ha-Ri ของ Agile ขั้นตอน 'Ha' (แหกกฎ) หมายถึงอะไร?", a: ["การเริ่มทดลองและเรียนรู้กฎใหม่ๆ นอกกรอบเดิม", "การทำตามแบบแผนอย่างเคร่งครัด", "การเป็นผู้สร้างนวัตกรรมใหม่เอง", "การลาออกเพื่อไปหางานใหม่"], c: 0 },
+            { cat: "K8S", q: "Service Type ใดใน Kubernetes ที่ใช้รับ Traffic จาก 'Public Load Balancer' ของ Cloud?", a: ["LoadBalancer", "NodePort", "ClusterIP", "ExternalIP"], c: 0 },
+            { cat: "AWS", q: "หากธนาคารต้องการเก็บไฟล์รูปภาพการทำธุรกรรมที่มีความคงทนสูง ควรเลือกใช้บริการใด?", a: ["S3 (Simple Storage Service)", "EC2", "VPC", "IAM"], c: 0 },
+            { cat: "LINUX", q: "คำสั่ง Linux ใดใช้สำหรับลบโฟลเดอร์พร้อมข้อมูลข้างในทั้งหมดแบบบังคับ (Force Recursive)?", a: ["rm -rf", "rmdir", "delete -all", "mv -del"], c: 0 },
+            { cat: "GIT", q: "Git Rebase แตกต่างจาก Merge อย่างไรในเชิงความสวยงามของประวัติ?", a: ["Rebase ทำให้ประวัติเป็นเส้นตรง (Linear)", "Merge ทำให้ประวัติหายไป", "Rebase ใช้เวลารันนานกว่า", "Merge ปลอดภัยกว่าเสมอ"], c: 0 },
+            { cat: "SECURITY", q: "CVE (Common Vulnerabilities and Exposures) คือรหัสมาตรฐานสำหรับสิ่งใด?", a: ["รหัสช่องโหว่ความปลอดภัยซอฟต์แวร์", "รหัสผ่านของพนักงานธนาคาร", "รหัสประจำตัวของ Server", "รหัสสัญญาเช่า Cloud"], c: 0 },
+            { cat: "BANKING", q: "Tier 3 Engineering Team ในธนาคารมีหน้าที่หลักคืออะไร?", a: ["แก้ปัญหาเชิงลึกและจัดการระบบ (Implement)", "รับโทรศัพท์ลูกค้าเบื้องต้น", "ทำความสะอาดเครื่อง Server", "เฝ้าหน้าจอ Dashboard อย่างเดียว"], c: 0 },
+            { cat: "DOCKER", q: "ใน Dockerfile คำสั่ง 'EXPOSE 80' มีจุดประสงค์เพื่ออะไร?", a: ["เป็นเอกสารระบุพอร์ตที่แอปจะใช้งาน", "เพื่อเปิดพอร์ตจริงในเครื่อง Host", "เพื่อลบข้อมูลในพอร์ตนั้น", "เพื่อเพิ่มความเร็วแอป"], c: 0 },
+            { cat: "CLOUD", q: "Shared Responsibility Model ใน Cloud หากใช้ IaaS ใครดูแลความปลอดภัยของ Data?", a: ["ผู้ใช้งาน (Customer)", "ผู้ให้บริการ (AWS)", "รัฐบาล", "ไม่มีใครดูแล"], c: 0 },
+            { cat: "K8S", q: "คุณสมบัติ 'Self-healing' ของ Kubernetes จะทำงานเมื่อใด?", a: ["เมื่อตรวจพบ Pod เสียหายหรือ Unhealthy", "เมื่อต้องการลดค่าใช้จ่าย", "เมื่อนักพัฒนาเขียนโค้ดผิด", "เมื่อไฟดับทั้งประเทศ"], c: 0 },
+            { cat: "NETWORKING", q: "HTTP Status Code 500 หมายถึงสถานะใด?", a: ["Internal Server Error", "Success (OK)", "Not Found", "Unauthorized"], c: 0 },
+            { cat: "SDLC", q: "Agile Manifesto ให้ความสำคัญกับสิ่งใดมากกว่า 'Contract Negotiation'?", a: ["Customer Collaboration", "Working Software", "Following a Plan", "Process and Tools"], c: 0 },
+            { cat: "DEVOPS", q: "ทักษะ 'Communication' ถูกยกให้เป็นอันดับ 1 ในงาน DevOps เพราะเหตุใด?", a: ["เพื่อแปลภาษาเทคนิคเป็นภาษาคนให้ทุกฝ่ายเข้าใจ", "เพื่อให้พิมพ์คุยกับเครื่องคอมพิวเตอร์ได้", "เพื่อให้พูดเก่งกว่าเพื่อนร่วมงาน", "ไม่มีความสำคัญจริง"], c: 0 },
+            { cat: "CI/CD", q: "Continuous Deployment แตกต่างจาก Continuous Delivery อย่างไร?", a: ["Deployment ขึ้น Production อัตโนมัติทันที", "Delivery ขึ้น Production อัตโนมัติทันที", "Deployment ต้องมีคนกดอนุมัติ", "Delivery ไม่ต้องผ่านการทดสอบ"], c: 0 },
+            { cat: "LINUX", q: "คำสั่ง Linux ใดใช้ดูเนื้อหาไฟล์ข้อความทั้งหมดทีเดียว?", a: ["cat", "ls", "cd", "mkdir"], c: 0 },
+            { cat: "GIT", q: "Conflict ใน Git เกิดขึ้นจากสถานการณ์ใดมากที่สุด?", a: ["การแก้ไขโค้ดบรรทัดเดียวกันในไฟล์เดียวกัน", "การลืม Commit งาน", "การลบโฟลเดอร์ Git ทิ้ง", "การเปลี่ยนสีธีมของ VS Code"], c: 0 },
+            { cat: "DOCKER", q: "Dockerfile คำสั่ง 'COPY' และ 'ADD' ต่างกันอย่างไร?", a: ["ADD สามารถดาวน์โหลดไฟล์จาก URL ได้", "COPY สามารถดาวน์โหลดไฟล์จาก URL ได้", "ADD ใช้ได้เฉพาะไฟล์รูป", "เหมือนกันทุกอย่าง"], c: 0 },
+            { cat: "K8S", q: "Pod ใน Kubernetes คืออะไร?", a: ["หน่วยย่อยที่สุดที่รันแอปพลิเคชัน", "เครื่องคอมพิวเตอร์หนึ่งเครื่อง", "ระบบฐานข้อมูล", "ศูนย์กระจายสินค้า"], c: 0 },
+            { cat: "AWS", q: "VPC Peering มีไว้เพื่อวัตถุประสงค์ใด?", a: ["เชื่อมต่อ VPC 2 ตัวเข้าหากัน", "สำรองข้อมูลไปยัง S3", "เพิ่มขนาด CPU ให้ EC2", "ลบรหัสผ่านพนักงาน"], c: 0 },
+            { cat: "BANKING", q: "SLA 99.9% (เลขเก้า 3 ตัว) ยอมให้ระบบล่มได้ประมาณเท่าใดต่อปี?", a: ["~8.77 ชั่วโมง", "~52 นาที", "~24 ชั่วโมง", "~3 วัน"], c: 0 },
+            { cat: "SDLC", q: "Agile Manifesto ข้อที่ 1 เน้นสิ่งใดมากกว่า 'Processes and Tools'?", a: ["Individuals and Interactions", "Working Software", "Responding to Change", "Budget Control"], c: 0 },
+            { cat: "LINUX", q: "คำสั่ง 'chmod +x script.sh' ทำหน้าที่อะไร?", a: ["ให้สิทธิ์การรันไฟล์ (Execute)", "ให้สิทธิ์อ่านไฟล์อย่างเดียว", "เปลี่ยนเจ้าของไฟล์", "ซ่อนไฟล์"], c: 0 },
+            { cat: "DEVOPS", q: "Infrastructure as Code (IaC) ช่วยแก้ปัญหาใดได้ดีที่สุด?", a: ["Configuration Drift", "Network Speed", "Employee Salaries", "Office Space"], c: 0 },
+            { cat: "CI/CD", q: "ในขั้นตอน CI เครื่องมือ 'Dependency Check' ตรวจสอบอะไร?", a: ["ช่องโหว่ความปลอดภัยใน Library ที่แอปเรียกใช้", "ตรวจความสวยงามของโค้ด", "ตรวจชื่อไฟล์", "ตรวจความเร็วเว็บ"], c: 0 },
+            { cat: "K8S", q: "Rolling Update ใน Kubernetes มีประโยชน์อย่างไร?", a: ["ทำให้แอปอัปเดตเวอร์ชันได้โดยไม่มี Downtime", "ทำให้แอปทำงานเร็วขึ้น 2 เท่า", "ทำให้ประหยัดค่าไฟ", "ทำให้ลบข้อมูลอัตโนมัติ"], c: 0 },
+            { cat: "AWS", q: "บริการใดของ AWS ที่ใช้รันเครื่องเซิร์ฟเวอร์เสมือน (VM)?", a: ["EC2", "S3", "VPC", "EKS"], c: 0 },
+            { cat: "DOCKER", q: "Multi-stage build ใน Dockerfile มีเป้าหมายหลักคืออะไร?", a: ["เพื่อลดขนาด Docker Image ให้เล็กที่สุด", "เพื่อเขียนโค้ดให้ยาวขึ้น", "เพื่อรันภาษาโปรแกรมได้หลายภาษา", "เพื่อไม่ต้องใช้ Registry"], c: 0 },
+            { cat: "GIT", q: "คำสั่ง 'git pull' ทำงานอย่างไรในเบื้องหลัง?", a: ["fetch ข้อมูลแล้ว merge เข้ากิ่งปัจจุบัน", "ลบข้อมูลปัจจุบันทิ้งแล้วลงใหม่", "ส่งข้อมูลขึ้น server", "สร้าง repo ใหม่"], c: 0 },
+            { cat: "BANKING", q: "Support Tier 2 ในธนาคารมีบทบาทอย่างไร?", a: ["เฝ้าระวังความผิดปกติผ่าน Dashboard (Monitor)", "รับสายรับเรื่องเบื้องต้น", "เขียนโค้ดแก้บัค", "จัดซื้อ Hardware"], c: 0 },
+            { cat: "NETWORKING", q: "HTTPS ใช้พอร์ตมาตรฐานหมายเลขใด?", a: ["443", "80", "22", "3306"], c: 0 },
+            { cat: "SDLC", q: "Shu-Ha-Ri ขั้นตอน 'Ri' คืออะไร?", a: ["สร้างกฎและแนวทางใหม่เอง (Create/Transcend)", "เรียนรู้พื้นฐาน", "ขัดแย้งกับหัวหน้า", "เลิกทำงานไอที"], c: 0 },
+            { cat: "LINUX", q: "คำสั่ง 'ls -la' ตัวเลือก -a ย่อมาจากอะไร?", a: ["All (รวมไฟล์ซ่อน)", "Alphabetical", "Active", "Absolute"], c: 0 },
+            { cat: "CLOUD", q: "Hybrid Cloud คือสถาปัตยกรรมแบบใด?", a: ["การใช้ Public และ Private Cloud ร่วมกัน", "การใช้ AWS และ Google ร่วมกัน", "การใช้ Laptop และ Server ร่วมกัน", "การรันแอปบนมือถืออย่างเดียว"], c: 0 },
+            { cat: "K8S", q: "Service Type: ClusterIP มีขอบเขตการใช้งานอย่างไร?", a: ["ใช้สื่อสารกันเองภายใน Cluster เท่านั้น", "เปิดให้คนภายนอกเข้าถึงได้", "ใช้สำหรับเก็บข้อมูลถาวร", "ใช้สำหรับปิด Cluster"], c: 0 },
+            { cat: "AWS", q: "บริการจัดการ Kubernetes บน AWS เรียกว่าอะไร?", a: ["EKS", "ECS", "Lambda", "EC2"], c: 0 },
+            { cat: "DOCKER", q: "ใน Dockerfile คำสั่งใดระบุ 'ภาพต้นแบบ' ที่จะใช้สร้าง?", a: ["FROM", "RUN", "CMD", "COPY"], c: 0 },
+            { cat: "GIT", q: "Git Flow 'master/main' branch มีไว้เพื่ออะไร?", a: ["เก็บโค้ดเวอร์ชันที่พร้อมรันบน Production", "เก็บโค้ดที่ยังทดลองอยู่", "เก็บไฟล์ขยะ", "เก็บรหัสผ่าน"], c: 0 },
+            { cat: "SECURITY", q: "SonarQube Grade A หมายถึงสิ่งใดในทางปฏิบัติของธนาคาร?", a: ["โค้ดผ่านเกณฑ์คุณภาพและความปลอดภัยสูงสุด", "โค้ดที่มีคนเขียนเยอะที่สุด", "โค้ดที่แพงที่สุด", "โค้ดที่เป็นภาษาไทย"], c: 0 },
+            { cat: "DEVOPS", q: "Wall of Confusion มักเกิดจากการวัดผล (Metrics) ที่ต่างกัน Dev วัดที่อะไร?", a: ["ความเร็วในการเปลี่ยน (Change)", "ความมั่นคงของระบบ (Stability)", "ราคา", "จำนวนบรรทัดที่เขียน"], c: 0 },
+            { cat: "CI/CD", q: "Harbor เชื่อมต่อกับเครื่องมือใดเพื่อสแกนช่องโหว่ความปลอดภัย?", a: ["Trivy หรือ Clair (Security Scan)", "Photoshop", "Excel", "Zoom"], c: 0 },
+            { cat: "LINUX", q: "คำสั่ง 'pwd' ย่อมาจากอะไร?", a: ["Print Working Directory", "Private Web Data", "Password Data", "Process Web Deploy"], c: 0 },
+            { cat: "K8S", q: "Label Selector ใน Kubernetes มีไว้เพื่อสิ่งใด?", a: ["จับคู่ Service กับกลุ่ม Pod ที่มีป้ายระบุตรงกัน", "ตั้งชื่อเล่นให้ Pod", "ระบุพิกัดที่ตั้งเครื่อง", "เปลี่ยนสีปุ่มในแอป"], c: 0 },
+            { cat: "BANKING", q: "การมีศูนย์สำรอง (DR) 3 แห่ง ช่วยเรื่องใดมากที่สุด?", a: ["High Availability แม้ศูนย์หลักและศูนย์รองหนึ่งแห่งพัง", "ประหยัดค่าไฟ", "หาที่ทำงานใหม่ให้พนักงาน", "ลดการจ้างงาน"], c: 0 }
         ];
 
         let currentQuizSet = [];
@@ -447,13 +529,11 @@
         let score = 0;
 
         function startQuiz() {
-            score = 0;
-            currentQuizIdx = 0;
-            // Shuffle and pick 10
+            score = 0; currentQuizIdx = 0;
             currentQuizSet = [...questionPool].sort(() => 0.5 - Math.random()).slice(0, 10);
             document.getElementById('quiz-start').classList.add('hidden');
-            document.getElementById('quiz-play').classList.remove('hidden');
             document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-play').classList.remove('hidden');
             updateScoreUI();
             showQuestion();
         }
@@ -465,10 +545,10 @@
             document.getElementById('q-text').innerText = data.q;
             document.getElementById('q-progress').style.width = `${((currentQuizIdx + 1) / 10) * 100}%`;
             
-            const optionsBox = document.getElementById('q-options');
-            optionsBox.innerHTML = '';
+            const grid = document.getElementById('q-options');
+            grid.innerHTML = '';
             
-            // Randomly shuffle options but keep track of correct one
+            // Randomize options but keep correct idx
             const opts = [...data.a].map((val, i) => ({ val, originalIdx: i }));
             const shuffled = opts.sort(() => 0.5 - Math.random());
 
@@ -477,7 +557,7 @@
                 btn.className = 'quiz-option p-6 bg-white border border-slate-200 rounded-2xl text-left font-medium shadow-sm hover:shadow-md transition-all';
                 btn.innerText = opt.val;
                 btn.onclick = () => checkAnswer(opt.originalIdx === 0, btn);
-                optionsBox.appendChild(btn);
+                grid.appendChild(btn);
             });
         }
 
@@ -490,26 +570,22 @@
                 score++;
             } else {
                 btn.classList.add('wrong');
-                // Highlight correct one
                 btns.forEach(b => {
-                    const data = currentQuizSet[currentQuizIdx];
-                    if(b.innerText === data.a[0]) b.classList.add('correct');
+                    if(b.innerText === currentQuizSet[currentQuizIdx].a[0]) b.classList.add('correct');
                 });
             }
             updateScoreUI();
 
             setTimeout(() => {
-                currentQuizIdx++;
-                if (currentQuizIdx < 10) showQuestion();
-                else showResult();
+                currentIdx = ++currentQuizIdx;
+                if (currentIdx < 10) showQuestion();
+                else finishQuiz();
             }, 1500);
         }
 
-        function updateScoreUI() {
-            document.getElementById('quiz-score-ui').innerText = `คะแนน: ${score} / 10`;
-        }
+        function updateScoreUI() { document.getElementById('quiz-score-ui').innerText = `คะแนน: ${score} / 10`; }
 
-        function showResult() {
+        function finishQuiz() {
             document.getElementById('quiz-play').classList.add('hidden');
             document.getElementById('quiz-result').classList.remove('hidden');
             document.getElementById('r-score').innerText = `คุณทำคะแนนได้ ${score} เต็ม 10`;
@@ -517,9 +593,8 @@
             const icon = document.getElementById('r-icon');
             if (score >= 8) { grade.innerText = "Grade A"; icon.innerText = "🏆"; }
             else if (score >= 5) { grade.innerText = "Passed"; icon.innerText = "🌟"; }
-            else { grade.innerText = "Keep Training"; icon.innerText = "📚"; }
+            else { grade.innerText = "Try Harder"; icon.innerText = "📚"; }
         }
-
     </script>
 </body>
 </html>
